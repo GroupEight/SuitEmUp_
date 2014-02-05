@@ -1,0 +1,19 @@
+﻿Build started 2014-01-28 14:59:34.
+     1>Project "c:\Users\martinm93\documents\visual studio 2013\Projects\SuitEmUp\SuitEmUp\SuitEmUp.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"../deps/SFML-2.1x86/include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Release\SuitEmUp.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+     1>c:\users\martinm93\documents\visual studio 2013\projects\suitemup\suitemup\stdafx.h(13): warning C4615: #pragma warning : unknown user warning type
+     1>c:\users\martinm93\documents\visual studio 2013\projects\suitemup\suitemup\stdafx.h(14): warning C4005: 'SFML_STATIC' : macro redefinition
+                 command-line arguments :  see previous definition of 'SFML_STATIC'
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"../deps/SFML-2.1x86/include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\SuitEmUp.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp
+         Main.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"c:\users\martinm93\documents\visual studio 2013\Projects\SuitEmUp\Release\SuitEmUp.lib" /LIBPATH:"../deps/SFML-2.1x86/lib" /NOLOGO /LTCG Release\Main.obj
+         Release\stdafx.obj
+         SuitEmUp.vcxproj -> c:\users\martinm93\documents\visual studio 2013\Projects\SuitEmUp\Release\SuitEmUp.lib
+     1>Done Building Project "c:\Users\martinm93\documents\visual studio 2013\Projects\SuitEmUp\SuitEmUp\SuitEmUp.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.81
