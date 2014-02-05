@@ -1,0 +1,42 @@
+﻿Build started 2014-02-05 16:02:14.
+     1>Project "C:\Users\MartinM93\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\SuitEmUp\SuitEmUp.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../deps/SFML-2.1x86/include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"../build/SuitEmUp/Debug\SuitEmUp_d.pch" /Fo"../build/SuitEmUp/Debug\\" /Fd"../build/SuitEmUp/Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\stdafx.h(14): warning C4615: #pragma warning : unknown user warning type
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\stdafx.h(15): warning C4005: 'SFML_STATIC' : macro redefinition
+                 command-line arguments :  see previous definition of 'SFML_STATIC'
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../deps/SFML-2.1x86/include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"../build/SuitEmUp/Debug\SuitEmUp_d.pch" /Fo"../build/SuitEmUp/Debug\\" /Fd"../build/SuitEmUp/Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt AnimatedSprite.cpp BulletObject.cpp Core.cpp DrawMan.cpp EnemyObject.cpp GameObject.cpp GameObjectMan.cpp Gamestate.cpp Main.cpp Menustate.cpp PlayerObject.cpp Sprite.cpp SpriteMan.cpp Stateman.cpp
+         Stateman.cpp
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\stateman.cpp(14): warning C4018: '<' : signed/unsigned mismatch
+         SpriteMan.cpp
+         Sprite.cpp
+         PlayerObject.cpp
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(12): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(18): error C2065: 'p_xTarget' : undeclared identifier
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(18): error C2228: left of '.draw' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(18): error C2027: use of undefined type 'Sprite'
+                 c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\gameobject.h(9) : see declaration of 'Sprite'
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(18): error C2227: left of '->GetTexture' must point to class/struct/union/generic type
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(18): error C2065: 'p_xStates' : undeclared identifier
+         Menustate.cpp
+         Main.cpp
+         Gamestate.cpp
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\gamestate.cpp(33): error C2660: 'GameObject::draw' : function does not take 1 arguments
+         GameObjectMan.cpp
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\gameobjectman.cpp(12): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\gameobjectman.cpp(28): warning C4018: '<' : signed/unsigned mismatch
+         GameObject.cpp
+         EnemyObject.cpp
+         DrawMan.cpp
+         Core.cpp
+         BulletObject.cpp
+         AnimatedSprite.cpp
+         Generating Code...
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\spriteman.cpp(59): warning C4715: 'SpriteMan::Load' : not all control paths return a value
+     1>Done Building Project "C:\Users\MartinM93\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\SuitEmUp\SuitEmUp.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:02.73
