@@ -12,8 +12,10 @@ Stateman::Stateman(){
 
 Stateman::~Stateman(){
 	for (int i = 0; i < m_States.size(); i++){
-		delete m_States[i];
-		m_States[i] = NULL;
+		if (m_States[i] != NULL){
+			delete m_States[i];
+			m_States[i] = NULL;
+		}
 	}
 	m_States.clear();
 }

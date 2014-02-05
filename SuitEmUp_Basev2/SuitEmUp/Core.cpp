@@ -95,7 +95,7 @@ bool Core::UpdateDeltaTime(){
 	m_xDtime += m_xpClock->restart();
 
 	if (m_xDtime >= m_xFps){
-		m_xDtime = m_xFps;
+		m_xDtime -= m_xFps;
 
 		return true;
 	}
@@ -119,6 +119,14 @@ void Core::Cleanup(){
 		delete m_xpWindow;
 		m_xpWindow = NULL;
 	}
+	/*if (m_xpGamestate != NULL){
+		delete m_xpGamestate;
+		m_xpGamestate = NULL;
+	}
+	if (m_xpMenustate != NULL){
+		delete m_xpMenustate;
+		m_xpMenustate = NULL;
+	}*/
 	if (m_xpStateman != NULL){
 		delete m_xpStateman;
 		m_xpStateman = NULL;
@@ -126,14 +134,6 @@ void Core::Cleanup(){
 	if (m_xpSpriteMan != NULL){
 		delete m_xpSpriteMan;
 		m_xpSpriteMan = NULL;
-	}
-	if (m_xpGamestate != NULL){
-		delete m_xpGamestate;
-		m_xpGamestate = NULL;
-	}
-	if (m_xpMenustate != NULL){
-		delete m_xpMenustate;
-		m_xpMenustate = NULL;
 	}
 	if (m_xpClock != NULL){
 		delete m_xpClock;

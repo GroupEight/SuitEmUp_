@@ -4,6 +4,8 @@
 
 #include "PlayerObject.h"
 
+#include "Sprite.h"
+
 PlayerObject::PlayerObject(){
 
 }
@@ -14,6 +16,7 @@ void PlayerObject::UpdateCurrent(sf::Time p_xDtime){
 	setVelocity(l_xVel * (float)p_xDtime.asMicroseconds());
 }
 
-void PlayerObject::DrawCurrent(sf::RenderWindow p_xWindow) const {
-	p_xTarget.draw(m_xpSprite->GetTexture(), p_xStates);
+void PlayerObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	//p_xWindow.draw(m_xpSprite->GetSprite());
+	target.draw(m_xpSprite->GetSprite(), states);
 }

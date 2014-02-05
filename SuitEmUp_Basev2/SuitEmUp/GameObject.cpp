@@ -50,23 +50,23 @@ void GameObject::UpdateCurrent(sf::Time p_xDtime){
 	SetPosition(m_xPos + m_xVel);
 }
 
-void GameObject::draw(sf::RenderTarget& p_xTarget, sf::RenderStates p_xStates) const {
-	p_xStates.transform *= getTransform();
+//void GameObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	/*p_xStates.transform *= getTransform();
 
 	DrawCurrent(p_xTarget, p_xStates);
-	DrawParents(p_xTarget, p_xStates);
-}
+	DrawParents(p_xTarget, p_xStates);*/
+//}
 
-void GameObject::DrawCurrent(sf::RenderTarget& p_xTarget, sf::RenderStates p_xStates) const {
+/*void GameObject::DrawCurrent(sf::RenderTarget& p_xTarget, sf::RenderStates p_xStates) const {
 	// Do nothing by default
 }
 
 void GameObject::DrawParents(sf::RenderTarget& p_xTarget, sf::RenderStates p_xStates) const {
 	/*for (const Ptr& l_xChild : m_xaChildren){
 		l_xChild->draw(p_xTarget, p_xStates);
-	}*/
+	}
 	GameObject::DrawCurrent(p_xTarget, p_xStates);
-}
+}*/
 
 sf::Vector2f GameObject::GetWorldPosition() const {
 	return GetWorldTransform() * sf::Vector2f();

@@ -19,7 +19,7 @@ public:
 	Ptr DetachChild(const GameObject &p_xObj);*/
 
 	void Update(sf::Time p_xDtime);
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 
 	sf::Vector2f GetWorldPosition() const;
 	sf::Transform GetWorldTransform() const;
@@ -40,8 +40,8 @@ protected:
 	virtual void UpdateCurrent(sf::Time p_xDtime);
 	virtual void UpdateParents(sf::Time p_xDtime);
 
-	virtual void DrawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void DrawParents(sf::RenderTarget& target, sf::RenderStates states) const;
+	/*virtual void DrawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void DrawParents(sf::RenderTarget& target, sf::RenderStates states) const;*/
 
 protected:
 	sf::Vector2f m_xPos;

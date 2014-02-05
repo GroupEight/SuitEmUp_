@@ -11,7 +11,7 @@ public:
 private:
 	void UpdateCurrent(sf::Time p_xDtime);
 
-	void DrawCurrent(sf::RenderWindow p_xWindow) const;
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
 	Sprite *m_xpSprite;
