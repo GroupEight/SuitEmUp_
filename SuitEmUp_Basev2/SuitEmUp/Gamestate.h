@@ -28,6 +28,7 @@ private:
 	sf::Window *m_xpWindow;
 
 	DrawMan *m_xpDrawMan;
+	SpriteMan *m_xpSpriteMan;
 
 	GameObjectMan *m_xpBulletMan;
 
