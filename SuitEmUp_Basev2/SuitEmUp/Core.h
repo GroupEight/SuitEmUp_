@@ -2,6 +2,8 @@
 
 #pragma once
 
+
+class DrawMan;
 class Stateman;
 class SpriteMan;
 
@@ -25,8 +27,9 @@ private:
 	sf::RenderWindow *m_xpWindow;
 	sf::Clock *m_xpClock;
 
-	Stateman *m_xpStateman; // Member_Stateman
-	SpriteMan *m_xpSpriteMan; // Member_SpriteMan
+	DrawMan *m_xpDrawMan; // Member_ClassPointerDrawMan
+	Stateman *m_xpStateman; // Member_ClassPointerStateman
+	SpriteMan *m_xpSpriteMan; // Member_ClassPointerSpriteMan
 
 	Gamestate *m_xpGamestate; // Member_Gamestate
 	Menustate *m_xpMenustate; // Member_Menustate

@@ -4,10 +4,15 @@
 
 #include "Gamestate.h"
 
+#include "DrawMan.h"
+#include "SpriteMan.h"
+
 #include "PlayerObject.h"
 
-Gamestate::Gamestate(){
-	m_xpPlayer = new PlayerObject;
+Gamestate::Gamestate(DrawMan *p_xpDrawMan, SpriteMan *p_xpSpriteMan){
+	m_xpDrawMan = p_xpDrawMan;
+
+	m_xpPlayer = new PlayerObject(p_xpSpriteMan->Load("PlaceHolder.png", sf::IntRect(0, 0, 0, 0)));
 }
 
 Gamestate::~Gamestate(){
@@ -30,7 +35,9 @@ bool Gamestate::Update(sf::Time p_xDtime){
 }
 
 void Gamestate::Draw(){
-	//m_xpPlayer->draw(m_xpWindow, ;
+	m_xpDrawMan->Draw(m_xpPlayer->GetSprite());
+
+	//m_xpPlayer->draw(*m_xpWindow, sf::RenderStates::Default);
 
 	// Add the background sprite to the scene
 	/*std::unique_ptr<Ground> backgroundSprite(new Ground(mTextures, mWindow.getSize()));

@@ -20,6 +20,9 @@ public:
 	void SetSprite(sf::Sprite p_xSprite);
 	const sf::Sprite GetSprite();
 
+	void SetPosition(sf::Vector2f p_xPos);
+	sf::Vector2f GetPosition();
+
 	void draw(sf::RenderTarget& m_xTarget, sf::RenderStates m_xStates) const;
 
 protected:

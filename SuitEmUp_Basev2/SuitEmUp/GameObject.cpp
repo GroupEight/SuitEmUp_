@@ -43,7 +43,7 @@ void GameObject::UpdateParents(sf::Time p_xDtime){
 }
 
 void GameObject::UpdateCurrent(sf::Time p_xDtime){
-	std::cout << m_xPos.x << " :" << m_xPos.y << std::endl;
+	
 
 	//move(m_xVel* p_xDtime.asSeconds());
 
@@ -95,6 +95,10 @@ bool GameObject::HasSprite() const {
 
 Sprite* GameObject::GetSprite(){
 	return m_xpSprite;
+}
+
+void GameObject::SetSprite(Sprite *p_xpSprite){
+	m_xpSprite = p_xpSprite;
 }
 
 bool GameObject::HasCollider() const {

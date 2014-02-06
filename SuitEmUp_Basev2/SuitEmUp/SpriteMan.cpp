@@ -40,22 +40,30 @@ void SpriteMan::Cleanup(){
 	m_xaSprites.clear();*/
 }
 
-Sprite* SpriteMan::Load(const std::string &p_sFname, sf::IntRect p_xRect){
-	sf::Texture l_xTex;
+Sprite* SpriteMan::Load(const std::string p_sFname, sf::IntRect p_xRect){
+	std::map<std::string, sf::Texture>::iterator it = m_xaSprites.find(p_sFname);
 
-	if (p_xRect.height == 0 && p_xRect.width == 0){
-		if (!l_xTex.loadFromFile(m_sDir + p_sFname)){
-			return NULL;
-		}
-	}
-	else {
-		if (!l_xTex.loadFromFile(m_sDir + p_sFname, p_xRect)){
-			return NULL;
-		}
-	}
+	if (it == m_xaSprites.end()){
+		sf::Texture l_xTex;
 
-	sf::Sprite l_xSprite;
-	l_xSprite.setTexture(l_xTex);
+		if (p_xRect == sf::IntRect(0, 0, 0, 0)){
+			if (!l_xTex.loadFromFile(m_sDir + p_sFname)){
+				return NULL;
+			}
+		}
+		else {
+			if (!l_xTex.loadFromFile(m_sDir + p_sFname, p_xRect)){
+				return NULL;
+			}
+		}
+
+		Sprite *l_xpSprite = new Sprite(l_xTex);
+
+		m_xaSprites.insert(std::pair<std::string, sf::Texture>(p_sFname, l_xTex));
+
+		return l_xpSprite;
+	}
+	return NULL;
 }
 
 /*AnimatedSprite* SpriteMan::Load(const std::string &p_srkFname){

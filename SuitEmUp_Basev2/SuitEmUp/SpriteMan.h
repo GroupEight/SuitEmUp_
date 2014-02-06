@@ -20,7 +20,7 @@ public:
 
 	void Cleanup();
 
-	Sprite* Load(const std::string &p_sFname, // Parameter_StringReferenceKonstantFname
+	Sprite* Load(const std::string p_sFname, // Parameter_StringReferenceKonstantFname
 		sf::IntRect p_xRect = sf::IntRect(0, 0, 0, 0)); // Parameter_ClassSize
 
 	Sprite* Load(const std::string &p_sFname); // Parameter_StringReferenceKonstantFname
@@ -33,6 +33,8 @@ private:
 private:
 	DrawMan *m_xpDrawman;
 	std::string m_sDir;
+
+	std::map<std::string, sf::Texture> m_xaSprites;
+	
 	//sf::Sprite m_xSprite;
-	//std::map<std::string, Pair> m_xaSprites;
 };

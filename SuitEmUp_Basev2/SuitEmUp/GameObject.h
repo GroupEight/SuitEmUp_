@@ -31,7 +31,8 @@ public:
 	sf::Vector2f getVelocity() const;
 
 	bool HasSprite()const;
-	Sprite *GetSprite();
+	virtual Sprite *GetSprite();
+	void SetSprite(Sprite *p_xpSprite);
 
 	bool HasCollider() const;
 	//Collider* GetCollider();

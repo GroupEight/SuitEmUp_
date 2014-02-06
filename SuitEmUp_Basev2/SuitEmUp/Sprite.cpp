@@ -9,9 +9,8 @@ Sprite::Sprite()
 	
 }
 
-Sprite::Sprite(const sf::Texture &p_xTex)
-: m_xSprite(p_xTex){
-	
+Sprite::Sprite(const sf::Texture &p_xTex){
+	SetTexture(p_xTex);
 }
 
 Sprite::~Sprite(){
@@ -32,6 +31,14 @@ void Sprite::SetSprite(sf::Sprite p_xSprite){
 
 const sf::Sprite Sprite::GetSprite(){
 	return m_xSprite;
+}
+
+void Sprite::SetPosition(sf::Vector2f p_xPos){
+	m_xSprite.setPosition(p_xPos);
+}
+
+sf::Vector2f Sprite::GetPosition(){
+	return m_xSprite.getPosition();
 }
 
 void Sprite::draw(sf::RenderTarget& p_xTarget, sf::RenderStates p_xStates) const {

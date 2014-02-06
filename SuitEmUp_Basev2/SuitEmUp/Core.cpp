@@ -4,6 +4,7 @@
 
 #include "Core.h"
 
+#include "DrawMan.h"
 #include "Stateman.h"
 #include "SpriteMan.h"
 
@@ -28,8 +29,8 @@ Core::~Core(){
 }
 
 bool Core::Init(){
-	m_iWi = 701;
-	m_iHe = 751;
+	m_iWi = 1024;
+	m_iHe = 640;
 
 	m_xDtime = sf::Time::Zero;
 	m_xFps = sf::seconds(1.f / 60.f);
@@ -40,8 +41,16 @@ bool Core::Init(){
 		l_sHiscorepath = "../data/hiscore.txt",
 		l_sStartstate = "Loadstate";
 
-	m_xpWindow = new sf::RenderWindow(sf::VideoMode(1024, 640), "SuitEmUp");
+	m_xpWindow = new sf::RenderWindow(sf::VideoMode(m_iWi, m_iHe), "SuitEmUp");
 	if (m_xpWindow == NULL){
+		return false;
+	}
+
+	m_xpDrawMan = new DrawMan;
+	if (m_xpDrawMan == NULL){
+		return false;
+	}
+	if (!m_xpDrawMan->Init(m_xpWindow)){
 		return false;
 	}
 
@@ -54,9 +63,11 @@ bool Core::Init(){
 	if (m_xpSpriteMan == NULL){
 		return false;
 	}
-	m_xpSpriteMan->Init("../deps/graphics/");
+	if (!m_xpSpriteMan->Init("../deps/graphics/")){
+		return false;
+	}
 
-	m_xpGamestate = new Gamestate;
+	m_xpGamestate = new Gamestate(m_xpDrawMan, m_xpSpriteMan);
 	if (m_xpGamestate == NULL){
 		return false;
 	}
@@ -96,6 +107,8 @@ bool Core::UpdateDeltaTime(){
 
 	if (m_xDtime >= m_xFps){
 		m_xDtime -= m_xFps;
+
+		std::cout << (float)m_xDtime.asMicroseconds() << std::endl;
 
 		return true;
 	}

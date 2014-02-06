@@ -10,13 +10,13 @@ public:
 	DrawMan();
 	~DrawMan();
 
-	bool Initialize(sf::RenderWindow *p_xpWindow, sf::Vector2f p_xSize);
+	bool Init(sf::RenderWindow *p_xpWindow);
 	void Cleanup();
 
 	void Clear();
 	void Present();
 
-	void Draw(Sprite *sprite, sf::Vector2f p_xPos);
+	void Draw(Sprite *p_xSprite, sf::RenderStates p_xRstates = sf::RenderStates::Default);
 
 private:
 	sf::RenderWindow *m_xpWindow;

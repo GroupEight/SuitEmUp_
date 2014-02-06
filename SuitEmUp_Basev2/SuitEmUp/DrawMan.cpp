@@ -14,7 +14,7 @@ DrawMan::~DrawMan(){
 
 };
 
-bool DrawMan::Initialize(sf::RenderWindow *p_xpWindow, sf::Vector2f p_xSize){
+bool DrawMan::Init(sf::RenderWindow *p_xpWindow){
 	m_xpWindow = p_xpWindow;
 	if (m_xpWindow == nullptr){
 		return false;
@@ -37,17 +37,8 @@ void DrawMan::Present(){
 	m_xpWindow->display();
 }
 
-void DrawMan::Draw(Sprite *sprite, sf::Vector2f p_xPos){
-	if (sprite != NULL){
-		//if (sprite->IsSprite("Sprite")){
-		//	SDL_Rect src = { sprite->m_iX, sprite->m_iY, sprite->m_iW, sprite->m_iH };
-		//	SDL_Rect dst = { x, y, sprite->m_iW, sprite->m_iH };
-		//	SDL_RenderCopy(m_renderer, sprite->m_TexpAlpha, &src, &dst);
-		//}
-		//else if (sprite->IsSprite("Text")){
-		//	SDL_Rect l_cLoc = { x, y, 0, 0 };
-		//	SDL_RenderCopy(m_renderer, sprite->m_TexpAlpha, NULL, &l_cLoc);
-		//	// SDL_BlitSurface(sprite->m_SurpAlpha, NULL, );
-		//}
+void DrawMan::Draw(Sprite *p_xSprite, sf::RenderStates p_xRstates){
+	if (p_xSprite != NULL){
+		m_xpWindow->draw(p_xSprite->GetSprite(), p_xRstates);
 	}
 }
