@@ -2,11 +2,20 @@
 
 #include "GameObject.h"
 
+class AnimatedSprite;
 class Sprite;
+
+class GameObjectMan;
+class SpriteMan;
 
 class PlayerObject : public GameObject {
 public:
-	PlayerObject(Sprite *p_xpSprite);
+	enum m_AnimationState {
+		m_eIdle,
+		m_eRun
+	};
+
+	PlayerObject(Sprite *p_xpSprite, GameObjectMan *p_xpBulletMan, SpriteMan *p_xpSpriteMan);
 
 	Sprite* GetSprite();
 
@@ -15,6 +24,14 @@ public:
 private:
 	void UpdateCurrent(sf::Time p_xDtime);
 
+	void Animate(sf::Time p_xDtime);
+
 private:
+	PlayerObject::m_AnimationState m_eState;
+
 	Sprite *m_xpSprite;
+	AnimatedSprite *m_xpAnimSprite;
+
+	GameObjectMan *m_xpBulletMan;
+	SpriteMan *m_xpSpriteMan;
 };

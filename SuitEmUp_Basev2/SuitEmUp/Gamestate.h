@@ -8,6 +8,7 @@
 
 class DrawMan;
 class SpriteMan;
+class GameObjectMan;
 
 class PlayerObject;
 
@@ -27,6 +28,8 @@ private:
 	sf::Window *m_xpWindow;
 
 	DrawMan *m_xpDrawMan;
+
+	GameObjectMan *m_xpBulletMan;
 
 	PlayerObject *m_xpPlayer;
 };

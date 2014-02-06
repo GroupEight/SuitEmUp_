@@ -37,6 +37,12 @@
     <Filter Include="Header Files\Other">
       <UniqueIdentifier>{4975a24f-de20-4f9a-9c76-029b0b6c2134}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{a84c6c53-da9b-4ef3-a358-382910c9958e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{e8ffb677-1055-4ef8-95df-cb9d700d5de6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -75,20 +81,20 @@
     <ClInclude Include="Core.h">
       <Filter>Header Files\Other</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Other</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files\Other</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files\Other</Filter>
     </ClInclude>
-    <ClInclude Include="AnimatedSprite.h">
-      <Filter>Header Files\Other</Filter>
-    </ClInclude>
     <ClInclude Include="Menustate.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedSprite.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +119,6 @@
     <ClCompile Include="PlayerObject.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Other</Filter>
-    </ClCompile>
     <ClCompile Include="SpriteMan.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -131,11 +134,14 @@
     <ClCompile Include="Menustate.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedSprite.cpp">
-      <Filter>Source Files\Other</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyObject.cpp">
       <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedSprite.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

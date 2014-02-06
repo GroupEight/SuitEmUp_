@@ -1,28 +1,23 @@
-﻿Build started 2014-02-06 13:21:23.
+﻿Build started 2014-02-06 15:53:22.
      1>Project "C:\Users\MartinM93\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\SuitEmUp\SuitEmUp.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../deps/SFML-2.1x86/include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"../build/SuitEmUp/Debug\SuitEmUp_d.pch" /Fo"../build/SuitEmUp/Debug\\" /Fd"../build/SuitEmUp/Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt PlayerObject.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../deps/SFML-2.1x86/include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"../build/SuitEmUp/Debug\SuitEmUp_d.pch" /Fo"../build/SuitEmUp/Debug\\" /Fd"../build/SuitEmUp/Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt BulletObject.cpp Core.cpp Gamestate.cpp Menustate.cpp PlayerObject.cpp
          PlayerObject.cpp
-     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(16): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../bin/SuitEmUp_d.exe" /INCREMENTAL /NOLOGO /LIBPATH:"../deps/SFML-2.1x86/lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"../bin/SuitEmUp_d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"../bin/SuitEmUp_d.lib" /MACHINE:X86 ../build/SuitEmUp/Debug\AnimatedSprite.obj
-         ../build/SuitEmUp/Debug\BulletObject.obj
-         ../build/SuitEmUp/Debug\Core.obj
-         ../build/SuitEmUp/Debug\DrawMan.obj
-         ../build/SuitEmUp/Debug\EnemyObject.obj
-         ../build/SuitEmUp/Debug\GameObject.obj
-         ../build/SuitEmUp/Debug\GameObjectMan.obj
-         ../build/SuitEmUp/Debug\Gamestate.obj
-         ../build/SuitEmUp/Debug\Main.obj
-         ../build/SuitEmUp/Debug\Menustate.obj
-         ../build/SuitEmUp/Debug\PlayerObject.obj
-         ../build/SuitEmUp/Debug\Sprite.obj
-         ../build/SuitEmUp/Debug\SpriteMan.obj
-         ../build/SuitEmUp/Debug\Stateman.obj
-         ../build/SuitEmUp/Debug\stdafx.obj
-         SuitEmUp.vcxproj -> C:\Users\MartinM93\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\SuitEmUp\../bin/SuitEmUp_d.exe
-     1>Done Building Project "C:\Users\MartinM93\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\SuitEmUp\SuitEmUp.vcxproj" (Build target(s)).
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(26): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Gamestate.cpp
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\gamestate.cpp(18): error C2664: 'PlayerObject::PlayerObject(const PlayerObject &)' : cannot convert parameter 1 from 'Sprite *' to 'const PlayerObject &'
+                 Reason: cannot convert from 'Sprite *' to 'const PlayerObject'
+                 No constructor could take the source type, or constructor overload resolution was ambiguous
+         BulletObject.cpp
+         Generating Code...
+         Compiling...
+         Menustate.cpp
+         Generating Code...
+         Compiling...
+         Core.cpp
+         Generating Code...
+     1>Done Building Project "C:\Users\MartinM93\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\SuitEmUp\SuitEmUp.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:00.45
+Time Elapsed 00:00:00.88
