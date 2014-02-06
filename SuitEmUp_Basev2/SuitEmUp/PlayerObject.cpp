@@ -15,7 +15,9 @@ PlayerObject::PlayerObject(Sprite *p_xpSprite){
 void PlayerObject::UpdateCurrent(sf::Time p_xDtime){
 	sf::Vector2f l_xVel((sf::Keyboard::isKeyPressed(sf::Keyboard::D) - sf::Keyboard::isKeyPressed(sf::Keyboard::A)), (sf::Keyboard::isKeyPressed(sf::Keyboard::S) - sf::Keyboard::isKeyPressed(sf::Keyboard::W)));
 
-	setVelocity(l_xVel * (float)p_xDtime.asMicroseconds());
+	setVelocity(l_xVel * 40.0f * (float)p_xDtime.asSeconds());
+
+	std::cout << m_xVel.x << ": " << m_xVel.y << std::endl;
 
 	//SetPosition(m_xPos + m_xVel);
 

@@ -91,7 +91,7 @@ void Core::Run(){
 	while (m_xpStateman->IsRunning()){
 		UpdEvents();
 
-		while (UpdateDeltaTime()){
+		if (UpdateDeltaTime()){
 			m_xpWindow->clear(sf::Color::Blue);
 			
 			m_xpStateman->Update(m_xDtime);
@@ -106,9 +106,9 @@ bool Core::UpdateDeltaTime(){
 	m_xDtime += m_xpClock->restart();
 
 	if (m_xDtime >= m_xFps){
-		m_xDtime -= m_xFps;
+		m_xDtime = m_xFps;
 
-		std::cout << (float)m_xDtime.asMicroseconds() << std::endl;
+		std::cout << (float)m_xDtime.asMilliseconds() << std::endl;
 
 		return true;
 	}
@@ -140,6 +140,10 @@ void Core::Cleanup(){
 		delete m_xpMenustate;
 		m_xpMenustate = NULL;
 	}*/
+	if (m_xpDrawMan != NULL){
+		delete m_xpDrawMan;
+		m_xpDrawMan = NULL;
+	}
 	if (m_xpStateman != NULL){
 		delete m_xpStateman;
 		m_xpStateman = NULL;
