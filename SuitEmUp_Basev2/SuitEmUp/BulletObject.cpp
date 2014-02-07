@@ -13,6 +13,12 @@ BulletObject::BulletObject(sf::Vector2f p_xPos, sf::Vector2f p_xVel, Sprite *p_x
 	m_xpSprite = p_xpSprite;
 }
 
+void  BulletObject::UpdateCurrent(sf::Time p_xDtime){
+	if (m_xpSprite != NULL){
+		m_xpSprite->SetPosition(m_xPos);
+	}
+}
+
 void BulletObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	//p_xWindow.draw(m_xpSprite->GetSprite());
 	target.draw(m_xpSprite->GetSprite(), states);

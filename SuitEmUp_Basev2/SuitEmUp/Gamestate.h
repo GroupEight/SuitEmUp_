@@ -25,7 +25,7 @@ public:
 	bool IsType(const std::string &p_sType); // Parameter_StringKonstantReferenceType
 
 private:
-	sf::Window *m_xpWindow;
+	sf::RenderWindow *m_xpWindow;
 
 	DrawMan *m_xpDrawMan;
 	SpriteMan *m_xpSpriteMan;
@@ -33,4 +33,6 @@ private:
 	GameObjectMan *m_xpBulletMan;
 
 	PlayerObject *m_xpPlayer;
+
+	sf::View m_xWorldView;
 };

@@ -107,7 +107,7 @@ void Core::Run(){
 bool Core::UpdateDeltaTime(){
 	m_xDtime += m_xpClock->restart();
 
-	std::cout << (float)m_xDtime.asMilliseconds() << std::endl;
+	//std::cout << (float)m_xDtime.asMilliseconds() << std::endl;
 
 	if (m_xDtime >= m_xFps){
 		//m_xDtime = m_xFps;

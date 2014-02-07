@@ -105,6 +105,16 @@ bool GameObject::HasCollider() const {
 	return false;
 }
 
+bool GameObject::OnScreen(sf::Vector2f p_xV0, sf::Vector2f p_xV1){
+	if (m_xPos.x > p_xV0.x + 0.5 * p_xV1.x || m_xPos.x < p_xV0.x - 0.5 * p_xV1.x){
+		return true;
+	}
+	if (m_xPos.y > p_xV0.y + 0.5 * p_xV1.y || m_xPos.y < p_xV0.y - 0.5 * p_xV1.y){
+		return true;
+	}
+	return false;
+}
+
 void GameObject::setVelocity(sf::Vector2f p_xVel){
 	m_xVel = p_xVel;
 }

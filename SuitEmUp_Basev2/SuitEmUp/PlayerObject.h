@@ -34,4 +34,6 @@ private:
 
 	GameObjectMan *m_xpBulletMan;
 	SpriteMan *m_xpSpriteMan;
+
+	float m_fBulletspd;
 };

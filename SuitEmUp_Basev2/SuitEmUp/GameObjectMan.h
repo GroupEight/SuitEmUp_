@@ -14,6 +14,8 @@ public:
 
 	void UpdateAll(sf::Time dt);
 
+	void OnScreen(sf::Vector2f p_xV0, sf::Vector2f p_xV1 = sf::Vector2f(0, 0));
+
 	void Cleanup();
 
 	//GameObject *GetObject(const std::string &p_srkType, int p = 0);

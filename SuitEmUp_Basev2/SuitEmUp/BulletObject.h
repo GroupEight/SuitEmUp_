@@ -10,4 +10,6 @@ public:
 
 private:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+	void  UpdateCurrent(sf::Time p_xDtime);
 };

@@ -37,6 +37,8 @@ public:
 	bool HasCollider() const;
 	//Collider* GetCollider();
 
+	bool OnScreen(sf::Vector2f p_xV0, sf::Vector2f p_xV1 = sf::Vector2f(0, 0));
+
 protected:
 	virtual void UpdateCurrent(sf::Time p_xDtime);
 	virtual void UpdateParents(sf::Time p_xDtime);
