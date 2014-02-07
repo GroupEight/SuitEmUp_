@@ -16,7 +16,7 @@ public:
 	void Clear();
 	void Present();
 
-	void Draw(Sprite *p_xSprite, sf::RenderStates p_xRstates = sf::RenderStates::Default);
+	void Draw(Sprite *p_xSprite, sf::RenderStates p_xRstates = sf::RenderStates::RenderStates());
 
 private:
 	sf::RenderWindow *m_xpWindow;

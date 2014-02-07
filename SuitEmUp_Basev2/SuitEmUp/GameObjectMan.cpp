@@ -10,8 +10,10 @@ GameObjectMan::GameObjectMan(){
 
 GameObjectMan::~GameObjectMan(){
 	for (int i = 0; i < m_xpaGobjs.size(); i++){
-		delete m_xpaGobjs[i];
-		m_xpaGobjs[i] = NULL;
+		if (m_xpaGobjs[i] != NULL){
+			delete m_xpaGobjs[i];
+			m_xpaGobjs[i] = NULL;
+		}
 	}
 	m_xpaGobjs.clear();
 }
@@ -30,4 +32,14 @@ void GameObjectMan::UpdateAll(sf::Time dt){
 			m_xpaGobjs[i]->Update(dt);
 		}
 	}
+}
+
+void GameObjectMan::Cleanup(){
+	for (int i = 0; i < m_xpaGobjs.size(); i++){
+		if (m_xpaGobjs[i] != NULL){
+			delete m_xpaGobjs[i];
+			m_xpaGobjs[i] = NULL;
+		}
+	}
+	m_xpaGobjs.clear();
 }

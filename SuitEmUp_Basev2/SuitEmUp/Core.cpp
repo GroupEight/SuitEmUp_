@@ -63,7 +63,7 @@ bool Core::Init(){
 	if (m_xpSpriteMan == NULL){
 		return false;
 	}
-	if (!m_xpSpriteMan->Init("../deps/graphics/")){
+	if (!m_xpSpriteMan->Init("../data/graphics/")){
 		return false;
 	}
 
@@ -98,6 +98,8 @@ void Core::Run(){
 			m_xpStateman->Draw();
 
 			m_xpWindow->display();
+
+			m_xDtime = sf::Time::Zero;
 		}
 	}
 }
@@ -105,10 +107,10 @@ void Core::Run(){
 bool Core::UpdateDeltaTime(){
 	m_xDtime += m_xpClock->restart();
 
-	if (m_xDtime >= m_xFps){
-		m_xDtime = m_xFps;
+	std::cout << (float)m_xDtime.asMilliseconds() << std::endl;
 
-		std::cout << (float)m_xDtime.asMilliseconds() << std::endl;
+	if (m_xDtime >= m_xFps){
+		//m_xDtime = m_xFps;
 
 		return true;
 	}

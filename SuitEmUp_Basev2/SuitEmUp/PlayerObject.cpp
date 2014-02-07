@@ -32,7 +32,8 @@ void PlayerObject::UpdateCurrent(sf::Time p_xDtime){
 	}
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-		m_xpBulletMan->Add(new BulletObject(m_xPos, sf::Vector2f(1, 1), m_xpSpriteMan->Load("PlaceHolder.png", sf::IntRect(0, 0, 16, 16))));
+		std::cout << "Banana!";
+		m_xpBulletMan->Add(new BulletObject(m_xPos, sf::Vector2f(0, 0), m_xpSpriteMan->Load("PlaceHolder.png", sf::IntRect(0, 0, 16, 16))));
 	}
 }
 

@@ -14,6 +14,8 @@ public:
 
 	void UpdateAll(sf::Time dt);
 
+	void Cleanup();
+
 	//GameObject *GetObject(const std::string &p_srkType, int p = 0);
 
 private:

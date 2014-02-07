@@ -17,7 +17,7 @@ Gamestate::Gamestate(DrawMan *p_xpDrawMan, SpriteMan *p_xpSpriteMan){
 
 	m_xpBulletMan = new GameObjectMan;
 
-	m_xpPlayer = new PlayerObject(m_xpSpriteMan->Load("PlaceHolder.png", sf::IntRect(0, 0, 0, 0)), m_xpBulletMan, m_xpSpriteMan);
+	m_xpPlayer = new PlayerObject(m_xpSpriteMan->Load("PlaceHolder.png", sf::IntRect(0, 0, 64, 64)), m_xpBulletMan, m_xpSpriteMan);
 }
 
 Gamestate::~Gamestate(){
@@ -42,7 +42,7 @@ bool Gamestate::Update(sf::Time p_xDtime){
 }
 
 void Gamestate::Draw(){
-	m_xpDrawMan->Draw(m_xpPlayer->GetSprite());
+	m_xpDrawMan->Draw(m_xpPlayer->GetSprite(), sf::RenderStates::RenderStates());
 
 	for (int i = 0; i < m_xpBulletMan->GetVector().size(); i++){
 		m_xpDrawMan->Draw(m_xpBulletMan->GetVector()[i]->GetSprite());

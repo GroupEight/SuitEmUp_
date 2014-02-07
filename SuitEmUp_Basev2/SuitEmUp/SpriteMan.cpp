@@ -63,7 +63,8 @@ Sprite* SpriteMan::Load(const std::string p_sFname, sf::IntRect p_xRect){
 
 		return l_xpSprite;
 	}
-	return NULL;
+
+	return new Sprite(it->second);
 }
 
 /*AnimatedSprite* SpriteMan::Load(const std::string &p_srkFname){
