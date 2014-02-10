@@ -35,5 +35,9 @@ private:
 	GameObjectMan *m_xpBulletMan;
 	SpriteMan *m_xpSpriteMan;
 
-	float m_fBulletspd;
+	float m_fBulletspd,
+		m_fPlayerspd,
+		m_fFiretime,
+		m_fFrate,
+		m_fMaxrate;
 };

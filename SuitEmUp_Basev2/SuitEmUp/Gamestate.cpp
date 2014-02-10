@@ -48,13 +48,13 @@ bool Gamestate::Update(sf::Time p_xDtime){
 
 void Gamestate::Draw(){
 	//m_xpWindow->setView(m_xWorldView);
-	m_xpWindow->setPosition(sf::Vector2i(m_xpPlayer->GetPosition()));
+	//m_xpWindow->setPosition(sf::Vector2i(m_xpPlayer->GetPosition()));
 
-	//m_xpDrawMan->Draw(m_xpPlayer->GetSprite(), sf::RenderStates::RenderStates());
+	m_xpDrawMan->Draw(m_xpPlayer->GetSprite(), sf::RenderStates::RenderStates());
 
-/*	for (int i = 0; i < m_xpBulletMan->GetVector().size(); i++){
+	for (int i = 0; i < m_xpBulletMan->GetVector().size(); i++){
 		m_xpDrawMan->Draw(m_xpBulletMan->GetVector()[i]->GetSprite());
-	}*/
+	}
 }
 
 std::string Gamestate::Next(){
