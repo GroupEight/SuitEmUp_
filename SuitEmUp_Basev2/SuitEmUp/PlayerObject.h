@@ -39,5 +39,12 @@ private:
 		m_fPlayerspd,
 		m_fFiretime,
 		m_fFrate,
-		m_fMaxrate;
+		m_fMaxrate,
+		m_fHeat,
+		m_fHeatup,
+		m_fCooldown,
+		m_fMaxheat,
+		m_fMinheat;
+
+	bool m_bOverheat;
 };

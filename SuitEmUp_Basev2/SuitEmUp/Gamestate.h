@@ -14,7 +14,7 @@ class PlayerObject;
 
 class Gamestate : public State {
 public:
-	Gamestate(DrawMan *p_xpDrawMan, SpriteMan *p_xpSpriteMan);
+	Gamestate(DrawMan *p_xpDrawMan, SpriteMan *p_xpSpriteMan, sf::RenderWindow *p_xpWindow);
 	~Gamestate();
 
 	bool Enter();
@@ -34,5 +34,5 @@ private:
 
 	PlayerObject *m_xpPlayer;
 
-	sf::View m_xWorldView;
+	sf::View *m_xpWorldView;
 };

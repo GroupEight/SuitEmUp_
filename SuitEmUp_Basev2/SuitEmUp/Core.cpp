@@ -67,7 +67,7 @@ bool Core::Init(){
 		return false;
 	}
 
-	m_xpGamestate = new Gamestate(m_xpDrawMan, m_xpSpriteMan);
+	m_xpGamestate = new Gamestate(m_xpDrawMan, m_xpSpriteMan, m_xpWindow);
 	if (m_xpGamestate == NULL){
 		return false;
 	}
