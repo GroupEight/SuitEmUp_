@@ -4,7 +4,7 @@
 
 #include <string>
 
-class Sprite : public sf::Drawable, public sf::Transformable {
+class Sprite : public sf::Transformable {
 	friend class DrawMan;
 	friend class SpriteMan;
 

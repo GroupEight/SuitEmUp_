@@ -13,6 +13,10 @@ BulletObject::BulletObject(sf::Vector2f p_xPos, sf::Vector2f p_xVel, Sprite *p_x
 	m_xpSprite = p_xpSprite;
 }
 
+BulletObject::~BulletObject(){
+	std::cout << "deleted";
+}
+
 void  BulletObject::UpdateCurrent(sf::Time p_xDtime){
 	if (m_xpSprite != NULL){
 		m_xpSprite->SetPosition(m_xPos);

@@ -31,6 +31,7 @@ private:
 	SpriteMan *m_xpSpriteMan;
 
 	GameObjectMan *m_xpBulletMan;
+	GameObjectMan *m_xpEnemyMan;
 
 	PlayerObject *m_xpPlayer;
 

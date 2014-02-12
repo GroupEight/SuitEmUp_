@@ -19,7 +19,7 @@ public:
 	Ptr DetachChild(const GameObject &p_xObj);*/
 
 	void Update(sf::Time p_xDtime);
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	sf::Vector2f GetWorldPosition() const;
 	sf::Transform GetWorldTransform() const;
@@ -37,7 +37,7 @@ public:
 	bool HasCollider() const;
 	//Collider* GetCollider();
 
-	bool OnScreen(sf::Vector2f p_xV0, sf::Vector2f p_xV1 = sf::Vector2f(0, 0));
+	bool OnScreen(sf::RenderWindow *p_xpWindow);
 
 protected:
 	virtual void UpdateCurrent(sf::Time p_xDtime);

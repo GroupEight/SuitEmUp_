@@ -41,7 +41,7 @@ bool Core::Init(){
 		l_sHiscorepath = "../data/hiscore.txt",
 		l_sStartstate = "Loadstate";
 
-	m_xpWindow = new sf::RenderWindow(sf::VideoMode(m_iWi, m_iHe), "SuitEmUp");
+	m_xpWindow = new sf::RenderWindow(sf::VideoMode(m_iWi, m_iHe), "Tailor Moon");
 	if (m_xpWindow == NULL){
 		return false;
 	}
@@ -63,7 +63,7 @@ bool Core::Init(){
 	if (m_xpSpriteMan == NULL){
 		return false;
 	}
-	if (!m_xpSpriteMan->Init("../data/graphics/")){
+	if (!m_xpSpriteMan->Init("../rec/Graphics/")){
 		return false;
 	}
 
@@ -92,7 +92,7 @@ void Core::Run(){
 		UpdEvents();
 
 		if (UpdateDeltaTime()){
-			m_xpWindow->clear(sf::Color::Blue);
+			m_xpWindow->clear(sf::Color::Cyan);
 			
 			m_xpStateman->Update(m_xDtime);
 			m_xpStateman->Draw();

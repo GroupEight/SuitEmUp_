@@ -57,11 +57,13 @@ Sprite* SpriteMan::Load(const std::string p_sFname, sf::IntRect p_xRect){
 			}
 		}
 
-		Sprite *l_xpSprite = new Sprite(l_xTex);
+		//Sprite *l_xpSprite = new Sprite(l_xTex);
 
 		m_xaSprites.insert(std::pair<std::string, sf::Texture>(p_sFname, l_xTex));
 
-		return l_xpSprite;
+		std::map<std::string, sf::Texture>::iterator it = m_xaSprites.find(p_sFname);
+
+		return new Sprite(it->second);
 	}
 
 	return new Sprite(it->second);

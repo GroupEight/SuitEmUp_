@@ -9,26 +9,9 @@
 #include <sstream>
 #include <typeinfo>
 
-GameObject::GameObject()
-/*: m_xaChildren()
-, m_xpParent(nullptr)*/{
+GameObject::GameObject(){
 
 }
-
-/*void GameObject::AttachChild(Ptr p_xChild){
-	p_xChild->m_xpParent = this;
-	m_xaChildren.push_back(std::move(p_xChild));
-}
-
-GameObject::Ptr GameObject::DetachChild(const GameObject &p_xObj){
-	auto found = std::find_if(m_xaChildren.begin(), m_xaChildren.end(), [&](Ptr& p) { return p.get() == &p_xObj; });
-	assert(found != m_xaChildren.end());
-
-	Ptr result = std::move(*found);
-	result->m_xpParent = nullptr;
-	m_xaChildren.erase(found);
-	return result;
-}*/
 
 void GameObject::Update(sf::Time p_xDtime){
 	UpdateCurrent(p_xDtime);
@@ -43,30 +26,12 @@ void GameObject::UpdateParents(sf::Time p_xDtime){
 }
 
 void GameObject::UpdateCurrent(sf::Time p_xDtime){
-	
-
-	//move(m_xVel* p_xDtime.asSeconds());
-
 	SetPosition(m_xPos + m_xVel);
 }
 
-//void GameObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	/*p_xStates.transform *= getTransform();
+void GameObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
-	DrawCurrent(p_xTarget, p_xStates);
-	DrawParents(p_xTarget, p_xStates);*/
-//}
-
-/*void GameObject::DrawCurrent(sf::RenderTarget& p_xTarget, sf::RenderStates p_xStates) const {
-	// Do nothing by default
 }
-
-void GameObject::DrawParents(sf::RenderTarget& p_xTarget, sf::RenderStates p_xStates) const {
-	/*for (const Ptr& l_xChild : m_xaChildren){
-		l_xChild->draw(p_xTarget, p_xStates);
-	}
-	GameObject::DrawCurrent(p_xTarget, p_xStates);
-}*/
 
 sf::Vector2f GameObject::GetWorldPosition() const {
 	return GetWorldTransform() * sf::Vector2f();
@@ -105,11 +70,11 @@ bool GameObject::HasCollider() const {
 	return false;
 }
 
-bool GameObject::OnScreen(sf::Vector2f p_xV0, sf::Vector2f p_xV1){
-	if (m_xPos.x > p_xV0.x + 0.5 * p_xV1.x || m_xPos.x < p_xV0.x - 0.5 * p_xV1.x){
+bool GameObject::OnScreen(sf::RenderWindow *p_xpWindow){
+	if (GetPosition().x > p_xpWindow->getView().getCenter().x - 0.5 * p_xpWindow->getView().getSize().x && GetPosition().x < p_xpWindow->getView().getCenter().x + 0.5 * p_xpWindow->getView().getSize().x){
 		return true;
 	}
-	if (m_xPos.y > p_xV0.y + 0.5 * p_xV1.y || m_xPos.y < p_xV0.y - 0.5 * p_xV1.y){
+	else if (GetPosition().y > p_xpWindow->getView().getCenter().y - 0.5 * p_xpWindow->getView().getSize().y && GetPosition().y < p_xpWindow->getView().getCenter().y + 0.5 * p_xpWindow->getView().getSize().y){
 		return true;
 	}
 	return false;

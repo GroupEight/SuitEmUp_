@@ -4,6 +4,8 @@
 
 #include <vector>
 
+class DrawMan;
+
 class GameObjectMan {
 public:
 	GameObjectMan();
@@ -13,8 +15,12 @@ public:
 	std::vector<GameObject*> GetVector();
 
 	void UpdateAll(sf::Time dt);
+	void DrawAll(DrawMan *p_xpDrawMan);
 
-	void OnScreen(sf::Vector2f p_xV0, sf::Vector2f p_xV1 = sf::Vector2f(0, 0));
+	void UpdateOnScreen(sf::RenderWindow *p_xpWindow, sf::Time p_xDtime);
+	void DrawOnScreen(sf::RenderWindow *p_xpWindow, DrawMan *p_xpDrawMan);
+
+	void DeleteOffScreen(sf::RenderWindow *p_xpWindow);
 
 	void Cleanup();
 
