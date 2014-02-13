@@ -1,4 +1,4 @@
-//EnemyObject.h//
+//EnemyObject.cpp//
 
 #include "stdafx.h"
 

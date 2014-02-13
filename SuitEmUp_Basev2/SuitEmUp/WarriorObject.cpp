@@ -19,7 +19,7 @@ WarriorObject::WarriorObject(sf::Vector2f p_xStartPos, GameObject *p_xpTarget, S
 
 	m_fSpd = 20.0f;
 
-	m_xAggrozone = sf::Vector2f(1024, 640);
+	m_xAggrozone = sf::Vector2f(512, 320);
 }
 
 WarriorObject::~WarriorObject(){
@@ -33,7 +33,6 @@ void WarriorObject::UpdateParents(sf::Time p_xDtime){
 
 void WarriorObject::UpdateCurrent(sf::Time p_xDtime){
 	if (m_xState == m_AIState::m_eIdle){
-		std::cout << "Idle\n";
 		if (m_xpTarget->GetPosition().x - m_xAggrozone.x < GetPosition().x && m_xpTarget->GetPosition().x + m_xAggrozone.x > GetPosition().x){
 			m_xState = m_AIState::m_eAttack;
 		}
@@ -42,7 +41,6 @@ void WarriorObject::UpdateCurrent(sf::Time p_xDtime){
 		}
 	}
 	if (m_xState == m_AIState::m_eAttack){
-		std::cout << "Attack\n";
 		if (m_xpTarget->GetPosition().x > GetPosition().x){
 			m_xVel.x = m_fSpd * (float)p_xDtime.asSeconds();
 		}
@@ -60,5 +58,4 @@ void WarriorObject::UpdateCurrent(sf::Time p_xDtime){
 		m_xpSprite->SetPosition(GetPosition());
 		m_xpSprite->setRotation(getRotation());
 	}
-	std::cout << m_xPos.x << ": " << m_xPos.y << std::endl;;
 }

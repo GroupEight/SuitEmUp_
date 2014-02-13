@@ -15,8 +15,7 @@ public:
 public:
 	GameObject();
 
-	/*void AttachChild(Ptr p_xChild);
-	Ptr DetachChild(const GameObject &p_xObj);*/
+	~GameObject() {};
 
 	void Update(sf::Time p_xDtime);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -43,15 +42,9 @@ protected:
 	virtual void UpdateCurrent(sf::Time p_xDtime);
 	virtual void UpdateParents(sf::Time p_xDtime);
 
-	/*virtual void DrawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void DrawParents(sf::RenderTarget& target, sf::RenderStates states) const;*/
-
 protected:
 	sf::Vector2f m_xPos;
 	sf::Vector2f m_xVel;
 
 	Sprite *m_xpSprite;
-
-	/*std::vector<Ptr> m_xaChildren;
-	GameObject* m_xpParent;*/
 };

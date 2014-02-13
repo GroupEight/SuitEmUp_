@@ -23,9 +23,11 @@ Gamestate::Gamestate(DrawMan *p_xpDrawMan, SpriteMan *p_xpSpriteMan, sf::RenderW
 	m_xpEnemyMan = new GameObjectMan;
 
 	m_xpPlayer = new PlayerObject(m_xpSpriteMan->Load("Player_Anim/Player_Anim_Idle.png", sf::IntRect(0, 0, 180, 291)), m_xpBulletMan, m_xpSpriteMan);
-	m_xpEnemyMan->Add(new WarriorObject(sf::Vector2f(0, 0), m_xpPlayer, m_xpSpriteMan->Load("Player_Anim/Player_Anim_Idle.png", sf::IntRect(0, 0, 180, 291))));
+	m_xpEnemyMan->Add(new WarriorObject(sf::Vector2f(-40, -40), m_xpPlayer, m_xpSpriteMan->Load("Warrior_01.png", sf::IntRect(0, 0, 0, 0))));
 
 	m_xpWorldView = new sf::View(m_xpWindow->getDefaultView());
+
+	m_fZoom = 1.0f;
 }
 
 Gamestate::~Gamestate(){
@@ -62,8 +64,19 @@ bool Gamestate::Update(sf::Time p_xDtime){
 	//m_xpEnemyMan->UpdateOnScreen(m_xpWindow, p_xDtime);
 	m_xpEnemyMan->UpdateAll(p_xDtime);
 
-	m_xpWorldView->setCenter(m_xpPlayer->GetPosition() - m_xpPlayer->GetWorldPosition());
-	m_xpWorldView->setSize(m_xpWindow->getSize().x, m_xpWindow->getSize().y);
+	m_xpWorldView->setCenter(m_xpPlayer->GetPosition());
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && m_fZoom < 1.5f){
+		m_fZoom += 0.025f;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && m_fZoom > 0.5f){
+		m_fZoom -= 0.025f;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
+		m_fZoom = 1.0f;
+	}
+	m_xpWorldView->setSize(m_fZoom * m_xpWindow->getSize().x, m_fZoom * m_xpWindow->getSize().y);
+	m_xpWindow->setView(*m_xpWorldView);
 
 	m_xpBulletMan->DeleteOffScreen(m_xpWindow);
 
@@ -71,8 +84,6 @@ bool Gamestate::Update(sf::Time p_xDtime){
 }
 
 void Gamestate::Draw(){
-	m_xpWindow->setView(*m_xpWorldView);
-
 	m_xpDrawMan->Draw(m_xpPlayer->GetSprite(), sf::RenderStates::RenderStates());
 
 	m_xpBulletMan->DrawOnScreen(m_xpWindow, m_xpDrawMan);

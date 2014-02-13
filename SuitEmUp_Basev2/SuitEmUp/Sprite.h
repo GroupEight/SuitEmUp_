@@ -23,6 +23,9 @@ public:
 	void SetPosition(sf::Vector2f p_xPos);
 	sf::Vector2f GetPosition();
 
+	void SetRotation(float p_fPos);
+	float GetRotation();
+
 	void draw(sf::RenderTarget& m_xTarget, sf::RenderStates m_xStates) const;
 
 protected:

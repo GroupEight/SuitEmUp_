@@ -18,7 +18,7 @@ PlayerObject::PlayerObject(Sprite *p_xpSprite, GameObjectMan *p_xpBulletMan, Spr
 
 	m_xpSprite = p_xpSprite;
 	m_xpSprite = p_xpSprite;
-	m_xpSprite->setPosition(m_xPos);
+	m_xpSprite->SetPosition(m_xPos);
 
 	m_xpBulletMan = p_xpBulletMan;
 
@@ -60,7 +60,7 @@ void PlayerObject::UpdateCurrent(sf::Time p_xDtime){
 	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_fFiretime > (m_fMaxrate / m_fFrate) && m_bOverheat == false){
 		m_fFiretime = 0.0f;
-		m_fHeat += m_fHeatup;
+		//m_fHeat += m_fHeatup;
 
 		float l_fA = sf::Mouse::getPosition().x - 1024;
 		float l_fB = sf::Mouse::getPosition().y - 640;
@@ -82,7 +82,7 @@ void PlayerObject::UpdateCurrent(sf::Time p_xDtime){
 
 	if (m_xpSprite != NULL){
 		m_xpSprite->SetPosition(GetPosition());
-		m_xpSprite->setRotation(getRotation());
+		m_xpSprite->SetRotation(getRotation() - 90.0f);
 	}
 
 	//std::cout << GetPosition().x << ": " << GetPosition().y << std::endl;

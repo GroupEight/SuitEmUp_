@@ -38,6 +38,7 @@ std::vector<GameObject*> GameObjectMan::GetVector(){
 void GameObjectMan::UpdateAll(sf::Time dt){
 	for (int i = m_xpaGobjs.size() - 1; i >= 0; i--){
 		if (m_xpaGobjs[i] != NULL){
+			//std::cout << i << std::endl;
 			m_xpaGobjs[i]->Update(dt);
 		}
 	}

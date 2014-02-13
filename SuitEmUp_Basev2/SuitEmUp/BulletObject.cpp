@@ -18,8 +18,12 @@ BulletObject::~BulletObject(){
 }
 
 void  BulletObject::UpdateCurrent(sf::Time p_xDtime){
+	float l_fRot = atan2f(m_xVel.x, m_xVel.y) * 180 / 3.141592;
+	setRotation(l_fRot);
+
 	if (m_xpSprite != NULL){
 		m_xpSprite->SetPosition(m_xPos);
+		m_xpSprite->SetRotation(getRotation() - 90.0f);
 	}
 }
 

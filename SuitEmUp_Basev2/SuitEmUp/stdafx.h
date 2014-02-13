@@ -23,8 +23,11 @@
 #pragma comment(lib, "sfml-graphics-s.lib")
 #pragma comment(lib, "sfml-system-s.lib")
 #pragma comment(lib, "sfml-audio-s.lib")
-#endif/*
-#if defined(_DEBUG)
+#endif
+
+#pragma comment(lib, "Box2D.lib")
+
+/*#if defined(_DEBUG)
 #pragma comment(lib, "sfml-window-s-d12.lib")
 #pragma comment(lib, "sfml-graphics-s-d12.lib")
 #pragma comment(lib, "sfml-system-s-d12.lib")
@@ -35,8 +38,14 @@
 #pragma comment(lib, "sfml-system-s12.lib")
 #pragma comment(lib, "sfml-audio-s12.lib")
 #endif*/
+
 #include <iostream>
+
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 #include <SFML\System.hpp>
 #include <SFML\Audio.hpp>
+
+#include <Box2D/Box2D.h>
+
+#include "Box2D\Dynamics\b2World.h"

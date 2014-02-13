@@ -9,8 +9,10 @@ public:
 	EnemyObject();
 	EnemyObject(sf::Vector2f p_xStartPos, GameObject *p_xpTarget = nullptr);
 
+	virtual ~EnemyObject() {};
+
 protected:
-	void UpdateCurrent(sf::Time dt);
+	virtual void UpdateCurrent(sf::Time dt);
 
 	sf::Vector2f m_xAggrozone;
 	sf::Vector2f m_xStartPos;
@@ -22,5 +24,5 @@ protected:
 
 	float m_fSpd;
 
-	bool m_bDefeated;
+	bool m_bAlive;
 };

@@ -36,4 +36,6 @@ private:
 	PlayerObject *m_xpPlayer;
 
 	sf::View *m_xpWorldView;
+
+	float m_fZoom;
 };

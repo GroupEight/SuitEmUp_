@@ -71,10 +71,10 @@ bool GameObject::HasCollider() const {
 }
 
 bool GameObject::OnScreen(sf::RenderWindow *p_xpWindow){
-	if (GetPosition().x > p_xpWindow->getView().getCenter().x - 0.5 * p_xpWindow->getView().getSize().x && GetPosition().x < p_xpWindow->getView().getCenter().x + 0.5 * p_xpWindow->getView().getSize().x){
+	if (GetPosition().x > p_xpWindow->getView().getCenter().x - p_xpWindow->getView().getSize().x && GetPosition().x < p_xpWindow->getView().getCenter().x + p_xpWindow->getView().getSize().x){
 		return true;
 	}
-	else if (GetPosition().y > p_xpWindow->getView().getCenter().y - 0.5 * p_xpWindow->getView().getSize().y && GetPosition().y < p_xpWindow->getView().getCenter().y + 0.5 * p_xpWindow->getView().getSize().y){
+	else if (GetPosition().y > p_xpWindow->getView().getCenter().y -p_xpWindow->getView().getSize().y && GetPosition().y < p_xpWindow->getView().getCenter().y + p_xpWindow->getView().getSize().y){
 		return true;
 	}
 	return false;

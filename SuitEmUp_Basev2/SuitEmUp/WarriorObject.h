@@ -1,4 +1,4 @@
-//WorkerObject.h//
+//WarriorObject.h//
 
 #pragma once
 
