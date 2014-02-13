@@ -59,7 +59,8 @@ bool Gamestate::Update(sf::Time p_xDtime){
 	m_xpPlayer->Update(p_xDtime);
 
 	m_xpBulletMan->UpdateAll(p_xDtime);
-	m_xpEnemyMan->UpdateOnScreen(m_xpWindow, p_xDtime);
+	//m_xpEnemyMan->UpdateOnScreen(m_xpWindow, p_xDtime);
+	m_xpEnemyMan->UpdateAll(p_xDtime);
 
 	m_xpWorldView->setCenter(m_xpPlayer->GetPosition() - m_xpPlayer->GetWorldPosition());
 	m_xpWorldView->setSize(m_xpWindow->getSize().x, m_xpWindow->getSize().y);

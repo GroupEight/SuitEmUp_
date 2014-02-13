@@ -1,14 +1,9 @@
-﻿Build started 2014-02-12 14:58:43.
+﻿Build started 2014-02-12 21:40:25.
      1>Project "C:\Users\MartinM93\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\SuitEmUp\SuitEmUp.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../deps/SFML-2.1x86/include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"../build/SuitEmUp/Debug\SuitEmUp_d.pch" /Fo"../build/SuitEmUp/Debug\\" /Fd"../build/SuitEmUp/Debug\vc110.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt PlayerObject.cpp
-         PlayerObject.cpp
-     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(17): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(44): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(65): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(66): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(80): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\playerobject.cpp(80): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../deps/SFML-2.1x86/include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"../build/SuitEmUp/Debug\SuitEmUp_d.pch" /Fo"../build/SuitEmUp/Debug\\" /Fd"../build/SuitEmUp/Debug\vc110.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt Gamestate.cpp
+         Gamestate.cpp
+     1>c:\users\martinm93\documents\github\suitemup_\suitemup_basev2\suitemup\gamestate.cpp(66): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../bin/SuitEmUp_d.exe" /INCREMENTAL /NOLOGO /LIBPATH:"../deps/SFML-2.1x86/lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"../bin/SuitEmUp_d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"../bin/SuitEmUp_d.lib" /MACHINE:X86 ../build/SuitEmUp/Debug\AnimatedSprite.obj
          ../build/SuitEmUp/Debug\BulletObject.obj
@@ -32,4 +27,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.44
+Time Elapsed 00:00:01.73
