@@ -5,7 +5,7 @@
 
 class DrawMan;
 class Stateman;
-class SpriteMan;
+class GfxMan;
 
 class Gamestate;
 class Menustate;
@@ -29,7 +29,7 @@ private:
 
 	DrawMan *m_xpDrawMan; // Member_ClassPointerDrawMan
 	Stateman *m_xpStateman; // Member_ClassPointerStateman
-	SpriteMan *m_xpSpriteMan; // Member_ClassPointerSpriteMan
+	GfxMan *m_xpGfxMan; // Member_ClassPointerGfxMan
 
 	Gamestate *m_xpGamestate; // Member_Gamestate
 	Menustate *m_xpMenustate; // Member_Menustate

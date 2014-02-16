@@ -1,4 +1,4 @@
-//SpriteMan.h//
+//GfxMan.h//
 
 #include "stdafx.h"
 
@@ -37,8 +37,8 @@ void DrawMan::Present(){
 	m_xpWindow->display();
 }
 
-void DrawMan::Draw(Sprite *p_xSprite, sf::RenderStates p_xRstates){
-	if (p_xSprite != NULL){
-		m_xpWindow->draw(p_xSprite->GetSprite(), p_xRstates);
+void DrawMan::Draw(const sf::Drawable *p_xpDrawable, sf::RenderStates p_xRstates){
+	if (p_xpDrawable != NULL){
+		m_xpWindow->draw(*p_xpDrawable, p_xRstates);
 	}
 }

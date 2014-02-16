@@ -2,7 +2,9 @@
 
 #include "WorkerObject.h"
 
-WorkerObject::WorkerObject(sf::Vector2f p_xStartPos, GameObject *p_xpTarget, Sprite *p_xpSprite){
+#include "Sprite.h"
+
+WorkerObject::WorkerObject(Sprite *p_xpSprite, sf::Vector2f p_xStartPos, GameObject *p_xpTarget){
 	m_xStartPos = p_xStartPos;
 
 	m_xpTarget = p_xpTarget;

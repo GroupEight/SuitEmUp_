@@ -6,7 +6,7 @@
 
 #include "DrawMan.h"
 #include "Stateman.h"
-#include "SpriteMan.h"
+#include "GfxMan.h"
 
 #include "Gamestate.h"
 #include "Menustate.h"
@@ -59,15 +59,15 @@ bool Core::Init(){
 		return false;
 	}
 
-	m_xpSpriteMan = new SpriteMan;
-	if (m_xpSpriteMan == NULL){
+	m_xpGfxMan = new GfxMan;
+	if (m_xpGfxMan == NULL){
 		return false;
 	}
-	if (!m_xpSpriteMan->Init("../rec/Graphics/")){
+	if (!m_xpGfxMan->Init("../rec/Graphics/")){
 		return false;
 	}
 
-	m_xpGamestate = new Gamestate(m_xpDrawMan, m_xpSpriteMan, m_xpWindow);
+	m_xpGamestate = new Gamestate(m_xpDrawMan, m_xpGfxMan, m_xpWindow);
 	if (m_xpGamestate == NULL){
 		return false;
 	}
@@ -150,9 +150,9 @@ void Core::Cleanup(){
 		delete m_xpStateman;
 		m_xpStateman = NULL;
 	}
-	if (m_xpSpriteMan != NULL){
-		delete m_xpSpriteMan;
-		m_xpSpriteMan = NULL;
+	if (m_xpGfxMan != NULL){
+		delete m_xpGfxMan;
+		m_xpGfxMan = NULL;
 	}
 	if (m_xpClock != NULL){
 		delete m_xpClock;

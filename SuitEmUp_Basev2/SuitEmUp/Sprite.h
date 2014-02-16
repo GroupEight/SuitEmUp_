@@ -4,21 +4,23 @@
 
 #include <string>
 
-class Sprite : public sf::Transformable {
+#include "Gfx.h"
+
+class Sprite : public Gfx {
 	friend class DrawMan;
-	friend class SpriteMan;
+	friend class GfxMan;
 
 public:
 	Sprite();
-	Sprite(const sf::Texture &p_xTex);
+	Sprite(const sf::Texture *p_xpTex);
 	
 	~Sprite();
 
-	void SetTexture(const sf::Texture& p_xTex);
+	void SetTexture(const sf::Texture *p_xpTex);
 	const sf::Texture *GetTexture() const;
 
 	void SetSprite(sf::Sprite p_xSprite);
-	const sf::Sprite GetSprite();
+	const sf::Sprite *GetSprite();
 
 	void SetPosition(sf::Vector2f p_xPos);
 	sf::Vector2f GetPosition();
@@ -26,9 +28,11 @@ public:
 	void SetRotation(float p_fPos);
 	float GetRotation();
 
-	void draw(sf::RenderTarget& m_xTarget, sf::RenderStates m_xStates) const;
+	sf::Drawable *GetParent();
+
+	bool IsGraphic(const std::string &p_sType);
 
 protected:
 	std::string m_sName;
-	sf::Sprite m_xSprite;
+	sf::Sprite *m_xpSprite;
 };

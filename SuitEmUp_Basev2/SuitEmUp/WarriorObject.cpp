@@ -4,7 +4,7 @@
 
 #include "Sprite.h"
 
-WarriorObject::WarriorObject(sf::Vector2f p_xStartPos, GameObject *p_xpTarget, Sprite *p_xpSprite){
+WarriorObject::WarriorObject(Sprite *p_xpSprite, sf::Vector2f p_xStartPos, GameObject *p_xpTarget){
 	m_xStartPos = p_xStartPos;
 	m_xPos = m_xStartPos;
 
@@ -24,6 +24,14 @@ WarriorObject::WarriorObject(sf::Vector2f p_xStartPos, GameObject *p_xpTarget, S
 
 WarriorObject::~WarriorObject(){
 
+}
+
+bool WarriorObject::HasGraphics() const {
+	return m_xpSprite != NULL;
+}
+
+Gfx *WarriorObject::GetGraphics(){
+	return m_xpSprite;
 }
 
 void WarriorObject::UpdateParents(sf::Time p_xDtime){
@@ -56,6 +64,6 @@ void WarriorObject::UpdateCurrent(sf::Time p_xDtime){
 	}
 	if (m_xpSprite != NULL){
 		m_xpSprite->SetPosition(GetPosition());
-		m_xpSprite->setRotation(getRotation());
+		//m_xpSprite->GetSprite()->setRotation();
 	}
 }

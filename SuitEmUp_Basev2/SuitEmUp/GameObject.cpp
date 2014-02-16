@@ -29,9 +29,9 @@ void GameObject::UpdateCurrent(sf::Time p_xDtime){
 	SetPosition(m_xPos + m_xVel);
 }
 
-void GameObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+/*void GameObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
-}
+}*/
 
 sf::Vector2f GameObject::GetWorldPosition() const {
 	return GetWorldTransform() * sf::Vector2f();
@@ -54,16 +54,8 @@ void GameObject::SetPosition(const sf::Vector2f &p_xPos){
 	m_xPos = p_xPos;
 }
 
-bool GameObject::HasSprite() const {
-	return (m_xpSprite != NULL);
-}
+void GameObject::SetGraphics(Gfx *p_xpGfx){
 
-Sprite* GameObject::GetSprite(){
-	return m_xpSprite;
-}
-
-void GameObject::SetSprite(Sprite *p_xpSprite){
-	m_xpSprite = p_xpSprite;
 }
 
 bool GameObject::HasCollider() const {
@@ -71,10 +63,16 @@ bool GameObject::HasCollider() const {
 }
 
 bool GameObject::OnScreen(sf::RenderWindow *p_xpWindow){
-	if (GetPosition().x > p_xpWindow->getView().getCenter().x - p_xpWindow->getView().getSize().x && GetPosition().x < p_xpWindow->getView().getCenter().x + p_xpWindow->getView().getSize().x){
+	/*if (GetPosition().x > p_xpWindow->getView().getCenter().x - 1024/2 && GetPosition().x < p_xpWindow->getView().getCenter().x + 1024/2){
 		return true;
 	}
-	else if (GetPosition().y > p_xpWindow->getView().getCenter().y -p_xpWindow->getView().getSize().y && GetPosition().y < p_xpWindow->getView().getCenter().y + p_xpWindow->getView().getSize().y){
+	else if (GetPosition().y > p_xpWindow->getView().getCenter().y - 640/2 && GetPosition().y < p_xpWindow->getView().getCenter().y + 640/2){
+		return true;
+	}*/
+	if (GetPosition().x > p_xpWindow->getView().getCenter().x - p_xpWindow->getView().getSize().x / 2 && GetPosition().x < p_xpWindow->getView().getCenter().x + p_xpWindow->getView().getSize().x / 2){
+		return true;
+	}
+	else if (GetPosition().y > p_xpWindow->getView().getCenter().y -p_xpWindow->getView().getSize().y / 2 && GetPosition().y < p_xpWindow->getView().getCenter().y + p_xpWindow->getView().getSize().y / 2){
 		return true;
 	}
 	return false;

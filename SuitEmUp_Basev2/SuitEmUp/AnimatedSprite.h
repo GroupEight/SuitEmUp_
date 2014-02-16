@@ -4,7 +4,7 @@
 
 #include "Sprite.h"
 
-class AnimatedSprite : public Sprite {
+class AnimatedSprite : public Sprite, sf::Transformable {
 public:
 	AnimatedSprite(sf::RenderTarget *p_xpTarget, sf::RenderStates *p_xpStates);
 	explicit AnimatedSprite(sf::RenderTarget *p_xpTarget, sf::RenderStates *p_xpStates, const sf::Texture& p_xTexture);

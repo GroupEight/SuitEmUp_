@@ -1,10 +1,10 @@
 //GameObjectMan.cpp//
 
-#include "stdafx.h"
-
 #include "GameObjectMan.h"
 
 #include "DrawMan.h"
+
+#include "Gfx.h"
 
 GameObjectMan::GameObjectMan(){
 	
@@ -47,7 +47,7 @@ void GameObjectMan::UpdateAll(sf::Time dt){
 void GameObjectMan::DrawAll(DrawMan *p_xpDrawMan){
 	for (int i = m_xpaGobjs.size() - 1; i >= 0; i--){
 		if (m_xpaGobjs[i] != NULL){
-			p_xpDrawMan->Draw(m_xpaGobjs[i]->GetSprite(), sf::RenderStates::RenderStates());
+			p_xpDrawMan->Draw(m_xpaGobjs[i]->GetGraphics()->GetParent(), sf::RenderStates::RenderStates());
 		}
 	}
 }
@@ -66,7 +66,7 @@ void GameObjectMan::DrawOnScreen(sf::RenderWindow *p_xpWindow, DrawMan *p_xpDraw
 	for (int i = 0; i < m_xpaGobjs.size(); i++){
 		if (m_xpaGobjs[i] != NULL){
 			if (m_xpaGobjs[i]->OnScreen(p_xpWindow)){
-				p_xpDrawMan->Draw(m_xpaGobjs[i]->GetSprite(), sf::RenderStates::RenderStates());
+				p_xpDrawMan->Draw(m_xpaGobjs[i]->GetGraphics()->GetParent(), sf::RenderStates::RenderStates());
 			}
 		}
 	}

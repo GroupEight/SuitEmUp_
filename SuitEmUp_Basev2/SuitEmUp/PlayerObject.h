@@ -6,7 +6,7 @@ class AnimatedSprite;
 class Sprite;
 
 class GameObjectMan;
-class SpriteMan;
+class GfxMan;
 
 class PlayerObject : public GameObject {
 public:
@@ -15,11 +15,13 @@ public:
 		m_eRun
 	};
 
-	PlayerObject(Sprite *p_xpSprite, GameObjectMan *p_xpBulletMan, SpriteMan *p_xpSpriteMan);
+	PlayerObject(Sprite *p_xpSprite, GameObjectMan *p_xpBulletMan, GfxMan *p_xpGfxMan);
 
 	Sprite* GetSprite();
 
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual bool HasGraphics() const;
+	virtual Gfx *GetGraphics();
+	//virtual void SetGraphics(Gfx *p_xpGfx);
 
 private:
 	void UpdateCurrent(sf::Time p_xDtime);
@@ -33,7 +35,7 @@ private:
 	AnimatedSprite *m_xpAnimSprite;
 
 	GameObjectMan *m_xpBulletMan;
-	SpriteMan *m_xpSpriteMan;
+	GfxMan *m_xpGfxMan;
 
 	float m_fBulletspd,
 		m_fPlayerspd,

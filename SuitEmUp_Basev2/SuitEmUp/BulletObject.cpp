@@ -17,6 +17,14 @@ BulletObject::~BulletObject(){
 	std::cout << "deleted";
 }
 
+bool BulletObject::HasGraphics() const {
+	return m_xpSprite != NULL;
+}
+
+Gfx *BulletObject::GetGraphics(){
+	return m_xpSprite;
+}
+
 void  BulletObject::UpdateCurrent(sf::Time p_xDtime){
 	float l_fRot = atan2f(m_xVel.x, m_xVel.y) * 180 / 3.141592;
 	setRotation(l_fRot);
@@ -25,9 +33,4 @@ void  BulletObject::UpdateCurrent(sf::Time p_xDtime){
 		m_xpSprite->SetPosition(m_xPos);
 		m_xpSprite->SetRotation(getRotation() - 90.0f);
 	}
-}
-
-void BulletObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	//p_xWindow.draw(m_xpSprite->GetSprite());
-	target.draw(m_xpSprite->GetSprite(), states);
 }

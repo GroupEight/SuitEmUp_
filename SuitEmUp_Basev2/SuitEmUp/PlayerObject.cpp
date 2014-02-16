@@ -10,9 +10,9 @@
 #include "Sprite.h"
 
 #include "GameObjectMan.h"
-#include "SpriteMan.h"
+#include "GfxMan.h"
 
-PlayerObject::PlayerObject(Sprite *p_xpSprite, GameObjectMan *p_xpBulletMan, SpriteMan *p_xpSpriteMan){
+PlayerObject::PlayerObject(Sprite *p_xpSprite, GameObjectMan *p_xpBulletMan, GfxMan *p_xpGfxMan){
 	SetPosition(sf::Vector2f(512, 320));
 	setOrigin(0.5 * p_xpSprite->GetPosition().x, 0.5 * p_xpSprite->GetPosition().y);
 
@@ -22,10 +22,10 @@ PlayerObject::PlayerObject(Sprite *p_xpSprite, GameObjectMan *p_xpBulletMan, Spr
 
 	m_xpBulletMan = p_xpBulletMan;
 
-	m_xpSpriteMan = p_xpSpriteMan;
+	m_xpGfxMan = p_xpGfxMan;
 
 	m_fBulletspd = 5.0f;
-	m_fPlayerspd = 80.0f;
+	m_fPlayerspd = 180.0f;
 
 	m_fFrate = 1.5f;
 	m_fMaxrate = 1.0f;
@@ -68,7 +68,7 @@ void PlayerObject::UpdateCurrent(sf::Time p_xDtime){
 
 		sf::Vector2f l_xBvel(l_fA/l_fC, l_fB/l_fC);
 		
-		m_xpBulletMan->Add(new BulletObject(m_xPos, m_fBulletspd * l_xBvel, m_xpSpriteMan->Load("Bullet_Player.png", sf::IntRect(0, 0, 133, 16))));
+		m_xpBulletMan->Add(new BulletObject(m_xPos, m_fBulletspd * l_xBvel, m_xpGfxMan->LoadSprite("Bullet_Player.png", sf::IntRect(0, 0, 133, 16))));
 	}
 
 	if (m_fHeat > m_fMaxheat){
@@ -92,10 +92,19 @@ Sprite* PlayerObject::GetSprite(){
 	return m_xpSprite;
 }
 
-void PlayerObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	//p_xWindow.draw(m_xpSprite->GetSprite());
-	target.draw(m_xpSprite->GetSprite(), states);
+bool PlayerObject::HasGraphics() const {
+	return m_xpSprite != NULL;
 }
+
+Gfx *PlayerObject::GetGraphics(){
+	return m_xpSprite;
+}
+
+/*void PlayerObject::SetGraphics(Gfx *p_xpGfx){
+	/*if (m_xpSprite->IsGraphic("Sprite")){
+		m_xpSprite = p_xpGfx;
+	}
+}*/
 
 void PlayerObject::Animate(sf::Time p_xDtime){
 	switch (m_eState){

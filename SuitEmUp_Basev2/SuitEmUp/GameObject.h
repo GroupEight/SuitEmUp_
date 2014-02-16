@@ -6,9 +6,9 @@
 #include <vector>
 #include <memory>
 
-class Sprite;
+class Gfx;
 
-class GameObject : public sf::Transformable, public sf::Drawable {
+class GameObject : public sf::Transformable {
 public:
 	typedef std::unique_ptr<GameObject> Ptr;
 
@@ -18,7 +18,7 @@ public:
 	~GameObject() {};
 
 	void Update(sf::Time p_xDtime);
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	//virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	sf::Vector2f GetWorldPosition() const;
 	sf::Transform GetWorldTransform() const;
@@ -29,9 +29,9 @@ public:
 	void setVelocity(sf::Vector2f p_xVel);
 	sf::Vector2f getVelocity() const;
 
-	bool HasSprite()const;
-	virtual Sprite *GetSprite();
-	void SetSprite(Sprite *p_xpSprite);
+	virtual bool HasGraphics() const = 0;
+	virtual Gfx *GetGraphics() = 0;
+	virtual void SetGraphics(Gfx *p_xpGfx);
 
 	bool HasCollider() const;
 	//Collider* GetCollider();
@@ -45,6 +45,4 @@ protected:
 protected:
 	sf::Vector2f m_xPos;
 	sf::Vector2f m_xVel;
-
-	Sprite *m_xpSprite;
 };

@@ -7,14 +7,15 @@
 #include "State.h"
 
 class DrawMan;
-class SpriteMan;
+class GfxMan;
 class GameObjectMan;
 
+class BGObject;
 class PlayerObject;
 
 class Gamestate : public State {
 public:
-	Gamestate(DrawMan *p_xpDrawMan, SpriteMan *p_xpSpriteMan, sf::RenderWindow *p_xpWindow);
+	Gamestate(DrawMan *p_xpDrawMan, GfxMan *p_xpGfxMan, sf::RenderWindow *p_xpWindow);
 	~Gamestate();
 
 	bool Enter();
@@ -28,11 +29,12 @@ private:
 	sf::RenderWindow *m_xpWindow;
 
 	DrawMan *m_xpDrawMan;
-	SpriteMan *m_xpSpriteMan;
+	GfxMan *m_xpGfxMan;
 
 	GameObjectMan *m_xpBulletMan;
 	GameObjectMan *m_xpEnemyMan;
 
+	BGObject *m_xpBGround;
 	PlayerObject *m_xpPlayer;
 
 	sf::View *m_xpWorldView;

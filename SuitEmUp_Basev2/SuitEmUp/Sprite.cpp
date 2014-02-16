@@ -5,53 +5,59 @@
 #include "Sprite.h"
 
 Sprite::Sprite()
-: m_xSprite(){
+: m_xpSprite(){
 	
 }
 
-Sprite::Sprite(const sf::Texture &p_xTex){
-	SetTexture(p_xTex);
+Sprite::Sprite(const sf::Texture *p_xpTex){
+	sf::Sprite l_xSprite;
+	l_xSprite.setTexture(*p_xpTex);
+
+	m_xpSprite = new sf::Sprite(l_xSprite);
 	
-	m_xSprite.setOrigin(sf::Vector2f(GetTexture()->getSize().x * 0.5, GetTexture()->getSize().y * 0.5));
+	m_xpSprite->setOrigin(sf::Vector2f(GetTexture()->getSize().x * 0.5, GetTexture()->getSize().y * 0.5));
 }
 
 Sprite::~Sprite(){
 
 }
 
-void Sprite::SetTexture(const sf::Texture& p_xTex){
-	m_xSprite.setTexture(p_xTex);
+void Sprite::SetTexture(const sf::Texture *p_xpTex){
+	m_xpSprite->setTexture(*p_xpTex);
 }
 
 const sf::Texture* Sprite::GetTexture() const {
-	return m_xSprite.getTexture();
+	return m_xpSprite->getTexture();
 }
 
 void Sprite::SetSprite(sf::Sprite p_xSprite){
-	m_xSprite = p_xSprite;
+	m_xpSprite = &p_xSprite;
 }
 
-const sf::Sprite Sprite::GetSprite(){
-	return m_xSprite;
+const sf::Sprite *Sprite::GetSprite(){
+	return m_xpSprite;
 }
 
 void Sprite::SetPosition(sf::Vector2f p_xPos){
-	m_xSprite.setPosition(p_xPos);
+	m_xpSprite->setPosition(p_xPos);
 }
 
 sf::Vector2f Sprite::GetPosition(){
-	return m_xSprite.getPosition();
+	return m_xpSprite->getPosition();
 }
 
 void Sprite::SetRotation(float p_fPos){
-	m_xSprite.setRotation(p_fPos);
+	m_xpSprite->setRotation(p_fPos);
 }
 
 float Sprite::GetRotation(){
-	return m_xSprite.getRotation();
+	return m_xpSprite->getRotation();
 }
 
-void Sprite::draw(sf::RenderTarget& p_xTarget, sf::RenderStates p_xStates) const {
-	p_xStates.transform *= getTransform();
-	p_xTarget.draw(m_xSprite, p_xStates);
+sf::Drawable *Sprite::GetParent(){
+	return m_xpSprite;
+}
+
+bool Sprite::IsGraphic(const std::string &p_sType){
+	return p_sType.compare("Sprite") == 0;
 }

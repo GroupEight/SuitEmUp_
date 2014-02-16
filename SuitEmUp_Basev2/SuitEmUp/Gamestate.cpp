@@ -1,29 +1,29 @@
 //Gamestate.cpp//
 
-#include "stdafx.h"
-
 #include "Gamestate.h"
 
 #include "DrawMan.h"
 #include "GameObjectMan.h"
-#include "SpriteMan.h"
+#include "GfxMan.h"
 
+#include "BGObject.h"
 #include "PlayerObject.h"
 #include "WorkerObject.h"
 #include "WarriorObject.h"
 
-Gamestate::Gamestate(DrawMan *p_xpDrawMan, SpriteMan *p_xpSpriteMan, sf::RenderWindow *p_xpWindow){
+Gamestate::Gamestate(DrawMan *p_xpDrawMan, GfxMan *p_xpGfxMan, sf::RenderWindow *p_xpWindow){
 	m_xpDrawMan = p_xpDrawMan;
 
-	m_xpSpriteMan = p_xpSpriteMan;
+	m_xpGfxMan = p_xpGfxMan;
 
 	m_xpWindow = p_xpWindow;
 
 	m_xpBulletMan = new GameObjectMan;
 	m_xpEnemyMan = new GameObjectMan;
 
-	m_xpPlayer = new PlayerObject(m_xpSpriteMan->Load("Player_Anim/Player_Anim_Idle.png", sf::IntRect(0, 0, 180, 291)), m_xpBulletMan, m_xpSpriteMan);
-	m_xpEnemyMan->Add(new WarriorObject(sf::Vector2f(-40, -40), m_xpPlayer, m_xpSpriteMan->Load("Warrior_01.png", sf::IntRect(0, 0, 0, 0))));
+	m_xpPlayer = new PlayerObject(m_xpGfxMan->LoadSprite("Player_Anim/Player_Anim_Idle.png", sf::IntRect(0, 0, 180, 291)), m_xpBulletMan, m_xpGfxMan);
+	m_xpBGround = new BGObject(m_xpGfxMan->LoadBackground("Ground.png", sf::Vector2f(m_xpWindow->getSize().x, m_xpWindow->getSize().y)), m_xpPlayer, m_xpWindow);
+	m_xpEnemyMan->Add(new WarriorObject(m_xpGfxMan->LoadSprite("Warrior_01.png", sf::IntRect(0, 0, 0, 0)), sf::Vector2f(-40, -40), m_xpPlayer));
 
 	m_xpWorldView = new sf::View(m_xpWindow->getDefaultView());
 
@@ -61,8 +61,9 @@ bool Gamestate::Update(sf::Time p_xDtime){
 	m_xpPlayer->Update(p_xDtime);
 
 	m_xpBulletMan->UpdateAll(p_xDtime);
-	//m_xpEnemyMan->UpdateOnScreen(m_xpWindow, p_xDtime);
 	m_xpEnemyMan->UpdateAll(p_xDtime);
+
+	m_xpBGround->Update(p_xDtime);
 
 	m_xpWorldView->setCenter(m_xpPlayer->GetPosition());
 
@@ -84,7 +85,9 @@ bool Gamestate::Update(sf::Time p_xDtime){
 }
 
 void Gamestate::Draw(){
-	m_xpDrawMan->Draw(m_xpPlayer->GetSprite(), sf::RenderStates::RenderStates());
+	m_xpDrawMan->Draw(m_xpBGround->GetGraphics()->GetParent(), m_xpBGround->GetTexture());
+
+	m_xpDrawMan->Draw(m_xpPlayer->GetSprite()->GetParent(), sf::RenderStates::RenderStates());
 
 	m_xpBulletMan->DrawOnScreen(m_xpWindow, m_xpDrawMan);
 	m_xpEnemyMan->DrawOnScreen(m_xpWindow, m_xpDrawMan);
@@ -94,6 +97,6 @@ std::string Gamestate::Next(){
 	return "Menustate";
 }
 
-bool Gamestate::IsType(const std::string &p_Type){
-	return p_Type.compare("Gamestate") == 0;
+bool Gamestate::IsType(const std::string &p_sType){
+	return p_sType.compare("Gamestate") == 0;
 }
