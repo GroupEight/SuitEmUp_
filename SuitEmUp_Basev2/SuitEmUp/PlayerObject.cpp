@@ -12,13 +12,14 @@
 #include "GameObjectMan.h"
 #include "GfxMan.h"
 
-PlayerObject::PlayerObject(Sprite *p_xpSprite, GameObjectMan *p_xpBulletMan, GfxMan *p_xpGfxMan){
+PlayerObject::PlayerObject(AnimatedSprite *p_xpAnimatedSprite, GameObjectMan *p_xpBulletMan, GfxMan *p_xpGfxMan){
 	SetPosition(sf::Vector2f(512, 320));
-	setOrigin(0.5 * p_xpSprite->GetPosition().x, 0.5 * p_xpSprite->GetPosition().y);
+	//setOrigin(0.5 * p_xpAnimatedSprite->getGetPosition().x, 0.5 * p_xpAnimatedSprite->GetPosition().y);
+	
+	//p_xpAnimatedSprite->setPosition(m_xPos);
 
-	m_xpSprite = p_xpSprite;
-	m_xpSprite = p_xpSprite;
-	m_xpSprite->SetPosition(m_xPos);
+	m_xpaAnimSprite = p_xpAnimatedSprite;
+	m_xpaAnimSprite->SetPosition(m_xPos);
 
 	m_xpBulletMan = p_xpBulletMan;
 
@@ -80,16 +81,17 @@ void PlayerObject::UpdateCurrent(sf::Time p_xDtime){
 	float l_fRot = atan2f((sf::Mouse::getPosition().y - 640), (sf::Mouse::getPosition().x - 1024)) * 180 / 3.141592;
 	setRotation(l_fRot);
 
-	if (m_xpSprite != NULL){
-		m_xpSprite->SetPosition(GetPosition());
-		m_xpSprite->SetRotation(getRotation() - 90.0f);
+	if (m_xpaAnimSprite != NULL){
+		m_xpaAnimSprite->SetPosition(GetPosition());
+		//m_xpaAnimSprite->SetRotation(getRotation() - 90.0f);
+		m_xpaAnimSprite->Update(p_xDtime);
 	}
 
 	//std::cout << GetPosition().x << ": " << GetPosition().y << std::endl;
 }
 
-Sprite* PlayerObject::GetSprite(){
-	return m_xpSprite;
+Gfx* PlayerObject::GetSprite(){
+	return m_xpaAnimSprite;
 }
 
 bool PlayerObject::HasGraphics() const {
@@ -97,21 +99,15 @@ bool PlayerObject::HasGraphics() const {
 }
 
 Gfx *PlayerObject::GetGraphics(){
-	return m_xpSprite;
+	return m_xpaAnimSprite;
 }
-
-/*void PlayerObject::SetGraphics(Gfx *p_xpGfx){
-	/*if (m_xpSprite->IsGraphic("Sprite")){
-		m_xpSprite = p_xpGfx;
-	}
-}*/
 
 void PlayerObject::Animate(sf::Time p_xDtime){
 	switch (m_eState){
 	case PlayerObject::m_eIdle:
 		break;
 	case PlayerObject::m_eRun:
-		m_xpAnimSprite->Update(p_xDtime);
+		m_xpaAnimSprite->Update(p_xDtime);
 		break;
 	default:
 		break;

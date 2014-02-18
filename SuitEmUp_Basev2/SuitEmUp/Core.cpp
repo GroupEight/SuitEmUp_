@@ -35,12 +35,6 @@ bool Core::Init(){
 	m_xDtime = sf::Time::Zero;
 	m_xFps = sf::seconds(1.f / 60.f);
 
-	std::string l_sData = "../data/config.txt",
-		l_sSpritepath = "../data/sprites/",
-		l_sSoundpath = "../data/sound/",
-		l_sHiscorepath = "../data/hiscore.txt",
-		l_sStartstate = "Loadstate";
-
 	m_xpWindow = new sf::RenderWindow(sf::VideoMode(m_iWi, m_iHe), "Tailor Moon");
 	if (m_xpWindow == NULL){
 		return false;
@@ -63,7 +57,7 @@ bool Core::Init(){
 	if (m_xpGfxMan == NULL){
 		return false;
 	}
-	if (!m_xpGfxMan->Init("../rec/Graphics/")){
+	if (!m_xpGfxMan->Init("../rec/")){
 		return false;
 	}
 

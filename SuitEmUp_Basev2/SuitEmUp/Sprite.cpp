@@ -34,7 +34,7 @@ void Sprite::SetSprite(sf::Sprite p_xSprite){
 	m_xpSprite = &p_xSprite;
 }
 
-const sf::Sprite *Sprite::GetSprite(){
+sf::Sprite *Sprite::GetSprite(){
 	return m_xpSprite;
 }
 

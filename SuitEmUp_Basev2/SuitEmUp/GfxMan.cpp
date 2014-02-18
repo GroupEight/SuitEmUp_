@@ -4,6 +4,7 @@
 
 #include "GfxMan.h"
 
+#include "AnimatedSprite.h"
 #include "Background.h"
 #include "Sprite.h"
 
@@ -14,8 +15,6 @@
 #include <iostream>
 #include <sstream>
 
-//#include "AnimatedSprite.h"
-
 GfxMan::GfxMan(){
 	
 }
@@ -25,7 +24,6 @@ GfxMan::~GfxMan(){
 }
 
 bool GfxMan::Init(const std::string &p_srkDir){
-	//IMG_Init(IMG_INIT_PNG);
 	m_sDir = p_srkDir;
 
 	return true;
@@ -82,20 +80,39 @@ Background *GfxMan::LoadBackground(const std::string p_sFname, sf::Vector2f p_xS
 
 AnimatedSprite* GfxMan::LoadAnimatedSprite(const std::string &p_sFname){
 	std::ifstream stream;
-	stream.open(p_sFname.c_str());
+	stream.open((m_sDir + p_sFname).c_str());
 	if (!stream.is_open()) {
 		return nullptr;
 	}
 
 	std::string row;
+
 	stream >> row;
-	std::map<std::string, sf::Texture*>::iterator it = m_xaSprites.find(row);
-	if (it == m_xaSprites.end()) {
-		if (!Loadimg(row)){
-			stream.close();
-			return nullptr;
+	Sprite *l_xpSprite = LoadSprite(row);
+	if (l_xpSprite == NULL){
+		stream.close();
+		return nullptr;
+	}
+	while (!stream.eof()){
+		std::getline(stream, row);
+		if (row.length() == 0){
+			continue;
 		}
-		it = m_xaSprites.find(row);
+		std::stringstream ss(row);
+		sf::Vector2i l_xFrameSize;
+		std::size_t l_xNumFrames;
+		std::size_t l_xCurrentFrame;
+		float l_xDuration;
+		bool l_bRepeat;
+
+		ss >> l_xFrameSize.x;
+		ss >> l_xFrameSize.y;
+		ss >> l_xNumFrames;
+		ss >> l_xCurrentFrame;
+		ss >> l_xDuration;
+		ss >> l_bRepeat;
+
+		return new AnimatedSprite(l_xpSprite, l_xFrameSize, l_xNumFrames, l_xCurrentFrame, l_xDuration, l_bRepeat);
 	}
 }
 

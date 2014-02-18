@@ -3,6 +3,7 @@
 #include "GameObject.h"
 
 class AnimatedSprite;
+class Gfx;
 class Sprite;
 
 class GameObjectMan;
@@ -15,9 +16,9 @@ public:
 		m_eRun
 	};
 
-	PlayerObject(Sprite *p_xpSprite, GameObjectMan *p_xpBulletMan, GfxMan *p_xpGfxMan);
+	PlayerObject(AnimatedSprite *p_xpAnimatedSprite, GameObjectMan *p_xpBulletMan, GfxMan *p_xpGfxMan);
 
-	Sprite* GetSprite();
+	Gfx* GetSprite();
 
 	virtual bool HasGraphics() const;
 	virtual Gfx *GetGraphics();
@@ -32,7 +33,7 @@ private:
 	PlayerObject::m_AnimationState m_eState;
 
 	Sprite *m_xpSprite;
-	AnimatedSprite *m_xpAnimSprite;
+	AnimatedSprite *m_xpaAnimSprite;
 
 	GameObjectMan *m_xpBulletMan;
 	GfxMan *m_xpGfxMan;

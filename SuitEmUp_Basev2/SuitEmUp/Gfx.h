@@ -2,7 +2,7 @@
 
 #pragma once
 
-class Gfx : sf::Drawable {
+class Gfx : public sf::Drawable, public sf::Transformable {
 public:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

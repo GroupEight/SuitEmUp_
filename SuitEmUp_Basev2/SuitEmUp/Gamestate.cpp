@@ -21,9 +21,9 @@ Gamestate::Gamestate(DrawMan *p_xpDrawMan, GfxMan *p_xpGfxMan, sf::RenderWindow 
 	m_xpBulletMan = new GameObjectMan;
 	m_xpEnemyMan = new GameObjectMan;
 
-	m_xpPlayer = new PlayerObject(m_xpGfxMan->LoadSprite("Player_Anim/Player_Anim_Idle.png", sf::IntRect(0, 0, 180, 291)), m_xpBulletMan, m_xpGfxMan);
-	m_xpBGround = new BGObject(m_xpGfxMan->LoadBackground("Ground.png", sf::Vector2f(m_xpWindow->getSize().x, m_xpWindow->getSize().y)), m_xpPlayer, m_xpWindow);
-	m_xpEnemyMan->Add(new WarriorObject(m_xpGfxMan->LoadSprite("Warrior_01.png", sf::IntRect(0, 0, 0, 0)), sf::Vector2f(-40, -40), m_xpPlayer));
+	m_xpPlayer = new PlayerObject(m_xpGfxMan->LoadAnimatedSprite("Animations/Player_Anim_Idle.txt"), m_xpBulletMan, m_xpGfxMan);
+	m_xpBGround = new BGObject(m_xpGfxMan->LoadBackground("Graphics/Ground.png", sf::Vector2f(m_xpWindow->getSize().x, m_xpWindow->getSize().y)), m_xpPlayer, m_xpWindow);
+	m_xpEnemyMan->Add(new WarriorObject(m_xpGfxMan->LoadSprite("Graphics/Warrior_01.png", sf::IntRect(0, 0, 0, 0)), sf::Vector2f(-40, -40), m_xpPlayer));
 
 	m_xpWorldView = new sf::View(m_xpWindow->getDefaultView());
 
@@ -87,7 +87,7 @@ bool Gamestate::Update(sf::Time p_xDtime){
 void Gamestate::Draw(){
 	m_xpDrawMan->Draw(m_xpBGround->GetGraphics()->GetParent(), m_xpBGround->GetTexture());
 
-	m_xpDrawMan->Draw(m_xpPlayer->GetSprite()->GetParent(), sf::RenderStates::RenderStates());
+	m_xpDrawMan->Draw(m_xpPlayer->GetGraphics()->GetParent(), sf::RenderStates::RenderStates());
 
 	m_xpBulletMan->DrawOnScreen(m_xpWindow, m_xpDrawMan);
 	m_xpEnemyMan->DrawOnScreen(m_xpWindow, m_xpDrawMan);

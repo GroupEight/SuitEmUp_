@@ -1,21 +1,23 @@
 //AnimatedSprite.h//
 
-#include "stdafx.h"
-
 #include "AnimatedSprite.h"
 
-AnimatedSprite::AnimatedSprite(sf::RenderTarget *p_xpTarget, sf::RenderStates *p_xpStates)
-: m_xSprite()
-, m_xFrameSize()
-, m_xNumFrames(0)
-, m_xCurrentFrame(0)
-, m_xDuration(sf::Time::Zero)
-, m_xElapsedTime(sf::Time::Zero)
-, m_bRepeat(false){
+#include "Sprite.h"
 
+AnimatedSprite::AnimatedSprite(Sprite *p_xpSprite, sf::Vector2i p_xFrameSize, std::size_t p_xNumFrames, std::size_t p_xCurrentFrame, float p_fDuration, bool p_bRepeat)
+: m_xFrameSize(p_xFrameSize)
+, m_xNumFrames(p_xNumFrames)
+, m_xCurrentFrame(0){
+	m_xpSprite = p_xpSprite;
+	m_fDuration = p_fDuration;
+	m_bRepeat = p_bRepeat;
+	m_fDuration = 0.0f;
+
+	sf::IntRect l_xTextureRect = m_xpSprite->GetSprite()->getTextureRect();
+	m_xpSprite->GetSprite()->setTextureRect(l_xTextureRect);
 }
 
-AnimatedSprite::AnimatedSprite(sf::RenderTarget *p_xpTarget, sf::RenderStates *p_xpStates, const sf::Texture& p_xTexture)
+/*AnimatedSprite::AnimatedSprite(sf::RenderTarget *p_xpTarget, sf::RenderStates *p_xpStates, const sf::Texture& p_xTexture)
 : m_xSprite(p_xTexture)
 , m_xFrameSize()
 , m_xNumFrames(0)
@@ -24,7 +26,7 @@ AnimatedSprite::AnimatedSprite(sf::RenderTarget *p_xpTarget, sf::RenderStates *p
 , m_xElapsedTime(sf::Time::Zero)
 , m_bRepeat(false){
 
-}
+}*/
 
 void AnimatedSprite::SetFrameSize(sf::Vector2i p_xFrameSize){
 	m_xFrameSize = p_xFrameSize;
@@ -42,12 +44,20 @@ std::size_t AnimatedSprite::GetNumFrames() const {
 	return m_xNumFrames;
 }
 
-void AnimatedSprite::SetDuration(sf::Time p_xDuration){
-	m_xDuration = p_xDuration;
+void AnimatedSprite::SetDuration(float p_fDuration){
+	m_fDuration = p_fDuration;
 }
 
-sf::Time AnimatedSprite::GetDuration() const {
-	return m_xDuration;
+float AnimatedSprite::GetDuration() const {
+	return m_fDuration;
+}
+
+void AnimatedSprite::SetPosition(sf::Vector2f p_xPos){
+	m_xpSprite->SetPosition(p_xPos);
+}
+
+sf::Vector2f AnimatedSprite::GetPosition(){
+	return m_xpSprite->GetPosition();
 }
 
 void AnimatedSprite::SetRepeating(bool p_bFlag){
@@ -66,20 +76,28 @@ bool AnimatedSprite::IsFinished() const {
 	return m_xCurrentFrame >= m_xNumFrames;
 }
 
-sf::FloatRect AnimatedSprite::GetLocalBounds() const {
+/*sf::FloatRect AnimatedSprite::GetLocalBounds() const {
 	return sf::FloatRect(getOrigin(), static_cast<sf::Vector2f>(GetFrameSize()));
 }
 
 sf::FloatRect AnimatedSprite::GetGlobalBounds() const {
 	return getTransform().transformRect(GetLocalBounds());
+}*/
+
+sf::Drawable *AnimatedSprite::GetParent(){
+	return m_xpSprite->GetSprite();
+}
+
+bool AnimatedSprite::IsGraphic(const std::string &p_sType){
+	return p_sType.compare("AnimatedSprite") == 0;
 }
 
 void AnimatedSprite::Update(sf::Time p_xDt){
-	sf::Time l_sFps = m_xDuration / static_cast<float>(m_xNumFrames);
-	m_xElapsedTime += p_xDt;
+	float l_sFps = m_fDuration / static_cast<float>(m_xNumFrames);
+	m_xElapsedTime += (float)p_xDt.asSeconds();
 
-	sf::Vector2i l_xTextureBounds(m_xSprite.getTexture()->getSize());
-	sf::IntRect l_xTextureRect = m_xSprite.getTextureRect();
+	sf::Vector2i l_xTextureBounds(m_xpSprite->GetTexture()->getSize());
+	sf::IntRect l_xTextureRect = m_xpSprite->GetSprite()->getTextureRect();
 
 	if (m_xCurrentFrame == 0)
 		l_xTextureRect = sf::IntRect(0, 0, m_xFrameSize.x, m_xFrameSize.y);
@@ -109,5 +127,5 @@ void AnimatedSprite::Update(sf::Time p_xDt){
 		}
 	}
 
-	m_xSprite.setTextureRect(l_xTextureRect);
+	m_xpSprite->GetSprite()->setTextureRect(l_xTextureRect);
 }

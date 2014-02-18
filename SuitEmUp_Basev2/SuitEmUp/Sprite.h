@@ -20,7 +20,7 @@ public:
 	const sf::Texture *GetTexture() const;
 
 	void SetSprite(sf::Sprite p_xSprite);
-	const sf::Sprite *GetSprite();
+	sf::Sprite *GetSprite();
 
 	void SetPosition(sf::Vector2f p_xPos);
 	sf::Vector2f GetPosition();

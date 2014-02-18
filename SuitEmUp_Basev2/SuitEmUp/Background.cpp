@@ -25,10 +25,10 @@ Background::Background(sf::Texture *p_xpTex, sf::Vector2f p_xSize){
 	m_xVertArray[i + 2].texCoords = sf::Vector2f(m_xSize.y, m_xSize.x);
 	m_xVertArray[i + 3].texCoords = sf::Vector2f(m_xSize.y, 0);
 
-	m_xVertArray[i].color = sf::Color::Blue;
+	/*m_xVertArray[i].color = sf::Color::Blue;
 	m_xVertArray[i + 1].color = sf::Color::Green;
 	m_xVertArray[i + 2].color = sf::Color::Yellow;
-	m_xVertArray[i + 3].color = sf::Color::Red;
+	m_xVertArray[i + 3].color = sf::Color::Red;*/
 
 	m_xpVertArray = &m_xVertArray;
 }
