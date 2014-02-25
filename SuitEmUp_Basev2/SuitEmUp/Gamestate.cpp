@@ -1,6 +1,6 @@
 //Gamestate.cpp//
 
-#include "Gamestate.h"
+/*#include "Gamestate.h"
 
 #include "DrawMan.h"
 #include "GameObjectMan.h"

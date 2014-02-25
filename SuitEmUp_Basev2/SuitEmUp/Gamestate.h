@@ -1,6 +1,6 @@
 //Gamestate.h//
 
-#pragma once
+/*#pragma once
 
 #include <string>
 

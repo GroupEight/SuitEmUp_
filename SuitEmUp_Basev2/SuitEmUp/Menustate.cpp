@@ -1,6 +1,6 @@
 //Gamestate.cpp//
 
-#include "stdafx.h"
+/*#include "stdafx.h"
 
 #include "Menustate.h"
 
@@ -51,7 +51,7 @@ void Menustate::Draw(){
 	std::unique_ptr<Player> _player(new Player(mTextures));
 	mPlayer = _player.get();
 	mPlayer->setPosition(mSpawnPosition);
-	mSceneLayers[Main]->attachChild(std::move(_player));*/
+	mSceneLayers[Main]->attachChild(std::move(_player));
 }
 
 std::string Menustate::Next(){
