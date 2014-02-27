@@ -1,2 +1,0 @@
-//WallObject.cpp//
-
