@@ -100,6 +100,8 @@ bool Level::LoadLevel(std::string p_sFile){
 			
 			ss >> l_fPosx;
 			ss >> l_fPosy;
+			ss >> l_fAggro;
+			ss >> l_fAtk;
 			ss >> l_iType;
 
             m_xpEnemyMan->Add(new EnemyObject(m_xpCMan, m_xpTexMan, 40.f, 10.f, sf::Vector2f(l_fPosx, l_fPosy), m_xpPlayer));

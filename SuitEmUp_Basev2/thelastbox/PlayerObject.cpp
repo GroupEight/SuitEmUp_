@@ -227,7 +227,7 @@ void PlayerObject::Update(sf::Time p_xDtime){
 	m_xVel.y = (m_xVel.y * m_fPlayerspd * (float)p_xDtime.asSeconds());
 	//std::cout << m_xpBody->GetPosition().x << ": " << m_xpBody->GetPosition().y << std::endl;
 
-	setRotation( atan2f( (sf::Mouse::getPosition().y - 720.f/2.f), (sf::Mouse::getPosition().x - 1280.f/2.f) ) * 180.f / 3.141592f );
+	setRotation( atan2f( (sf::Mouse::getPosition().y - 720.f * 2), (sf::Mouse::getPosition().x - 1280.f * 2) ) * 180.f / 3.141592f );
 
 	m_xpCurrentAnim->setOrigin(m_xpCurrentAnim->getFrameSize().x/2, m_xpCurrentAnim->getFrameSize().y/2);
 

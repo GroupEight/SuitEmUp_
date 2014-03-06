@@ -43,11 +43,13 @@ Gamestate::Gamestate(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMa
 	m_xpWorldView = new sf::View(m_xpWindow->getDefaultView());
 	m_xpWorldView->setCenter(0.0f, 0.0f);
 
-	m_fMaxZoom = 3.6f;
+	m_fMaxZoom = 2.7f;
 	m_fStrtZoom = 1.8f;
 	m_fMinZoom = 0.9f;
 
-	m_xpWorldView->zoom(m_fStrtZoom);
+	m_fCurrZoom = m_fStrtZoom;
+
+	m_xpWorldView->zoom(m_fCurrZoom);
 	//m_xpWorldView->zoom(m_fMinZoom);
 }
 

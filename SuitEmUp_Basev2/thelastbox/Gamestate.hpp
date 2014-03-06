@@ -83,9 +83,10 @@ private:
 
 	Gamestate::SubStates m_eState;
 
-	float m_fMinZoom;
-	float m_fStrtZoom;
-	float m_fMaxZoom;
+	float m_fMinZoom,
+		m_fStrtZoom,
+		m_fMaxZoom,
+		m_fCurrZoom;
 
 	// Used in Playstate:
 	CollisionMan *m_xpCollisionMan;
