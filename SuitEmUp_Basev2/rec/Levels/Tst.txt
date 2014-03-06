@@ -3,7 +3,7 @@
 Player 0 0
 
 Wall 0 550
-Wall 500 550
+Wall 500 1200
 Wall 600 450
 Wall 700 225
 Wall 750 0
