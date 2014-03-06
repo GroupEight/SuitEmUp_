@@ -25,6 +25,11 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const{
 	}*/
 }
 
+void SceneNode::Overlap() {
+
+	//if (sqrt(pow(m_xpBody->getPosition().x - it->first->getPosition().x, 2) + pow(shape.getPosition().y - it->first->getPosition().y, 2)) <= shape.getRadius() + it->first->getRadius()) {
+}
+
 sf::Vector2f SceneNode::getWorldPosition() const {
 	return getWorldTransform() * sf::Vector2f();
 }

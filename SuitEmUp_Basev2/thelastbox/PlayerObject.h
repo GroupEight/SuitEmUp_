@@ -8,7 +8,7 @@ class Animation;
 class Player_Arms;
 
 class CollisionMan;
-class GameObjectMan;
+class NodeMan;
 class TextureMan;
 
 class PlayerObject : public GameObject {
@@ -27,7 +27,7 @@ public:
 	};
 
 public:
-	PlayerObject(CollisionMan *p_xpCollisionMan, GameObjectMan *p_xpBulletMan, TextureMan *p_xpTextureMan);
+	PlayerObject(CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMan, TextureMan *p_xpTextureMan);
 	~PlayerObject();
 
 	virtual void Update(sf::Time p_xDtime);
@@ -47,7 +47,7 @@ public:
 private:
 
 	CollisionMan *m_xpCollisionMan;
-	GameObjectMan *m_xpBulletMan;
+	NodeMan *m_xpBulletMan;
 	TextureMan *m_xpTextureMan;
 
 	PlayerObject::State m_eState;

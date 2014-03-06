@@ -3,7 +3,7 @@
 #include "Gamestate.hpp"
 
 #include "CollisionMan.h"
-#include "GameObjectMan.h"
+#include "NodeMan.h"
 
 #include "CursorObject.h"
 #include "EnemyObject.hpp"
@@ -14,7 +14,7 @@
 #include "PlayerObject.h"
 #include "Prompt.hpp"
 
-Gamestate::Gamestate(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, TextureMan *p_xpTextMan, GameObjectMan *p_xpPBulletMan, PlayerObject *p_xpPlayer, CursorObject *p_xpCursor, Ground *p_xpGround){
+Gamestate::Gamestate(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, TextureMan *p_xpTextMan, NodeMan *p_xpPBulletMan, NodeMan *p_xpEBulletMan, PlayerObject *p_xpPlayer, CursorObject *p_xpCursor, Ground *p_xpGround){
 	m_xpWindow = p_xpWindow;
 
 	m_xpCollisionMan = p_xpCollisionMan;
@@ -29,8 +29,8 @@ Gamestate::Gamestate(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMa
 
 	m_xpGround = p_xpGround;
 
-	//m_xpPBulletMan = new GameObjectMan;
-	m_xpEnemyMan = new GameObjectMan;
+	//m_xpPBulletMan = new NodeMan;
+	m_xpEnemyMan = new NodeMan;
 
 	m_xpLevel = new Level("../rec/Levels/", m_xpTextureMan, m_xpCollisionMan, m_xpEnemyMan, m_xpPlayer);
 
