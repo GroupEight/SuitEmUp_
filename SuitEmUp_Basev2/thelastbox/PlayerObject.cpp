@@ -8,10 +8,10 @@
 #include "Player_Arms.hpp"
 
 #include "CollisionMan.h"
-#include "GameObjectMan.h"
+#include "NodeMan.h"
 #include "TextureMan.h"
 
-PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, GameObjectMan *p_xpBulletMan, TextureMan *p_xpTextureMan){
+PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMan, TextureMan *p_xpTextureMan){
 
 	m_xPos = sf::Vector2f(0, 0);
 
@@ -37,6 +37,7 @@ PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, GameObjectMan *p_xpBu
 	m_xpIdleAnim->setNumFrames( 12 );
 	m_xpIdleAnim->setRepeating( true );
 	m_xpIdleAnim->setScale( 1.f, 1.f );
+	m_xpIdleAnim->setOrigin(m_xpIdleAnim->getFrameSize().x/2, m_xpIdleAnim->getFrameSize().y/2);
 
 	m_xpRunAnim = new Animation(m_xpRunTex);
 	m_xpRunAnim->setReversed( false );
@@ -46,6 +47,8 @@ PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, GameObjectMan *p_xpBu
 	m_xpRunAnim->setNumFrames( 16 );
 	m_xpRunAnim->setRepeating( true );
 	m_xpRunAnim->setScale( 0.9f, 0.9f );
+	m_xpRunAnim->setOrigin(m_xpRunAnim->getFrameSize().x/2, m_xpRunAnim->getFrameSize().y/2);
+
 
 	m_xpStepAnim = new Animation(m_xpSStepTex);
 	m_xpStepAnim->setReversed( false );
@@ -55,6 +58,8 @@ PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, GameObjectMan *p_xpBu
 	m_xpStepAnim->setNumFrames( 12 );
 	m_xpStepAnim->setRepeating( true );
 	m_xpStepAnim->setScale( 1.f, 1.f );
+	m_xpStepAnim->setOrigin(m_xpStepAnim->getFrameSize().x/2, m_xpStepAnim->getFrameSize().y/2);
+
 
 	m_xpCrossbow = new Animation(m_xpCrossbowTex);
 	m_xpCrossbow->setRotation( 90 );
@@ -66,10 +71,11 @@ PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, GameObjectMan *p_xpBu
 	m_xpCrossbow->setNumFrames( 7 );
 	m_xpCrossbow->setRepeating( true );
 	m_xpCrossbow->setScale( 1.f, 1.f );
-
+	
 	setState( State::Idle );
 	setTool( Tool::Crossbow ); // Start tool
 
+	
 	m_xpPlayerArms[0] = new Player_Arms(m_xpTextureMan, 0);
 	m_xpPlayerArms[1] = new Player_Arms(m_xpTextureMan, 0);
 
@@ -87,6 +93,9 @@ PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, GameObjectMan *p_xpBu
 	m_fMinheat = 15.0f; // If the player's weapon is overheated then it has to coll down to this much
 
 	m_bOverheat = false; // Wether the weapon is overheated or not
+
+	
+
 }
 
 PlayerObject::~PlayerObject(){
@@ -287,14 +296,19 @@ void PlayerObject::Update(sf::Time p_xDtime){
 		break;
 	}
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_fFiretime > (m_fMaxrate / m_fFrate) && m_bOverheat == false){
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_fFiretime <= 0 ){ //&& m_fFiretime > (m_fMaxrate / m_fFrate) && m_bOverheat == false
 		if (GetTool() == Tool::Crossbow){
-			m_xpBulletMan->Add(new PlayerBullet(m_xpBulletTex, m_xPos, getRotation()));
+
+			m_fFiretime = 0.2f;
+			m_xpBulletMan->Add(new PlayerBullet(m_xpTextureMan, getPosition(), getRotation()));
 		}
 		else {
 			setTool(Tool::Crossbow);
 		}
 	}
+	
+
+	m_fFiretime-=p_xDtime.asSeconds();
 
 	/*switch (punchArm){ // 0 = Left Arm, 1 = Right Arm
 	case 0:

@@ -23,6 +23,4 @@ protected:
 	b2Body *m_xpBody;
 
 	SoundPlayer	*m_xpSPlayer;
-
-	sf::Vector2f m_xVel;
 };

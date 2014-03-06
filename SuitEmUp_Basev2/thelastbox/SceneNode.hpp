@@ -23,5 +23,7 @@ public:
 protected:
 	sf::Vector2f m_xPos;
 
+	sf::Vector2f m_xVel;
+
 	bool m_bShowing;
 };

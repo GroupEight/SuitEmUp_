@@ -11,8 +11,6 @@ public:
 
 	b2Body *GetNewBody(sf::Vector2f p_xPos, float p_fRadius, int p_iDensity);
 
-	b2World *GetWorld();
-
 private:
 	b2World *m_xpThisWorld;
 

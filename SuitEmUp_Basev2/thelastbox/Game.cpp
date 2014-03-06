@@ -6,7 +6,7 @@
 
 #include "CollisionMan.h"
 #include "FontMan.h"
-#include "GameObjectMan.h"
+#include "NodeMan.h"
 #include "SoundPlayer.hpp"
 #include "Stateman.h"
 #include "TextureMan.h"
@@ -24,6 +24,7 @@ Game::Game(){
 	m_xpTextMan = NULL;
 
 	m_xpPBulletman = NULL;
+	m_xpEBulletman = NULL;
 
 	m_xpGround = NULL;
 	m_xpPlayer = NULL;
@@ -114,8 +115,13 @@ bool Game::Init(){
 	}
 	LoadSounds();
 
-	m_xpPBulletman = new GameObjectMan;
+	m_xpPBulletman = new NodeMan;
 	if (m_xpPBulletman == NULL){
+		return false;
+	}
+
+	m_xpEBulletman = new NodeMan;
+	if (m_xpEBulletman == NULL) {
 		return false;
 	}
 
@@ -134,7 +140,7 @@ bool Game::Init(){
 		return false;
 	}
 
-	m_xpGamestate = new Gamestate(m_xpWindow, m_xpCollisionMan, m_xpTextMan, m_xpPBulletman, m_xpPlayer, m_xpCursor, m_xpGround);
+	m_xpGamestate = new Gamestate(m_xpWindow, m_xpCollisionMan, m_xpTextMan, m_xpPBulletman, m_xpEBulletman, m_xpPlayer, m_xpCursor, m_xpGround);
 	if (m_xpGamestate == NULL){
 		return false;
 	}

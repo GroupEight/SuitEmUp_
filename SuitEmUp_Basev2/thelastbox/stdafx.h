@@ -29,10 +29,9 @@
 
 #include <Box2D/Box2D.h>
 
-#include <SFML\Audio.hpp>
-#include "SFML\OpenGL.hpp"
+#include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 #include <SFML\System.hpp>
-#include <SFML\Window.hpp>
+#include <SFML\Audio.hpp>
 
 // TODO: reference additional headers your program requires here

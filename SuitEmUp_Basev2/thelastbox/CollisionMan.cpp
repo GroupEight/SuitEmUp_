@@ -14,6 +14,7 @@ void CollisionMan::Update(sf::Time p_xDtime){
 	m_xpThisWorld->Step(1.f/60.f, 10, 8);
 }
 
+
 b2Body *CollisionMan::GetNewBody(sf::Vector2f p_xPos, float p_fRadius, int p_iDensity){
 	b2BodyDef *l_xpBDef = new b2BodyDef;
 	l_xpBDef->type = b2_dynamicBody;
@@ -33,10 +34,6 @@ b2Body *CollisionMan::GetNewBody(sf::Vector2f p_xPos, float p_fRadius, int p_iDe
 	m_xaDefs.push_back(l_xpBody);
 
 	return l_xpBody;
-}
-
-b2World *CollisionMan::GetWorld(){
-	return m_xpThisWorld;
 }
 
 /*void CollisionMan::MakeNewDynamicDef(){

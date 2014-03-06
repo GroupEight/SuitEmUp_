@@ -3,18 +3,17 @@
 #include "Gamestate.hpp"
 
 #include "CollisionMan.h"
-#include "GameObjectMan.h"
-
+#include "NodeMan.h"
+#include "Morker.h"
 #include "CursorObject.h"
 #include "EnemyObject.hpp"
 #include "Ground.hpp"
-#include "Level_Wall.hpp"
 #include "Menu_Button.hpp"
 #include "Player_Arms.hpp"
 #include "PlayerObject.h"
 #include "Prompt.hpp"
 
-Gamestate::Gamestate(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, TextureMan *p_xpTextMan, GameObjectMan *p_xpPBulletMan, PlayerObject *p_xpPlayer, CursorObject *p_xpCursor, Ground *p_xpGround){
+Gamestate::Gamestate(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, TextureMan *p_xpTextMan, NodeMan *p_xpPBulletMan, NodeMan *p_xpEBulletMan, PlayerObject *p_xpPlayer, CursorObject *p_xpCursor, Ground *p_xpGround){
 	m_xpWindow = p_xpWindow;
 
 	m_xpCollisionMan = p_xpCollisionMan;
@@ -23,18 +22,25 @@ Gamestate::Gamestate(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMa
 
 	m_xpPBulletMan = p_xpPBulletMan;
 
+	m_xpEBulletMan = p_xpEBulletMan;
+
 	m_xpPlayer = p_xpPlayer;
 
 	m_xpCursor = p_xpCursor;
 
 	m_xpGround = p_xpGround;
 
+	
+
 	//m_xpPBulletMan = new GameObjectMan;
-	m_xpEnemyMan = new GameObjectMan;
+	m_xpEnemyMan = new NodeMan;
 
-	m_xpLevel = new Level("../rec/Levels/", m_xpTextureMan, m_xpCollisionMan, m_xpEnemyMan, m_xpPlayer);
+	m_xpEnemyMan->Add(new EnemyObject(m_xpCollisionMan, m_xpTextureMan, 50.0f, 4.5f, sf::Vector2f(20, 20), m_xpPlayer));
+	m_xpEnemyMan->Add(new Morker(m_xpCollisionMan, m_xpTextureMan, 30.0f, 25.f, sf::Vector2f(0, 30), m_xpPlayer, m_xpEBulletMan, m_xpTex));
 
-	//m_xpEnemyMan->Add(new EnemyObject(m_xpCollisionMan, m_xpTextureMan, 120.0f, 4.5f, sf::Vector2f(10, 10), m_xpPlayer));
+
+	
+
 
 	//m_xpPlayer = new PlayerObject(m_xpGfxMan->LoadAnimatedSprite("Animations/Player_Anim_Idle.txt"), m_xpBulletMan, m_xpGfxMan);
 	//m_xpGround = new BGObject(m_xpGfxMan->LoadBackground("Graphics/Ground.png", sf::Vector2f(m_xpWindow->getSize().x, m_xpWindow->getSize().y)), m_xpPlayer, m_xpWindow);
@@ -53,11 +59,11 @@ Gamestate::Gamestate(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMa
 
 bool Gamestate::Enter(){
 	m_eState = Gamestate::SubStates::Play;
-	return m_xpLevel->LoadLevel("Tst.txt");
+	return false;
 }
 
 void Gamestate::Exit(){
-	m_xpLevel->ClearLevel();
+	
 }
 
 bool Gamestate::Update(sf::Time p_xDtime){
@@ -70,16 +76,13 @@ bool Gamestate::Update(sf::Time p_xDtime){
 			m_sNext = "Menustate";
 			return false;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)){
-			m_sNext = "Gamestate";
-			return false;
-			//m_xpLevel->ClearLevel();
-		}
 		m_xpGround->Update(p_xDtime);
 		m_xpPlayer->Update(p_xDtime); // Update Player
 
 		m_xpEnemyMan->UpdateAll(p_xDtime); // Update all enemies
 		m_xpPBulletMan->UpdateAll(p_xDtime); // Update all of the player bullets
+		m_xpEBulletMan->UpdateAll(p_xDtime); // Update all enemy bullets
+
 
 		m_xpCollisionMan->Update(p_xDtime); // Have CollisionMan update the world
 	}
@@ -107,11 +110,11 @@ void Gamestate::Draw(){
 	m_xpWorldView->setCenter( m_xpPlayer->getPosition() ); // Center camera on player
 	m_xpWindow->setView(*m_xpWorldView); // Set the worldview
 
-	m_xpGround->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the ground
+	m_xpGround->draw(*m_xpWindow, sf::RenderStates::Default);
 	m_xpPlayer->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the player
 	m_xpPBulletMan->DrawOnScreen(m_xpWindow); // Draw the bullets
 	m_xpEnemyMan->DrawOnScreen(m_xpWindow); // Draw the enemies
-	m_xpLevel->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the Level
+	m_xpEBulletMan->DrawOnScreen(m_xpWindow); // Draw enemy bullets
 
 	//m_xpCursor->draw(*m_xpWindow, sf::RenderStates::Default);
 }
@@ -123,7 +126,7 @@ void Gamestate::LoadResources(){
 }
 
 std::string Gamestate::Next(){
-	return m_sNext;
+	return "Menustate";
 }
 
 bool Gamestate::IsType(const std::string &p_sType){

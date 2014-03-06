@@ -4,7 +4,7 @@
 
 class CollisionMan;
 class FontMan;
-class GameObjectMan;
+class NodeMan;
 class Stateman;
 class SoundPlayer;
 class TextureMan;
@@ -12,6 +12,7 @@ class TextureMan;
 class CursorObject;
 class Ground;
 class PlayerObject;
+
 
 class Gamestate;
 class Menustate;
@@ -66,11 +67,15 @@ private:
 	TextureMan *m_xpTextMan;
 	FontMan *m_xpFontMan;
 
-	GameObjectMan *m_xpPBulletman;
+	NodeMan *m_xpPBulletman;
+	NodeMan *m_xpEBulletman;
+
 
 	CursorObject *m_xpCursor;
 	Ground *m_xpGround;
 	PlayerObject *m_xpPlayer;
+
+	
 
 	Gamestate *m_xpGamestate; // Member_Gamestate
 	Menustate *m_xpMenustate; // Member_Menustate
