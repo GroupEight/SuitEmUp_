@@ -77,6 +77,7 @@ bool Gamestate::Update(sf::Time p_xDtime){
 			return false;
 			//m_xpLevel->ClearLevel();
 		}
+		m_xpLevel->placeWallVertices();
 		m_xpGround->Update(p_xDtime);
 		m_xpPlayer->Update(p_xDtime); // Update Player
 

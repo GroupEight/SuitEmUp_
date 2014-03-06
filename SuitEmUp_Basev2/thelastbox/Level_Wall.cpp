@@ -208,6 +208,8 @@ void Level::placeWallVertices(){
 	float wallHeight = 50.f;
 	int lastVertex = m_xCVertices.getVertexCount()-1;
 
+	cPos = m_xpPlayer->getPosition();
+
 	int q = 0;
 
 	for(int i = 0; i < m_xaWalls.size(); i++){

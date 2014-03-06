@@ -33,13 +33,14 @@ public:
 	bool LoadLevel(std::string p_sFile);
 	void ClearLevel();
 
+	void placeWallVertices();
+	void MakeWalls();
+
 	void setCameraPos( sf::Vector2f pos );
 	sf::Vector2f getControlVertexPos( int index );
 
 private:
-	void placeWallVertices();
 	//void createControlVertex(sf::Vector2f _pos, float _ang = 0.f, float _height = 0.f);
-	void MakeWalls();
 
 	b2Vec2 *vs;
 
