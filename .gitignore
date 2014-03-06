@@ -1,7 +1,7 @@
-build/*
-bin/*
-ipch/*
-Debug/*
+build/
+bin/
+ipch/
+Debug/
 *.sdf
 *.opensdf
 *.zip
