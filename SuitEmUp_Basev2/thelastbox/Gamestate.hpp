@@ -12,7 +12,7 @@ class TextureHolder;
 class SoundPlayer;
 
 class CollisionMan;
-class GameObjectMan;
+class NodeMan;
 class TextureMan;
 
 class Ground;
@@ -47,7 +47,7 @@ class Gamestate : public State {
 	};
 
 public:
-	Gamestate(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, TextureMan *p_xpTextMan, GameObjectMan *p_xpPBulletMan, PlayerObject *p_xpPlayer, CursorObject *p_xpCursor, Ground *p_xpGround);
+	Gamestate(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, TextureMan *p_xpTextMan, NodeMan *p_xpPBulletMan, NodeMan *p_xpEBulletMan, PlayerObject *p_xpPlayer, CursorObject *p_xpCursor, Ground *p_xpGround);
 
 	bool Enter();
 	void Exit();
@@ -93,8 +93,11 @@ private:
 
 	PlayerObject *m_xpPlayer;
 
-	GameObjectMan *m_xpEnemyMan;
-	GameObjectMan *m_xpPBulletMan;
+	sf::Texture *m_xpTex;
+
+	NodeMan *m_xpEnemyMan;
+	NodeMan *m_xpEBulletMan;
+	NodeMan *m_xpPBulletMan;
 
 	Level* m_xpLevel;
 	HWallObject* mHWall;
@@ -103,7 +106,7 @@ private:
 	sf::Vector2f m_xSpawnPosition;
 
 	// Used in Pausestate/Quitstate
-	GameObjectMan *m_xpMenuman;
+	NodeMan *m_xpMenuman;
 
 	Prompt *m_xpQuitPrompt;
 

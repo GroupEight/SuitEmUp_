@@ -7,7 +7,7 @@
 #include "SceneNode.hpp"
 
 class CollisionMan;
-class GameObjectMan;
+class NodeMan;
 class TextureMan;
 
 class PlayerObject;
@@ -23,7 +23,7 @@ public:
 
 class Level : public SceneNode {
 public:
-	Level(std::string p_sDir, TextureMan *p_xpTextMan, CollisionMan *p_xpCMan, GameObjectMan *p_xpEnemyMan, PlayerObject *p_xpPlayer);
+	Level(std::string p_sDir, TextureMan *p_xpTextMan, CollisionMan *p_xpCMan, NodeMan *p_xpEnemyMan, PlayerObject *p_xpPlayer);
 	~Level();
 
 	virtual void Update(sf::Time dt);
@@ -48,7 +48,7 @@ private:
 	std::vector<Wall*> m_xaWalls;
 
 	CollisionMan *m_xpCMan;
-	GameObjectMan *m_xpEnemyMan;
+	NodeMan *m_xpEnemyMan;
 	TextureMan *m_xpTexMan;
 
 	PlayerObject *m_xpPlayer;

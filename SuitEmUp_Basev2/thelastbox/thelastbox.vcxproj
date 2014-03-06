@@ -88,13 +88,14 @@
     <ClInclude Include="CollisionMan.h" />
     <ClInclude Include="Crossbow.hpp" />
     <ClInclude Include="CursorObject.h" />
+    <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="EnemyObject.hpp" />
     <ClInclude Include="Enemy_Larva.hpp" />
     <ClInclude Include="Film_Grain.hpp" />
     <ClInclude Include="FontMan.h" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameObjectMan.h" />
+    <ClInclude Include="NodeMan.h" />
     <ClInclude Include="Ground.hpp" />
     <ClInclude Include="Ground_Bump.hpp" />
     <ClInclude Include="Hidden_Wall.hpp" />
@@ -132,6 +133,7 @@
     <ClCompile Include="CollisionMan.cpp" />
     <ClCompile Include="Crossbow.cpp" />
     <ClCompile Include="CursorObject.cpp" />
+    <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="EnemyObject.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>
@@ -148,7 +150,7 @@
     <ClCompile Include="GameObject.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="GameObjectMan.cpp" />
+    <ClCompile Include="NodeMan.cpp" />
     <ClCompile Include="Ground.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>

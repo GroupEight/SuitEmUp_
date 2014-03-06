@@ -8,10 +8,10 @@
 #include "Player_Arms.hpp"
 
 #include "CollisionMan.h"
-#include "GameObjectMan.h"
+#include "NodeMan.h"
 #include "TextureMan.h"
 
-PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, GameObjectMan *p_xpBulletMan, TextureMan *p_xpTextureMan){
+PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMan, TextureMan *p_xpTextureMan){
 
 	m_xPos = sf::Vector2f(0, 0);
 
@@ -287,15 +287,18 @@ void PlayerObject::Update(sf::Time p_xDtime){
 		break;
 	}
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_fFiretime > (m_fMaxrate / m_fFrate) && m_bOverheat == false){
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_fFiretime <= 0 ){ //&& m_fFiretime > (m_fMaxrate / m_fFrate) && m_bOverheat == false
 		if (GetTool() == Tool::Crossbow){
-			m_xpBulletMan->Add(new PlayerBullet(m_xpBulletTex, m_xPos, getRotation()));
+
+			m_fFiretime = 0.2f;
+			m_xpBulletMan->Add(new PlayerBullet(m_xpTextureMan, getPosition(), getRotation()));
 		}
 		else {
 			setTool(Tool::Crossbow);
 		}
 	}
 
+	m_fFiretime-=p_xDtime.asSeconds();
 	/*switch (punchArm){ // 0 = Left Arm, 1 = Right Arm
 	case 0:
 		if( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && !m_xpPlayerArms[0]->bPunching){

@@ -9,7 +9,7 @@
 #include <typeinfo>
 
 #include "CollisionMan.h"
-#include "GameObjectMan.h"
+#include "NodeMan.h"
 #include "TextureMan.h"
 
 #include "EnemyObject.hpp"
@@ -22,7 +22,7 @@ Wall::Wall(sf::Vector2f p_xPos, float p_fAng, float p_fHe){
 	m_fHe = p_fHe;
 }
 
-Level::Level(std::string p_sDir, TextureMan *p_xpTextMan, CollisionMan *p_xpCMan, GameObjectMan *p_xpEnemyMan, PlayerObject *p_xpPlayer)
+Level::Level(std::string p_sDir, TextureMan *p_xpTextMan, CollisionMan *p_xpCMan, NodeMan *p_xpEnemyMan, PlayerObject *p_xpPlayer)
 : mParallax( 0.2 ){
 	m_xpPlayer = p_xpPlayer;
 	m_sDir = p_sDir;
