@@ -34,8 +34,9 @@ Ground::Ground(TextureMan *p_xpTextMan, sf::Vector2f size, PlayerObject *p_xpPla
 }
 
 void Ground::Update(sf::Time dt){
+	float t = 2.f;
 	sf::Vector2f l_xPos = sf::Vector2f(m_xpWindow->getView().getCenter());
-	sf::Vector2f p_xOffset = m_xpPlayer->getPosition();
+	sf::Vector2f p_xOffset = sf::Vector2f(m_xpPlayer->getPosition().x / t, m_xpPlayer->getPosition().y / t);
 
 	int i = 0;
 	m_xVertArray[i+0].position = sf::Vector2f(l_xPos.x - m_xpWindow->getSize().x, l_xPos.y - m_xpWindow->getSize().y);
