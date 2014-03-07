@@ -20,7 +20,7 @@ public:
 	};
 
 public:
-	EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan, float p_fAggroRange, float p_fAttackRange, sf::Vector2f p_xStartpos, PlayerObject *p_xpPlayer);
+	EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan, float p_fAggroRange, float p_fAttackRange, sf::Vector2f p_xStartpos, PlayerObject *p_xpPlayer, sf::CircleShape *p_hitradius);
 
 	virtual void Update(sf::Time p_xDtime);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -44,6 +44,8 @@ private:
 	EnemyObject::AIState m_eState;
 
 	PlayerObject *m_xpPlayer;
+
+	sf::CircleShape *m_hitradius;
 
 	float m_fAggroRange,
 		m_fAttackRange,

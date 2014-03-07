@@ -32,6 +32,8 @@ b2Body *CollisionMan::GetNewBody(sf::Vector2f p_xPos, float p_fRadius, int p_iDe
 
 	m_xaDefs.push_back(l_xpBody);
 
+	
+
 	return l_xpBody;
 }
 

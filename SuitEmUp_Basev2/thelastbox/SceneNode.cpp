@@ -1,6 +1,9 @@
 //SceneNode.cpp//
 
 #include "SceneNode.hpp"
+#include "EnemyObject.hpp"
+#include "PlayerBullet.hpp"
+
 
 SceneNode::SceneNode(){
 	m_bShowing = true;
@@ -25,9 +28,14 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const{
 	}*/
 }
 
-void SceneNode::Overlap() {
+void SceneNode::Overlap(PlayerBullet *p_xpPBullet, EnemyObject *p_xpEnemy) {
 
-	//if (sqrt(pow(m_xpBody->getPosition().x - it->first->getPosition().x, 2) + pow(shape.getPosition().y - it->first->getPosition().y, 2)) <= shape.getRadius() + it->first->getRadius()) {
+	m_xpPBullet = p_xpPBullet;
+	m_xpEnemy = p_xpEnemy;
+
+	if (sqrt(pow(m_xpEnemy->getPosition().x - m_xpPBullet->getPosition().x, 2) + pow(m_xpEnemy->getPosition().y - m_xpPBullet->getPosition().y, 2)) <= m_xpEnemy->getRadius() + m_xpPBullet->getRadius())
+	{
+}
 }
 
 sf::Vector2f SceneNode::getWorldPosition() const {

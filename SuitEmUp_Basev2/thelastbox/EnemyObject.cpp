@@ -12,6 +12,7 @@
 EnemyObject::EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan, float p_fAggroRange, float p_fAttackRange, sf::Vector2f p_xStartpos, PlayerObject *p_xpPlayer){
 	m_xPos = p_xStartpos;
 
+	
 	m_fAggroRange = p_fAggroRange;
 	m_fAttackRange = p_fAttackRange;
 
@@ -20,7 +21,7 @@ EnemyObject::EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan,
 	m_fSpd = 5.f;
 
 	m_xpBody = p_xpCollisionMan->GetNewBody(m_xPos, 1.0f, 1);
-
+	
 	m_xpIdleTex = p_xpTexMan->Get("Warrior_Idle");
 	m_xpRunTex = p_xpTexMan->Get("Warrior_Run");
 	m_xpAtkTex = p_xpTexMan->Get("Warrior_Atk");

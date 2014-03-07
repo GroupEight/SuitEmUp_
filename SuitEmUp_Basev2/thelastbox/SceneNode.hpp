@@ -2,6 +2,9 @@
 
 #pragma once
 
+class PlayerBullet;
+class EnemyObject;
+
 class SceneNode : public sf::Transformable, public sf::Drawable {
 public:
 	SceneNode();
@@ -11,7 +14,7 @@ public:
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 
-	virtual void Overlap();
+	virtual void Overlap(PlayerBullet *p_xpPBullet, EnemyObject *p_xpEnemy);
 
 	bool Show();
 	bool Hide();
@@ -28,4 +31,8 @@ protected:
 	sf::Vector2f m_xVel;
 
 	bool m_bShowing;
+
+	PlayerBullet *m_xpPBullet;
+
+	EnemyObject *m_xpEnemy;
 };
