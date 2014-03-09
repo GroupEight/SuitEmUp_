@@ -6,6 +6,7 @@
 
 #include "CollisionMan.h"
 #include "FontMan.h"
+#include "InputMan.h"
 #include "NodeMan.h"
 #include "SoundPlayer.hpp"
 #include "Stateman.h"
@@ -120,12 +121,17 @@ bool Game::Init(){
 		return false;
 	}
 
-		m_xpEBulletman = new NodeMan;
+	m_xpEBulletman = new NodeMan;
 	if (m_xpEBulletman == NULL) {
 		return false;
 	}
 
-	m_xpPlayer = new PlayerObject(m_xpCollisionMan, m_xpPBulletman, m_xpTextMan);
+	m_xpInputMan = new InputMan(m_xpWindow);
+	if (m_xpInputMan == NULL){
+		return false;
+	}
+
+	m_xpPlayer = new PlayerObject(m_xpWindow, m_xpCollisionMan, m_xpPBulletman, m_xpTextMan, m_xpInputMan);
 	if (m_xpPlayer == NULL){
 		return false;
 	}
@@ -293,7 +299,7 @@ void Game::LoadTexts(TextureMan *p_xpTextMan){
 void Game::LoadSounds(){
 	m_xpSPlayer->Load("Button_Click.wav", "Button_Click");
 	m_xpSPlayer->Load("Button_Hover.wav", "Button_Hover");
-	m_xpSPlayer->Load("Cymbal_Hit_01.wav", "Cymbal_Hit1");
+	m_xpSPlayer->Load("Cymbal_Hit_01.wav", "Cymbal_Hit0");
 	m_xpSPlayer->Load("Cymbal_Hit_02.wav", "Cymbal_Hit1");
-	m_xpSPlayer->Load("Cymbal_Hit_03.wav", "Cymbal_Hit1");
+	m_xpSPlayer->Load("Cymbal_Hit_03.wav", "Cymbal_Hit2");
 }

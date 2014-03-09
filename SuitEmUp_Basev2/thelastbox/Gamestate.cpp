@@ -103,6 +103,8 @@ bool Gamestate::Update(sf::Time p_xDtime){
 		return false;
 	}
 
+	m_xpPBulletMan->DeleteOffScreen(m_xpWindow);
+
 	return true;
 }
 
@@ -112,7 +114,7 @@ void Gamestate::Draw(){
 
 	m_xpGround->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the ground
 	m_xpPlayer->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the player
-	m_xpPBulletMan->DrawOnScreen(m_xpWindow); // Draw the bullets
+	m_xpPBulletMan->DrawAll(m_xpWindow); // Draw the bullets
 	m_xpEnemyMan->DrawOnScreen(m_xpWindow); // Draw the enemies
 	m_xpLevel->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the Level
 

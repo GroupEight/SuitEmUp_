@@ -28,7 +28,7 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const{
 	}*/
 }
 
-void SceneNode::Overlap(PlayerBullet *p_xpPBullet, EnemyObject *p_xpEnemy) {
+/*void SceneNode::Overlap(PlayerBullet *p_xpPBullet, EnemyObject *p_xpEnemy) {
 
 	m_xpPBullet = p_xpPBullet;
 	m_xpEnemy = p_xpEnemy;
@@ -36,7 +36,7 @@ void SceneNode::Overlap(PlayerBullet *p_xpPBullet, EnemyObject *p_xpEnemy) {
 	if (sqrt(pow(m_xpEnemy->getPosition().x - m_xpPBullet->getPosition().x, 2) + pow(m_xpEnemy->getPosition().y - m_xpPBullet->getPosition().y, 2)) <= m_xpEnemy->getRadius() + m_xpPBullet->getRadius())
 	{
 }
-}
+}*/
 
 sf::Vector2f SceneNode::getWorldPosition() const {
 	return getWorldTransform() * sf::Vector2f();
@@ -66,10 +66,10 @@ bool SceneNode::GetIsShowing(){
 }
 
 bool SceneNode::OnScreen(sf::RenderWindow *p_xpWindow){
-	if (m_xPos.x > p_xpWindow->getView().getCenter().x - p_xpWindow->getView().getSize().x / 2 && m_xPos.x < p_xpWindow->getView().getCenter().x + p_xpWindow->getView().getSize().x / 2){
+	if (getPosition().x < p_xpWindow->getView().getCenter().x - p_xpWindow->getView().getSize().x / 2 && getPosition().x > p_xpWindow->getView().getCenter().x + p_xpWindow->getView().getSize().x / 2){
 		return true;
 	}
-	else if (m_xPos.y > p_xpWindow->getView().getCenter().y -p_xpWindow->getView().getSize().y / 2 && m_xPos.y < p_xpWindow->getView().getCenter().y + p_xpWindow->getView().getSize().y / 2){
+	else if (getPosition().y < p_xpWindow->getView().getCenter().y -p_xpWindow->getView().getSize().y / 2 && getPosition().y > p_xpWindow->getView().getCenter().y + p_xpWindow->getView().getSize().y / 2){
 		return true;
 	}
 	return false;

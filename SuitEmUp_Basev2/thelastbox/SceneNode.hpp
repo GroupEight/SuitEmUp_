@@ -14,7 +14,7 @@ public:
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 
-	virtual void Overlap(PlayerBullet *p_xpPBullet, EnemyObject *p_xpEnemy);
+	//virtual void Overlap(PlayerBullet *p_xpPBullet, EnemyObject *p_xpEnemy);
 
 	bool Show();
 	bool Hide();

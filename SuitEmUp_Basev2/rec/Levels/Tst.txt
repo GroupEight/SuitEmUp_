@@ -60,11 +60,11 @@ Wall -600 450
 Wall -500 550
 Wall 0 550
 
-Enemy 5 0 40 10
-Enemy 0 5 40 10
-Enemy -5 0 40 10
-Enemy 0 -5 40 10
-Enemy 5 5 40 10
-Enemy -5 -5 40 10
-Enemy 5 -5 40 10
-Enemy -5 5 40 10
+# Enemy 5 0 40 10
+# Enemy 0 5 40 10
+# Enemy -5 0 40 10
+# Enemy 0 -5 40 10
+# Enemy 5 5 40 10
+# Enemy -5 -5 40 10
+# Enemy 5 -5 40 10
+# Enemy -5 5 40 10

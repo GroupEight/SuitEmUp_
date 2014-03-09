@@ -19,7 +19,7 @@ Player_Arms::Player_Arms(TextureMan *p_xpTextMan, int p_iArmDir)
 	m_fPunchInterp = 0;
 }
 
-void Player_Arms::setArmsPosition(sf::Vector2f armLength){
+void Player_Arms::setArmsPosition(sf::Vector2i armLength){
 
 	if(m_bPunching){
 		m_fPunchLength = sinf( m_fPunchInterp * 3.141592 / 180 );
@@ -84,10 +84,6 @@ float Player_Arms::GetPt( int n1 , int n2 , float perc ){
     int diff = n2 - n1;
 
     return n1 + ( diff * perc );
-}
-
-void Player_Arms::UpdateCurrent(sf::Time p_xDtime){
-	
 }
 
 void Player_Arms::draw(sf::RenderTarget& target, sf::RenderStates states) const{

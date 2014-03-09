@@ -2,11 +2,9 @@
 
 #include "PlayerBullet.hpp"
 
-
 #include "NodeMan.h"
 #include "TextureMan.h"
 #include "PlayerObject.h"
-
 
 PlayerBullet::PlayerBullet(TextureMan *p_xpTextureMan, sf::Vector2f p_xPos, float p_fRot){
 	//std::cout << "SPAWN!!";
@@ -39,7 +37,7 @@ PlayerBullet::PlayerBullet(TextureMan *p_xpTextureMan, sf::Vector2f p_xPos, floa
 }
 
 PlayerBullet::~PlayerBullet(){
-
+	std::cout << "deleted!";
 }
 
 void PlayerBullet::Update(sf::Time p_xDtime){

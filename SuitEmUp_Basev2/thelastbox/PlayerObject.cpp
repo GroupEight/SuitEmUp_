@@ -8,15 +8,19 @@
 #include "Player_Arms.hpp"
 
 #include "CollisionMan.h"
+#include "InputMan.h"
 #include "NodeMan.h"
+#include "SoundPlayer.hpp"
 #include "TextureMan.h"
 
-PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMan, TextureMan *p_xpTextureMan){
-
+PlayerObject::PlayerObject(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMan, TextureMan *p_xpTextureMan, InputMan *p_xpIMan){
 	m_xPos = sf::Vector2f(0, 0);
+
+	m_xpWindow = p_xpWindow;
 
 	m_xpBulletMan = p_xpBulletMan;
 	m_xpCollisionMan = p_xpCollisionMan;
+	m_xpIMan = p_xpIMan;
 	m_xpTextureMan = p_xpTextureMan;
 
 	m_xpBody = p_xpCollisionMan->GetNewBody(sf::Vector2f(m_xPos.x, m_xPos.y), 1.0f, 1);
@@ -31,6 +35,7 @@ PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMa
 
 	m_xpIdleAnim = new Animation(m_xpIdleTex);
 	m_xpIdleAnim->setReversed( false );
+	m_xpIdleAnim->setOrigin(sf::Vector2f(m_xpIdleAnim->getFrameSize().x / 2, m_xpIdleAnim->getFrameSize().y / 2));
 	m_xpIdleAnim->restart();
 	m_xpIdleAnim->setFrameSize( sf::Vector2i( 177, 291 ) );
 	m_xpIdleAnim->setDuration( sf::seconds( 0.8f ) );
@@ -40,6 +45,7 @@ PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMa
 
 	m_xpRunAnim = new Animation(m_xpRunTex);
 	m_xpRunAnim->setReversed( false );
+	m_xpRunAnim->setOrigin(sf::Vector2f(m_xpRunAnim->getFrameSize().x / 2, m_xpRunAnim->getFrameSize().y / 2));
 	m_xpRunAnim->restart();
 	m_xpRunAnim->setFrameSize( sf::Vector2i( 177, 291 ) );
 	m_xpRunAnim->setDuration( sf::seconds( 0.7f ) );
@@ -57,8 +63,9 @@ PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMa
 	m_xpStepAnim->setScale( 1.f, 1.f );
 
 	m_xpCrossbow = new Animation(m_xpCrossbowTex);
-	m_xpCrossbow->setRotation( 90 );
-	m_xpCrossbow->setOrigin( m_xpCrossbow->getFrameSize().x/10, m_xpCrossbow->getFrameSize().y/2 );
+	//m_xpCrossbow->getsetRotation( 0 );
+	m_xpCrossbow->setOrigin( m_xpCrossbow->getFrameSize().x / 10, m_xpCrossbow->getFrameSize().y / 2 );
+	//m_xpCrossbow->setOrigin(GetPosition());
 	m_xpCrossbow->setPosition( 280.f, -90.f );
 	m_xpCrossbow->setReversed( false );
 	m_xpCrossbow->setFrameSize( sf::Vector2i( 178, 291 ) );
@@ -71,7 +78,10 @@ PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMa
 	setTool( Tool::Crossbow ); // Start tool
 
 	m_xpPlayerArms[0] = new Player_Arms(m_xpTextureMan, 0);
+	m_xpPlayerArms[0]->setPosition(GetPosition());
+
 	m_xpPlayerArms[1] = new Player_Arms(m_xpTextureMan, 0);
+	m_xpPlayerArms[1]->setPosition(GetPosition());
 
 	m_fPlayerspd = 720.0f; // Players movement speed
 	m_fBulletspd = 5.0f; // The speed that the players bullets fly in
@@ -87,6 +97,8 @@ PlayerObject::PlayerObject(CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMa
 	m_fMinheat = 15.0f; // If the player's weapon is overheated then it has to coll down to this much
 
 	m_bOverheat = false; // Wether the weapon is overheated or not
+
+	m_bPunchArm = false;
 }
 
 PlayerObject::~PlayerObject(){
@@ -112,49 +124,6 @@ PlayerObject::~PlayerObject(){
 	}
 }
 
-/*PlayerObject::PlayerObject(const TextureHolder& textures)
-	: mSprite ()
-	, mRunAnim ( textures.get( Textures::PlayerRun ) )
-	, mIdleAnim ( textures.get( Textures::PlayerIdle ) )
-	, mSStepAnim ( textures.get( Textures::PlayerSStep ) )
-	, mAnimSprite ()
-	, mCrossbowTex ( textures.get( Textures::Ranged_Crossbow ) )
-	, punchArm (false) //Start with left arm
-	, bPunching ( false ){
-	mRunAnim.setSmooth( true );
-	mIdleAnim.setSmooth( true );
-	mSStepAnim.setSmooth( true );
-	mCrossbowTex.setSmooth( true );
-
-	setState( State::Idle );
-	setTool( Tool::Crossbow ); // Start tool
-
-	m_xpAnimation->setRotation( -90 );
-	m_xpAnimation->setOrigin( m_xpAnimation->getFrameSize().x/2, m_xpAnimation->getFrameSize().y/2 );
-
-	mCrossbow.setTexture( mCrossbowTex );
-	mCrossbow.setRotation( 90 );
-	mCrossbow.setOrigin( mCrossbow.getFrameSize().x/10, mCrossbow.getFrameSize().y/2 );
-	mCrossbow.setPosition( 280.f, -90.f );
-	mCrossbow.setReversed( false );
-	mCrossbow.setFrameSize( sf::Vector2i( 178, 291 ) );
-	mCrossbow.setDuration( sf::seconds( 0.4f ) );
-	mCrossbow.setNumFrames( 7 );
-	mCrossbow.setRepeating( true );
-	mCrossbow.setScale( 1.f, 1.f );
-
-	//Add arms
-	std::unique_ptr<Player_Arms> _larm( new Player_Arms( textures, 1 ) );
-	mLArm = _larm.get();
-	_larm->setPosition( sf::Vector2f( -10.f, -30.f ) );
-	this->attachChild( std::move( _larm ) );
-
-	std::unique_ptr<Player_Arms> _rarm( new Player_Arms( textures, -1 ) );
-	mRArm = _rarm.get();
-	_rarm->setPosition( sf::Vector2f( -10.f, 30.f ) );
-	this->attachChild( std::move( _rarm ) );
-}*/
-
 void PlayerObject::setTool(PlayerObject::Tool tool){
 	if(m_eTool != tool){
 		m_eTool = tool;
@@ -169,41 +138,39 @@ void PlayerObject::setState(PlayerObject::State state){
 		switch (m_eState){
 		case PlayerObject::Idle:
 			m_xpIdleAnim->setReversed( false );
-			m_xpIdleAnim->restart();
 			m_xpCurrentAnim = m_xpIdleAnim;
+			m_xpCurrentAnim->setOrigin(m_xpCurrentAnim->getFrameSize().x/2, m_xpCurrentAnim->getFrameSize().y/2);
+			m_xpCurrentAnim->restart();
 			break;
 		case PlayerObject::Run_F:
 			m_xpRunAnim->setReversed( false );
-			m_xpRunAnim->restart();
 			m_xpCurrentAnim = m_xpRunAnim;
+			m_xpCurrentAnim->setOrigin(m_xpCurrentAnim->getFrameSize().x/2, m_xpCurrentAnim->getFrameSize().y/2);
+			m_xpCurrentAnim->restart();
 			break;
 		case PlayerObject::Run_B:
 			m_xpRunAnim->setReversed( true );
-			m_xpRunAnim->restart();
 			m_xpCurrentAnim = m_xpRunAnim;
+			m_xpCurrentAnim->setOrigin(m_xpCurrentAnim->getFrameSize().x/2, m_xpCurrentAnim->getFrameSize().y/2);
+			m_xpCurrentAnim->restart();
 			break;
 		case PlayerObject::Run_L:
 			m_xpStepAnim->setReversed( false );
-			m_xpStepAnim->restart();
 			m_xpCurrentAnim = m_xpStepAnim;
+			m_xpCurrentAnim->setOrigin(m_xpCurrentAnim->getFrameSize().x/2, m_xpCurrentAnim->getFrameSize().y/2);
+			m_xpCurrentAnim->restart();
 			break;
 		case PlayerObject::Run_R:
 			m_xpStepAnim->setReversed( true );
-			m_xpStepAnim->restart();
 			m_xpCurrentAnim = m_xpStepAnim;
+			m_xpCurrentAnim->setOrigin(m_xpCurrentAnim->getFrameSize().x/2, m_xpCurrentAnim->getFrameSize().y/2);
+			m_xpCurrentAnim->restart();
 			break;
 		default:
 			break;
 		}
 	}
 }
-
-/*void PlayerObject::setCursorPosition(sf::Vector2f _pos){
-	//mLArm->setArmsPosition( sqrtf( (_pos.x - 1280/2.f) * (_pos.x - 1280/2.f) + (_pos.y - 720/2.f) * (_pos.y - 720/2.f) ) );
-	//mRArm->setArmsPosition( sqrtf( (_pos.x - 1280/2.f) * (_pos.x - 1280/2.f) + (_pos.y - 720/2.f) * (_pos.y - 720/2.f) ) );
-	mLArm->setArmsPosition( _pos );
-	mRArm->setArmsPosition( _pos );
-}*/
 
 PlayerObject::State PlayerObject::GetState(){
 	return m_eState;
@@ -213,23 +180,14 @@ PlayerObject::Tool PlayerObject::GetTool(){
 	return m_eTool;
 }
 
-void PlayerObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	target.draw(*m_xpCurrentAnim, states);
-
-	if( m_eTool == Tool::Crossbow){
-		target.draw(*m_xpCrossbow, states);
-	}
-}
-
 void PlayerObject::Update(sf::Time p_xDtime){
 	m_xVel = sf::Vector2f(sf::Keyboard::isKeyPressed(sf::Keyboard::D) - sf::Keyboard::isKeyPressed(sf::Keyboard::A), sf::Keyboard::isKeyPressed(sf::Keyboard::S) - sf::Keyboard::isKeyPressed(sf::Keyboard::W));
 	m_xVel.x = (m_xVel.x * m_fPlayerspd * (float)p_xDtime.asSeconds());
 	m_xVel.y = (m_xVel.y * m_fPlayerspd * (float)p_xDtime.asSeconds());
 	//std::cout << m_xpBody->GetPosition().x << ": " << m_xpBody->GetPosition().y << std::endl;
 
-	setRotation( atan2f( (sf::Mouse::getPosition().y - 720.f * 2), (sf::Mouse::getPosition().x - 1280.f * 2) ) * 180.f / 3.141592f );
-
-	m_xpCurrentAnim->setOrigin(m_xpCurrentAnim->getFrameSize().x/2, m_xpCurrentAnim->getFrameSize().y/2);
+	setRotation( atan2f( (sf::Mouse::getPosition().y - m_xpWindow->getSize().y / 2 + m_xpWindow->getPosition().y), (sf::Mouse::getPosition().x - m_xpWindow->getSize().x / 2) ) * 180.f / 3.141592f + m_xpWindow->getPosition().x);
+	//setRotation( atan2f( (sf::Mouse::getPosition().x - 1280.f / 2), (sf::Mouse::getPosition().y - 720.f / 2 + m_xpWindow->getPosition().y) ) * 180.f / 3.141592f + m_xpWindow->getPosition().x);
 
 	//m_xpAnimation[0]->setOrigin(m_xpAnimation[0]->getFrameSize().x/2, m_xpAnimation[0]->getFrameSize().y/2);
 	//m_xpAnimation[1]->setOrigin(m_xpAnimation[1]->getFrameSize().x/2, m_xpAnimation[1]->getFrameSize().y/2);
@@ -266,6 +224,11 @@ void PlayerObject::Update(sf::Time p_xDtime){
 	m_xpCurrentAnim->setRotation(getRotation());
 	m_xpCrossbow->setPosition(getPosition());
 	m_xpCrossbow->setRotation(getRotation());
+	for (int i = 0; i < 2; i++){
+		m_xpPlayerArms[0]->setPosition(GetPosition());
+		m_xpPlayerArms[0]->setRotation(getRotation());
+		m_xpPlayerArms[0]->setArmsPosition(sf::Mouse::getPosition());
+	}
 
 	switch (m_eState){
 	case PlayerObject::Idle:
@@ -287,10 +250,11 @@ void PlayerObject::Update(sf::Time p_xDtime){
 		break;
 	}
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_fFiretime <= 0 ){ //&& m_fFiretime > (m_fMaxrate / m_fFrate) && m_bOverheat == false
+	//if (m_xpIMan->KeyIsDown(sf::Mouse::Button::Left) && m_fFiretime > (m_fFrate / m_fMaxrate) ){ //&& m_fFiretime > (m_fMaxrate / m_fFrate) && m_bOverheat == false
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && m_fFiretime > (m_fFrate / m_fMaxrate) ){ //&& m_fFiretime > (m_fMaxrate / m_fFrate) && m_bOverheat == false
 		if (GetTool() == Tool::Crossbow){
 
-			m_fFiretime = 0.2f;
+			m_fFiretime = m_fFrate;
 			m_xpBulletMan->Add(new PlayerBullet(m_xpTextureMan, getPosition(), getRotation()));
 		}
 		else {
@@ -298,35 +262,38 @@ void PlayerObject::Update(sf::Time p_xDtime){
 		}
 	}
 
-	m_fFiretime-=p_xDtime.asSeconds();
-	/*switch (punchArm){ // 0 = Left Arm, 1 = Right Arm
-	case 0:
-		if( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && !m_xpPlayerArms[0]->bPunching){
-			if( m_eTool == Tool::Melee ){
-				int s = rand() % 3;
+	//if (m_xpIMan->KeyIsDown(sf::Mouse::Button::Right) && m_fFiretime > (m_fFrate / m_fMaxrate)){
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right) && m_fFiretime > (m_fFrate / m_fMaxrate)){
+		if( m_eTool == Tool::Melee ){
+			int s = rand() % 3;
 
-				m_xpPlayerArms[0]->Punch();
-				playSound( s );
-				punchArm = 1;
-			}
-			else {
-				setTool( Tool::Melee );
-			}
-		}
-		break;
-	case 1:
-		if ( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && !m_xpPlayerArms[1]->bPunching){
-			if( mTool == Tool::Melee ){
-				int s = rand() % 3;
+			m_xpPlayerArms[m_bPunchArm]->Punch();
+//			m_xpSPlayer->Play("Cymbal_Hit" + s);
+			m_bPunchArm = rand() % 2;
 
-				m_xpPlayerArms[1]->Punch();
-				playSound(s);
-				punchArm = 0;
+			/*if (m_bPunchArm){
+				m_bPunchArm = false;
 			}
-			else {
-				setTool( Tool::Melee );
-			}
+			else if (!m_bPunchArm){
+				m_bPunchArm = true;
+			}*/
 		}
-		break;
-	}*/
+		else {
+			setTool( Tool::Melee );
+		}
+	}
+
+	m_fFiretime+= (float)p_xDtime.asSeconds();
+}
+
+void PlayerObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	target.draw(*m_xpCurrentAnim, states);
+
+	if (m_eTool == Tool::Melee){
+		target.draw(*m_xpPlayerArms[0], states);
+		target.draw(*m_xpPlayerArms[1], states);
+	}
+	else if ( m_eTool == Tool::Crossbow){
+		target.draw(*m_xpCrossbow, states);
+	}
 }

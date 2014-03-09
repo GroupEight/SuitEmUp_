@@ -86,7 +86,6 @@ void NodeMan::DeleteOffScreen(sf::RenderWindow *p_xpWindow){
 	for (int i = m_xpaNodes.size() - 1; i >= 0; i--){
 		if (m_xpaNodes[i] != NULL){
 			if (!m_xpaNodes[i]->OnScreen(p_xpWindow)){
-				std::cout << i;
 				delete m_xpaNodes[i];
 				m_xpaNodes[i] = NULL;
 			}

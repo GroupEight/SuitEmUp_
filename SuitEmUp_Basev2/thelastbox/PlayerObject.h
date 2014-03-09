@@ -8,6 +8,7 @@ class Animation;
 class Player_Arms;
 
 class CollisionMan;
+class InputMan;
 class NodeMan;
 class TextureMan;
 
@@ -27,7 +28,7 @@ public:
 	};
 
 public:
-	PlayerObject(CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMan, TextureMan *p_xpTextureMan);
+	PlayerObject(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMan, TextureMan *p_xpTextureMan, InputMan *p_xpIMan);
 	~PlayerObject();
 
 	virtual void Update(sf::Time p_xDtime);
@@ -45,8 +46,10 @@ public:
 	bool m_bPunching;
 
 private:
+	sf::RenderWindow *m_xpWindow;
 
 	CollisionMan *m_xpCollisionMan;
+	InputMan *m_xpIMan;
 	NodeMan *m_xpBulletMan;
 	TextureMan *m_xpTextureMan;
 
@@ -65,7 +68,7 @@ private:
 
 	Player_Arms *m_xpPlayerArms[2];
 
-	bool punchArm;
+	bool m_bPunchArm;
 	
 	float m_fBulletspd,
 		m_fPlayerspd,
