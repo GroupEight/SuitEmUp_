@@ -10,6 +10,7 @@ class CollisionMan;
 class NodeMan;
 class TextureMan;
 
+class Hidden_Wall;
 class PlayerObject;
 
 class Wall {
@@ -47,6 +48,7 @@ private:
 	b2Body *m_xpLevelBody;
 
 	std::vector<Wall*> m_xaWalls;
+	std::vector<Hidden_Wall*> m_xaHWalls;
 
 	CollisionMan *m_xpCMan;
 	NodeMan *m_xpEnemyMan;

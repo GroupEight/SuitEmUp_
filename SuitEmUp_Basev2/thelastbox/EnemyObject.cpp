@@ -109,8 +109,6 @@ void EnemyObject::Update(sf::Time dt){
 	float l_fEnemyDist = sqrtf( ( (m_xpPlayer->GetPosition().x - m_xpBody->GetPosition().x ) * ( m_xpPlayer->GetPosition().x - m_xpBody->GetPosition().x ) ) + ( ( m_xpPlayer->GetPosition().y - m_xpBody->GetPosition().y ) * (m_xpPlayer->GetPosition().y - m_xpBody->GetPosition().y) ) );
 	float l_fXtrrot = -90.f;
 
-	std::cout << l_fEnemyDist << std::endl;
-
 	/*if ( l_fEnemyDist < m_fAggroRange && l_fEnemyDist > m_fAttackRange ){
 			SetState( EnemyObject::Aggro );
 	}
@@ -142,8 +140,6 @@ void EnemyObject::Update(sf::Time dt){
 	else if (m_eState == EnemyObject::AIState::Aggro){		
 		setRotation(atan2f( (m_xpPlayer->GetPosition().y - GetPosition().y), (m_xpPlayer->GetPosition().x - GetPosition().x) ) * 180.f / 3.141592f - 90.f);
 		m_xVel = m_fSpd * sf::Vector2f(cosf(getRotation() * 3.141592 / 180 + 90.f), sinf(getRotation() * 3.141592 / 180 + 90.f));
-
-		std::cout << GetPosition().x << " : " << GetPosition().y << " : " << getRotation() << std::endl;
 	}
 	else if (m_eState == EnemyObject::AIState::Attacking){
 		m_xVel = sf::Vector2f(0, 0);

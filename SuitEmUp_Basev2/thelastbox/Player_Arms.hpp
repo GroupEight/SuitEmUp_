@@ -12,7 +12,7 @@ class Player_Arms : public SceneNode {
 public:
 	Player_Arms(TextureMan *p_xpTextMan, int p_iArmDir, PlayerObject *p_xpPlayer);
 
-	void setArmsPosition(sf::Vector2i armLength);
+	void setArmsPosition(sf::Vector2i armLength, float p_fRot);
 
 	bool Punch();
 

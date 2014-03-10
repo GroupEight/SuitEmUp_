@@ -100,7 +100,7 @@
     <ClInclude Include="Ground_Bump.hpp" />
     <ClInclude Include="Hidden_Wall.hpp" />
     <ClInclude Include="InputMan.h" />
-    <ClInclude Include="Level_Wall.hpp" />
+    <ClInclude Include="Level.hpp" />
     <ClInclude Include="Menustate.h" />
     <ClInclude Include="Menu_Button.hpp" />
     <ClInclude Include="Morker.h" />
@@ -161,7 +161,7 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="InputMan.cpp" />
-    <ClCompile Include="Level_Wall.cpp">
+    <ClCompile Include="Level.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="Main.cpp" />

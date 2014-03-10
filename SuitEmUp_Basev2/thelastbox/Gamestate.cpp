@@ -8,7 +8,7 @@
 #include "CursorObject.h"
 #include "EnemyObject.hpp"
 #include "Ground.hpp"
-#include "Level_Wall.hpp"
+#include "Level.hpp"
 #include "Menu_Button.hpp"
 #include "Player_Arms.hpp"
 #include "PlayerObject.h"
@@ -77,7 +77,7 @@ bool Gamestate::Update(sf::Time p_xDtime){
 			return false;
 			//m_xpLevel->ClearLevel();
 		}
-		m_xpLevel->placeWallVertices();
+		m_xpLevel->Update(p_xDtime);
 		m_xpGround->Update(p_xDtime);
 		m_xpPlayer->Update(p_xDtime); // Update Player
 
@@ -115,7 +115,7 @@ void Gamestate::Draw(){
 	m_xpGround->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the ground
 	m_xpPlayer->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the player
 	m_xpPBulletMan->DrawAll(m_xpWindow); // Draw the bullets
-	m_xpEnemyMan->DrawOnScreen(m_xpWindow); // Draw the enemies
+	m_xpEnemyMan->DrawAll(m_xpWindow); // Draw the enemies
 	m_xpLevel->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the Level
 
 	//m_xpCursor->draw(*m_xpWindow, sf::RenderStates::Default);

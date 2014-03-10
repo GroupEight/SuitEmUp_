@@ -63,8 +63,7 @@ PlayerObject::PlayerObject(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpColli
 	m_xpStepAnim->setScale( 1.f, 1.f );
 
 	m_xpCrossbow = new Animation(m_xpCrossbowTex);
-	//m_xpCrossbow->getsetRotation( 0 );
-	m_xpCrossbow->setOrigin( m_xpCrossbow->getFrameSize().x / 10, m_xpCrossbow->getFrameSize().y / 2 );
+	m_xpCrossbow->setOrigin( m_xpCrossbow->getFrameSize().x / 10, m_xpCrossbow->getFrameSize().y / 2  + GetPosition().x);
 	//m_xpCrossbow->setOrigin(GetPosition());
 	m_xpCrossbow->setPosition( 280.f, -90.f );
 	m_xpCrossbow->setReversed( false );
@@ -77,17 +76,17 @@ PlayerObject::PlayerObject(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpColli
 	setState( State::Idle );
 	setTool( Tool::Crossbow ); // Start tool
 
-	m_xpPlayerArms[0] = new Player_Arms(m_xpTextureMan, 0);
-	m_xpPlayerArms[0]->setPosition(GetPosition());
+	m_xpPlayerArms[0] = new Player_Arms(m_xpTextureMan, 1, this);
+	m_xpPlayerArms[0]->setPosition(sf::Vector2f(getPosition().x + 10, getPosition().y + 10));
 
-	m_xpPlayerArms[1] = new Player_Arms(m_xpTextureMan, 0);
-	m_xpPlayerArms[1]->setPosition(GetPosition());
+	m_xpPlayerArms[1] = new Player_Arms(m_xpTextureMan, -1, this);
+	m_xpPlayerArms[1]->setPosition(sf::Vector2f(getPosition().x + 10, getPosition().y + 10));
 
 	m_fPlayerspd = 720.0f; // Players movement speed
 	m_fBulletspd = 5.0f; // The speed that the players bullets fly in
 
 	m_fFrate = 1.5f; // How many bullets the player can shoot every second
-	m_fMaxrate = 1.0f; // How much a "second" is in the above statement
+	m_fMaxrate = 1.0f; // How much time a "second" is in the above statement
 	m_fFiretime = 0.0f; // How long ago the player fired his weapon
 
 	m_fHeat = 0.0f; // The currrent weapon-heat
@@ -184,10 +183,13 @@ void PlayerObject::Update(sf::Time p_xDtime){
 	m_xVel = sf::Vector2f(sf::Keyboard::isKeyPressed(sf::Keyboard::D) - sf::Keyboard::isKeyPressed(sf::Keyboard::A), sf::Keyboard::isKeyPressed(sf::Keyboard::S) - sf::Keyboard::isKeyPressed(sf::Keyboard::W));
 	m_xVel.x = (m_xVel.x * m_fPlayerspd * (float)p_xDtime.asSeconds());
 	m_xVel.y = (m_xVel.y * m_fPlayerspd * (float)p_xDtime.asSeconds());
-	//std::cout << m_xpBody->GetPosition().x << ": " << m_xpBody->GetPosition().y << std::endl;
 
-	setRotation( atan2f( (sf::Mouse::getPosition().y - m_xpWindow->getSize().y / 2 + m_xpWindow->getPosition().y), (sf::Mouse::getPosition().x - m_xpWindow->getSize().x / 2) ) * 180.f / 3.141592f + m_xpWindow->getPosition().x);
-	//setRotation( atan2f( (sf::Mouse::getPosition().x - 1280.f / 2), (sf::Mouse::getPosition().y - 720.f / 2 + m_xpWindow->getPosition().y) ) * 180.f / 3.141592f + m_xpWindow->getPosition().x);
+	//setRotation( atan2f( (sf::Mouse::getPosition().y - m_xpWindow->getSize().y / 2 + m_xpWindow->getPosition().y), (sf::Mouse::getPosition().x - m_xpWindow->getSize().x / 2) ) * 180.f / 3.141592f + m_xpWindow->getPosition().x);
+	float l_fRot = atan2f( (sf::Mouse::getPosition().x - 1280.f / 1 + m_xpWindow->getPosition().x), (sf::Mouse::getPosition().y - 720.f / 1 + m_xpWindow->getPosition().y) ) * 180.f / 3.141592f;
+
+	l_fRot+= 90;
+
+	setRotation(-l_fRot);
 
 	//m_xpAnimation[0]->setOrigin(m_xpAnimation[0]->getFrameSize().x/2, m_xpAnimation[0]->getFrameSize().y/2);
 	//m_xpAnimation[1]->setOrigin(m_xpAnimation[1]->getFrameSize().x/2, m_xpAnimation[1]->getFrameSize().y/2);
@@ -225,9 +227,9 @@ void PlayerObject::Update(sf::Time p_xDtime){
 	m_xpCrossbow->setPosition(getPosition());
 	m_xpCrossbow->setRotation(getRotation());
 	for (int i = 0; i < 2; i++){
-		m_xpPlayerArms[0]->setPosition(GetPosition());
-		m_xpPlayerArms[0]->setRotation(getRotation());
-		m_xpPlayerArms[0]->setArmsPosition(sf::Mouse::getPosition());
+		//m_xpPlayerArms[i]->setPosition(GetPosition());
+		m_xpPlayerArms[i]->setRotation(l_fRot);
+		m_xpPlayerArms[i]->setArmsPosition(sf::Mouse::getPosition(), l_fRot);
 	}
 
 	switch (m_eState){
@@ -252,6 +254,7 @@ void PlayerObject::Update(sf::Time p_xDtime){
 
 	//if (m_xpIMan->KeyIsDown(sf::Mouse::Button::Left) && m_fFiretime > (m_fFrate / m_fMaxrate) ){ //&& m_fFiretime > (m_fMaxrate / m_fFrate) && m_bOverheat == false
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && m_fFiretime > (m_fFrate / m_fMaxrate) ){ //&& m_fFiretime > (m_fMaxrate / m_fFrate) && m_bOverheat == false
+		m_fFiretime = 0;
 		if (GetTool() == Tool::Crossbow){
 
 			m_fFiretime = m_fFrate;
@@ -265,18 +268,19 @@ void PlayerObject::Update(sf::Time p_xDtime){
 	//if (m_xpIMan->KeyIsDown(sf::Mouse::Button::Right) && m_fFiretime > (m_fFrate / m_fMaxrate)){
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right) && m_fFiretime > (m_fFrate / m_fMaxrate)){
 		if( m_eTool == Tool::Melee ){
+			m_fFiretime = 0.125 * (m_fFrate / m_fMaxrate);
 			int s = rand() % 3;
 
 			m_xpPlayerArms[m_bPunchArm]->Punch();
-//			m_xpSPlayer->Play("Cymbal_Hit" + s);
+			//m_xpSPlayer->Play("Cymbal_Hit" + s);
 			m_bPunchArm = rand() % 2;
 
-			/*if (m_bPunchArm){
+			if (m_bPunchArm){
 				m_bPunchArm = false;
 			}
 			else if (!m_bPunchArm){
 				m_bPunchArm = true;
-			}*/
+			}
 		}
 		else {
 			setTool( Tool::Melee );
@@ -287,13 +291,12 @@ void PlayerObject::Update(sf::Time p_xDtime){
 }
 
 void PlayerObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	target.draw(*m_xpCurrentAnim, states);
+	target.draw(*m_xpPlayerArms[0], states);
+	target.draw(*m_xpPlayerArms[1], states);
 
-	if (m_eTool == Tool::Melee){
-		target.draw(*m_xpPlayerArms[0], states);
-		target.draw(*m_xpPlayerArms[1], states);
-	}
-	else if ( m_eTool == Tool::Crossbow){
+	if ( m_eTool == Tool::Crossbow){
 		target.draw(*m_xpCrossbow, states);
 	}
+	
+	target.draw(*m_xpCurrentAnim, states);
 }

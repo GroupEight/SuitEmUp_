@@ -1,6 +1,6 @@
 //Level.cpp//
 
-#include "Level_Wall.hpp"
+#include "Level.hpp"
 
 #include <sstream>
 #include <fstream>
@@ -13,6 +13,7 @@
 #include "TextureMan.h"
 
 #include "EnemyObject.hpp"
+#include "Hidden_Wall.hpp"
 #include "PlayerObject.h"
 
 Wall::Wall(sf::Vector2f p_xPos, float p_fAng, float p_fHe){
@@ -86,6 +87,32 @@ bool Level::LoadLevel(std::string p_sFile){
             }
 
 			m_xaWalls.push_back(new Wall(sf::Vector2f(l_fPosx, l_fPosy), l_fAng, l_fHe));
+
+            row = "";
+
+            continue;
+        }
+
+		// Hidden_Walls:
+        if (l_sType.compare("Hidden_Wall") == 0){
+
+            float l_fPosxA, l_fPosyA, l_fPosxB, l_fPosyB, l_fRot = 0.f, l_fDist = 0;
+
+            ss >> l_fPosxA;
+            ss >> l_fPosyA;
+
+			ss >> l_fPosxB;
+            ss >> l_fPosyB;
+
+            if (row.length() != 0){
+                ss >> l_fRot;
+            }
+
+			if (row.length() != 0){
+                ss >> l_fDist;
+            }
+
+			m_xaHWalls.push_back(new Hidden_Wall(sf::Vector2f(l_fPosxA, l_fPosyA), sf::Vector2f(l_fPosxB, l_fPosyB), l_fRot, l_fDist, m_xpPlayer, m_xpTexMan, m_xpCMan));
 
             row = "";
 
@@ -208,8 +235,6 @@ void Level::placeWallVertices(){
 	float wallHeight = 50.f;
 	int lastVertex = m_xCVertices.getVertexCount()-1;
 
-	cPos = m_xpPlayer->getPosition();
-
 	int q = 0;
 
 	for(int i = 0; i < m_xaWalls.size(); i++){
@@ -221,12 +246,12 @@ void Level::placeWallVertices(){
 		float camDistanceY = m_xCVertices[i].position.y - cPos.y;
 		
 		//ANGLE
-		if(i>0 && i<lastVertex){
+		if (i>0 && i<lastVertex){
 			angleBetweenPoints = (90.f * 3.141592 / 180) + atan2f( ( m_xCVertices[i+1].position.y - m_xCVertices[i-1].position.y ), ( m_xCVertices[i+1].position.x - m_xCVertices[i-1].position.x ) );
-		}else{
+		}
+		else {
 			angleBetweenPoints = (90.f * 3.141592 / 180);
 		}
-		
 
 		//POSITION
 		m_xWalls[q].position = sf::Vector2f( m_xCVertices[i].position.x, m_xCVertices[i].position.y );
@@ -238,10 +263,9 @@ void Level::placeWallVertices(){
 		//ROOF COLOR
 		m_xRoof[q].color = sf::Color::Black;
 		m_xRoof[q+1].color = sf::Color::Black;
-
 		
 		//TEX-COORDS
-		if(i>0){
+		if (i>0){
 			float _x = m_xCVertices[i-1].position.x - m_xCVertices[i].position.x;
 			float _y = m_xCVertices[i-1].position.y - m_xCVertices[i].position.y;
 			distanceBetweenPoints = sqrtf( ( _x * _x ) + ( _y * _y ) );
@@ -249,12 +273,11 @@ void Level::placeWallVertices(){
 			//Add the length of the new quad to the last texCoords to make sure that the textures isn't stretched/squashed.
 			m_xWalls[q].texCoords = sf::Vector2f( m_xWalls[q-1].texCoords.x + distanceBetweenPoints, m_xpTex->getSize().y );
 			m_xWalls[q+1].texCoords = sf::Vector2f( m_xWalls[q-1].texCoords.x + distanceBetweenPoints, 0 );
-		}else{
+		}
+		else {
 			m_xWalls[q].texCoords = sf::Vector2f( 0, m_xpTex->getSize().y );
 			m_xWalls[q+1].texCoords = sf::Vector2f( 0, 0 );
 		}
-		
-
 		q+=2;
 	}
 
@@ -262,8 +285,7 @@ void Level::placeWallVertices(){
 	/*m_xWalls[q-1].position = m_xWalls[q-2].position;
 	m_xWalls[q-1].texCoords = m_xWalls[q-2].texCoords;
 	m_xRoof[q-1].position = m_xRoof[q-2].position;
-	m_xRoof[q-1].color = sf::Color::Black;*/
-	
+	m_xRoof[q-1].color = sf::Color::Black;*/	
 }
 
 sf::Vector2f Level::getControlVertexPos( int index ){
@@ -271,14 +293,24 @@ sf::Vector2f Level::getControlVertexPos( int index ){
 }
 
 void Level::Update(sf::Time dt){
+	setCameraPos(m_xpPlayer->getPosition());
 	placeWallVertices();
+
+	for (int i = 0; i < m_xaHWalls.size(); i++){
+		m_xaHWalls[i]->SetCameraPos(cPos);
+		m_xaHWalls[i]->Update(dt);
+	}
 }
 
 void Level::setCameraPos( sf::Vector2f pos ){
 	cPos = pos;
 }
 
-void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const{
+void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	for (int i = 0; i < m_xaHWalls.size(); i++){
+		m_xaHWalls[i]->draw(target, states);
+	}
+
 	glEnable( GL_CULL_FACE );
 
 	states.texture = m_xpTex;

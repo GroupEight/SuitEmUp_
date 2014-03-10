@@ -236,8 +236,6 @@ void Game::Cleanup(){
 bool Game::UpdateDeltaTime(){
 	m_xDtime += m_xpClock->restart();
 
-	//std::cout << (float)m_xDtime.asMilliseconds() << std::endl;
-
 	if (m_xDtime >= m_xFps){
 		//m_xDtime = m_xFps;
 

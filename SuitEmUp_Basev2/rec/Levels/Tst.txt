@@ -2,6 +2,9 @@
 
 Player 0 0
 
+Hidden_Wall 0 550 600 450 90 300
+# Hidden_Wall 0 0 90 300
+
 Wall 0 550
 Wall 500 550
 Wall 600 450
