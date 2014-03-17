@@ -66,11 +66,11 @@ bool SceneNode::GetIsShowing(){
 }
 
 bool SceneNode::OnScreen(sf::RenderWindow *p_xpWindow){
-	if (getPosition().x < p_xpWindow->getView().getCenter().x - p_xpWindow->getView().getSize().x / 2 && getPosition().x > p_xpWindow->getView().getCenter().x + p_xpWindow->getView().getSize().x / 2){
-		return true;
+	if (getPosition().x - p_xpWindow->getView().getCenter().x < p_xpWindow->getView().getSize().x / 2 && getPosition().x - p_xpWindow->getView().getCenter().x > -p_xpWindow->getView().getSize().x / 2){
+		 if (getPosition().y - p_xpWindow->getView().getCenter().y < p_xpWindow->getView().getSize().y / 2 && getPosition().y - p_xpWindow->getView().getCenter().y > -p_xpWindow->getView().getSize().y / 2){
+			 return true;
+		 }
 	}
-	else if (getPosition().y < p_xpWindow->getView().getCenter().y -p_xpWindow->getView().getSize().y / 2 && getPosition().y > p_xpWindow->getView().getCenter().y + p_xpWindow->getView().getSize().y / 2){
-		return true;
-	}
+
 	return false;
 }

@@ -20,7 +20,7 @@ public:
 	};
 
 public:
-	EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan, float p_fAggroRange, float p_fAttackRange, sf::Vector2f p_xStartpos, PlayerObject *p_xpPlayer);
+	EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan, int p_iHp, float p_fPow, float p_fAggroRange, sf::Vector2f p_xStartpos, PlayerObject *p_xpPlayer);
 
 	virtual void Update(sf::Time p_xDtime);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

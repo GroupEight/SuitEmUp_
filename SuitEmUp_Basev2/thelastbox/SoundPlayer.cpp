@@ -61,7 +61,7 @@ sf::Sound *SoundPlayer::Load(std::string p_sFname, std::string p_sCname){
 }
 
 void SoundPlayer::Play(std::string p_sCname){
-	RemoveStoppedSounds();
+	//RemoveStoppedSounds();
 	Play(p_sCname, GetListenerPosition());
 }
 

@@ -15,11 +15,22 @@ class PlayerObject;
 
 class Wall {
 public:
-	Wall(sf::Vector2f p_xPos, float p_fAng = 0, float p_fHe = 0);
+	Wall(sf::Vector2f p_xPos, float p_fAng, float p_fHe);
 
 	sf::Vector2f m_xPos;
 
 	float m_fAng, m_fHe;
+};
+
+class Darkness {
+public:
+	Darkness(sf::Vector2f p_xPos, sf::Vector2f p_xSize, float p_fRot, PlayerObject *p_xpPlayer);
+
+	sf::RectangleShape m_xRect;
+
+	PlayerObject *m_xpPlayer;
+
+	bool Update();
 };
 
 class Level : public SceneNode {
@@ -49,6 +60,7 @@ private:
 
 	std::vector<Wall*> m_xaWalls;
 	std::vector<Hidden_Wall*> m_xaHWalls;
+	std::vector<Darkness*> m_xaDarkness;
 
 	CollisionMan *m_xpCMan;
 	NodeMan *m_xpEnemyMan;

@@ -95,6 +95,7 @@
     <ClInclude Include="FontMan.h" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="HUD.h" />
     <ClInclude Include="NodeMan.h" />
     <ClInclude Include="Ground.hpp" />
     <ClInclude Include="Ground_Bump.hpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="GameObject.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="NodeMan.cpp" />
     <ClCompile Include="Ground.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>

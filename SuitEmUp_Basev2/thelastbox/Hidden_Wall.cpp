@@ -7,7 +7,7 @@
 #include "CollisionMan.h"
 #include "TextureMan.h"
 
-Hidden_Wall::Hidden_Wall(sf::Vector2f p_xPosA, sf::Vector2f p_xPosB, float p_fRot, float p_fWallDist, PlayerObject *p_xpPlayer, TextureMan *p_xpTextMan, CollisionMan *p_xpCMan)
+Hidden_Wall::Hidden_Wall(sf::Vector2f p_xPos, float p_fRot, float p_fWallDist, PlayerObject *p_xpPlayer, TextureMan *p_xpTextMan, CollisionMan *p_xpCMan)
 : mWalls( sf::TrianglesStrip, 300 )
 , mRope1( sf::TrianglesStrip, 4 )
 , mRope2( sf::TrianglesStrip, 4 )
@@ -45,11 +45,10 @@ Hidden_Wall::Hidden_Wall(sf::Vector2f p_xPosA, sf::Vector2f p_xPosB, float p_fRo
 	//mBBody->CreateFixture(&mBFixtureDef);
 
 	//setPosition(sf::Vector2f(p_xPos.x, p_xPos.y));
-	m_xPosA = p_xPosA;
-	m_xPosB = p_xPosB;
-	mWalls[0].position = p_xPosA;
-	mWalls[202].position = p_xPosB;
+	setPosition(p_xPos);
 	setRotation(p_fRot);
+
+	m_fWallDist = p_fWallDist;
 }
 
 void Hidden_Wall::PlaceWallVertices(){
@@ -60,7 +59,7 @@ void Hidden_Wall::PlaceWallVertices(){
 
 	int q = 0;
 
-	/*int l_iWall = sqrt((m_xPosA.x - m_xPosB.x) * (m_xPosA.x - m_xPosB.x) + (m_xPosA.y - m_xPosB.y) * (m_xPosA.y - m_xPosB.y));
+	/*int l_iWall = sqrtf((m_xPosA.x - m_xPosB.x) * (m_xPosA.x - m_xPosB.x) + (m_xPosA.y - m_xPosB.y) * (m_xPosA.y - m_xPosB.y));
 
 	for (int i = 0; i < l_iWall; i++){
 		mWalls[i].position = sf::Vector2f(0, 0);
@@ -176,17 +175,19 @@ void Hidden_Wall::SetCameraPos( sf::Vector2f pos ){
 	cPos = pos;
 }
 
-void Hidden_Wall::draw(sf::RenderTarget& target, sf::RenderStates states) const{
-	//glEnable( GL_CULL_FACE );
+void Hidden_Wall::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	states.transform*= getTransform();
 
 	states.texture = m_xpRTex;
 	target.draw( mRope2, states );
 
+	glEnable( GL_CULL_FACE );
+
 	states.texture = m_xpTex;
 	target.draw( mWalls, states );
 
+	glDisable( GL_CULL_FACE );
+
 	states.texture = m_xpRTex;
 	target.draw( mRope1, states );
-
-	//glDisable( GL_CULL_FACE );
 }

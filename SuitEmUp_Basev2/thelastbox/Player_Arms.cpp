@@ -19,7 +19,7 @@ Player_Arms::Player_Arms(TextureMan *p_xpTextMan, int p_iArmDir, PlayerObject *p
 
 	std::cout << getOrigin().x << getOrigin().y << std::endl;
 	//setOrigin(m_xpPlayer->getPosition().x - getPosition().x, m_xpPlayer->getPosition().y - getPosition().y);
-	setOrigin(5, 5);
+	setOrigin(0, 10);
 	std::cout << getOrigin().x << getOrigin().y << std::endl;
 
 	m_bPunching = false;
@@ -90,7 +90,7 @@ void Player_Arms::setArmsPosition(sf::Vector2i armLength, float p_fRot){
 
 		m_xpGlove->setPosition( x, y );
 		//m_xpGlove->setRotation( -90 + a * 180 / 3.141592 );
-		m_xpGlove->setRotation(p_fRot);
+		//m_xpGlove->setRotation(p_fRot);
 	}
 }
 

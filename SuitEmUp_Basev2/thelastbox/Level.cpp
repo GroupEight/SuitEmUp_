@@ -23,6 +23,23 @@ Wall::Wall(sf::Vector2f p_xPos, float p_fAng, float p_fHe){
 	m_fHe = p_fHe;
 }
 
+Darkness::Darkness(sf::Vector2f p_xPos, sf::Vector2f p_xSize, float p_fRot, PlayerObject *p_xpPlayer){
+	m_xRect.setPosition(p_xPos);
+	m_xRect.setSize(p_xSize);
+	m_xRect.setFillColor(sf::Color::Black);
+
+	m_xpPlayer = p_xpPlayer;
+}
+
+bool Darkness::Update(){
+	if (m_xpPlayer->getPosition().x > m_xRect.getPosition().x && m_xpPlayer->getPosition().x  < m_xRect.getPosition().x + m_xRect.getSize().x){
+		if (m_xpPlayer->getPosition().y > m_xRect.getPosition().y && m_xpPlayer->getPosition().y < m_xRect.getPosition().y + m_xRect.getSize().y){
+			return true;
+		}
+	}
+	return false;
+}
+
 Level::Level(std::string p_sDir, TextureMan *p_xpTextMan, CollisionMan *p_xpCMan, NodeMan *p_xpEnemyMan, PlayerObject *p_xpPlayer)
 : mParallax( 0.2 ){
 	m_xpPlayer = p_xpPlayer;
@@ -96,13 +113,10 @@ bool Level::LoadLevel(std::string p_sFile){
 		// Hidden_Walls:
         if (l_sType.compare("Hidden_Wall") == 0){
 
-            float l_fPosxA, l_fPosyA, l_fPosxB, l_fPosyB, l_fRot = 0.f, l_fDist = 0;
+            float l_fPosx, l_fPosy, l_fRot, l_fDist;
 
-            ss >> l_fPosxA;
-            ss >> l_fPosyA;
-
-			ss >> l_fPosxB;
-            ss >> l_fPosyB;
+            ss >> l_fPosx;
+            ss >> l_fPosy;
 
             if (row.length() != 0){
                 ss >> l_fRot;
@@ -112,7 +126,28 @@ bool Level::LoadLevel(std::string p_sFile){
                 ss >> l_fDist;
             }
 
-			m_xaHWalls.push_back(new Hidden_Wall(sf::Vector2f(l_fPosxA, l_fPosyA), sf::Vector2f(l_fPosxB, l_fPosyB), l_fRot, l_fDist, m_xpPlayer, m_xpTexMan, m_xpCMan));
+			m_xaHWalls.push_back(new Hidden_Wall(sf::Vector2f(l_fPosx, l_fPosy), l_fRot, l_fDist, m_xpPlayer, m_xpTexMan, m_xpCMan));
+			//m_xaHWalls[m_xaHWalls.size() - 1]->setPosition(sf::Vector2f(l_fPosxA, l_fPosyA));
+
+            row = "";
+
+            continue;
+        }
+
+		// Darkness
+		if (l_sType.compare("Darkness") == 0){
+
+            float l_fPosx, l_fPosy, l_fHe, l_fWi, l_fRot;
+
+            ss >> l_fPosx;
+            ss >> l_fPosy;
+
+			ss >> l_fWi;
+			ss >> l_fHe;
+
+			ss >> l_fRot;
+
+			m_xaDarkness.push_back(new Darkness(sf::Vector2f(l_fPosx, l_fPosy), sf::Vector2f(l_fWi, l_fHe), l_fRot, m_xpPlayer));
 
             row = "";
 
@@ -131,7 +166,7 @@ bool Level::LoadLevel(std::string p_sFile){
 			ss >> l_fAtk;
 			ss >> l_iType;
 
-            m_xpEnemyMan->Add(new EnemyObject(m_xpCMan, m_xpTexMan, 40.f, 10.f, sf::Vector2f(l_fPosx, l_fPosy), m_xpPlayer));
+			m_xpEnemyMan->Add(new EnemyObject(m_xpCMan, m_xpTexMan, 5, l_fAggro, l_fAtk, sf::Vector2f(l_fPosx, l_fPosy), m_xpPlayer));
 
             row = "";
 
@@ -300,6 +335,15 @@ void Level::Update(sf::Time dt){
 		m_xaHWalls[i]->SetCameraPos(cPos);
 		m_xaHWalls[i]->Update(dt);
 	}
+
+	for (int i = m_xaDarkness.size() - 1; i >= 0; i--){
+		if (m_xaDarkness[i] != NULL){
+			if (m_xaDarkness[i]->Update()){
+				delete m_xaDarkness[i];
+				m_xaDarkness[i] = NULL;
+			}
+		}
+	}
 }
 
 void Level::setCameraPos( sf::Vector2f pos ){
@@ -307,10 +351,6 @@ void Level::setCameraPos( sf::Vector2f pos ){
 }
 
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	for (int i = 0; i < m_xaHWalls.size(); i++){
-		m_xaHWalls[i]->draw(target, states);
-	}
-
 	glEnable( GL_CULL_FACE );
 
 	states.texture = m_xpTex;
@@ -320,4 +360,14 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 	states.texture = nullptr;
 	target.draw( m_xRoof, states );
+
+	for (int i = 0; i < m_xaDarkness.size(); i++){
+		if (m_xaDarkness[i] != NULL){
+			target.draw(m_xaDarkness[i]->m_xRect);
+		}
+	}
+
+	for (int i = 0; i < m_xaHWalls.size(); i++){
+		m_xaHWalls[i]->draw(target, states);
+	}
 }

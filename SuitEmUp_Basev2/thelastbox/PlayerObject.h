@@ -35,6 +35,8 @@ public:
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	void Damage(float p_fDmg);
+
 	void setState(PlayerObject::State state);
 	void setTool(PlayerObject::Tool tool);
 
@@ -68,7 +70,8 @@ private:
 
 	Player_Arms *m_xpPlayerArms[2];
 
-	bool m_bPunchArm;
+	bool m_bPunchArm,
+		m_bOverheat;
 	
 	float m_fBulletspd,
 		m_fPlayerspd,
@@ -79,9 +82,8 @@ private:
 		m_fHeatup,
 		m_fCooldown,
 		m_fMaxheat,
-		m_fMinheat;
-
-	bool m_bOverheat;
+		m_fMinheat,
+		m_fSuit;
 
 	sf::Texture *m_xpIdleTex, 
 		*m_xpRunTex, 
