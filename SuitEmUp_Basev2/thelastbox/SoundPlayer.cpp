@@ -30,8 +30,6 @@
 SoundPlayer::SoundPlayer(std::string p_sDir){
 	m_sDir = p_sDir;
 
-	m_xpSoundBuffers = new sf::SoundBuffer;
-
 	m_fListenerZ = 300.f;
 	m_fAttenuation = 8.f;
 	m_fMinDistance2D = 200.f;
@@ -42,46 +40,58 @@ std::vector<SPair*> SoundPlayer::GetVector(){
 	return m_xpaSfx;
 }
 
-sf::Sound *SoundPlayer::Load(std::string p_sFname, std::string p_sCname){
-	sf::SoundBuffer l_xSoundBuffer;
+void *SoundPlayer::Load(std::string p_sFname, std::string p_sCname){
+	sf::SoundBuffer *l_xpSoundBuffer = new sf::SoundBuffer;
 	SPair *l_xpPair = new SPair;
 
-	if (!l_xSoundBuffer.loadFromFile(m_sDir + p_sFname)){
+	if (!l_xpSoundBuffer->loadFromFile(m_sDir + p_sFname)){
 		return NULL;
 	}
 
-	l_xpPair->Param0 = new sf::Sound;
-	l_xpPair->Param0->setBuffer(l_xSoundBuffer);
+	l_xpPair->Param0 = l_xpSoundBuffer;
 
 	l_xpPair->Param1 = p_sCname;
 	
 	m_xpaSfx.push_back(l_xpPair);
-
-	return l_xpPair->Param0;
 }
 
 void SoundPlayer::Play(std::string p_sCname){
 	RemoveStoppedSounds();
+
 	Play(p_sCname, GetListenerPosition());
 }
 
 void SoundPlayer::Play(std::string p_sCname, sf::Vector2f p_xPos){
 	for (int i = 0; i < m_xpaSfx.size(); i++){
 		if (m_xpaSfx[i]->Param1.compare(p_sCname) == 0){
-			m_xpaSfx[i]->Param0->setPosition(p_xPos.x, -p_xPos.y, 0.f);
-			m_xpaSfx[i]->Param0->setAttenuation(m_fAttenuation);
-			m_xpaSfx[i]->Param0->setMinDistance(m_fMinDistance3D);
-			m_xpaSfx[i]->Param0->play();
-			return;
+			sf::Sound *l_xpSound = new sf::Sound(*m_xpaSfx[i]->Param0);
+
+			l_xpSound->setPosition(p_xPos.x, -p_xPos.y, 0.f);
+			l_xpSound->setAttenuation(m_fAttenuation);
+			l_xpSound->setMinDistance(m_fMinDistance3D);
+			
+			l_xpSound->play();
+
+			m_xpaSounds.push_back(l_xpSound);
 		}
 	}
 }
 
 void SoundPlayer::RemoveStoppedSounds(){
-	/*m_xpaSfx[0]->Param0->remove_if([] (const sf::Sound& s)
-	{
+	//m_xpaSfx[0]->Param0->remove_if([] (const sf::Sound& s)
+	/*{
 		return s.getStatus() == sf::Sound::Stopped;
 	});*/
+
+	//for (int i = m_xpaSounds.size() - 1; i >= 0; i--){
+	for (int i = 0; i < m_xpaSounds.size(); i++){
+		if (m_xpaSounds[i] != NULL){
+			if (m_xpaSounds[i]->getStatus() == sf::Sound::Stopped){
+				delete m_xpaSounds[i];
+				m_xpaSounds[i] = NULL;
+			}
+		}
+	}
 }
 
 void SoundPlayer::SetListenerPosition(sf::Vector2f p_xPos){

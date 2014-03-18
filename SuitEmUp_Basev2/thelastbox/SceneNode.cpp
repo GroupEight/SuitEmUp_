@@ -13,8 +13,8 @@ SceneNode::~SceneNode(){
 
 }
 
-void SceneNode::Update(sf::Time dt){
-	// Empty...
+bool SceneNode::Update(sf::Time dt){
+	return false;
 }
 
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const{
@@ -28,14 +28,13 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const{
 	}*/
 }
 
-void SceneNode::Overlap(PlayerBullet *p_xpPBullet, EnemyObject *p_xpEnemy) {
+bool SceneNode::Overlap(sf::Vector2f position, float p_fRadius){
 
-	m_xpPBullet = p_xpPBullet;
-	m_xpEnemy = p_xpEnemy;
+	if (sqrt(pow(position.x - getPosition().x, 2) + pow(position.y - getPosition().y, 2)) <= m_fRadius + p_fRadius){
+		return true;
+	}
 
-	if (sqrt(pow(m_xpEnemy->getPosition().x - m_xpPBullet->getPosition().x, 2) + pow(m_xpEnemy->getPosition().y - m_xpPBullet->getPosition().y, 2)) <= m_xpEnemy->getRadius() + m_xpPBullet->getRadius())
-	{
-}
+	return false;
 }
 
 sf::Vector2f SceneNode::getWorldPosition() const {
@@ -66,11 +65,14 @@ bool SceneNode::GetIsShowing(){
 }
 
 bool SceneNode::OnScreen(sf::RenderWindow *p_xpWindow){
-	if (m_xPos.x > p_xpWindow->getView().getCenter().x - p_xpWindow->getView().getSize().x / 2 && m_xPos.x < p_xpWindow->getView().getCenter().x + p_xpWindow->getView().getSize().x / 2){
-		return true;
-	}
-	else if (m_xPos.y > p_xpWindow->getView().getCenter().y -p_xpWindow->getView().getSize().y / 2 && m_xPos.y < p_xpWindow->getView().getCenter().y + p_xpWindow->getView().getSize().y / 2){
-		return true;
+	if (getPosition().x - p_xpWindow->getView().getCenter().x < p_xpWindow->getView().getSize().x / 2 && getPosition().x - p_xpWindow->getView().getCenter().x > -p_xpWindow->getView().getSize().x / 2){
+		if (getPosition().y - p_xpWindow->getView().getCenter().y < p_xpWindow->getView().getSize().y / 2 && getPosition().y - p_xpWindow->getView().getCenter().y > -p_xpWindow->getView().getSize().y / 2){
+			return true;
+		}
 	}
 	return false;
+}
+
+float SceneNode::getRadius(){
+	return m_fRadius;
 }

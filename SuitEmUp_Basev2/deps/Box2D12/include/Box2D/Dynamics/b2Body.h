@@ -166,7 +166,7 @@ public:
 
 	/// Get the world body origin position.
 	/// @return the world position of the body's origin.
-	 b2Vec2& GetPosition() ;
+	b2Vec2& GetPosition();
 
 	/// Get the angle in radians.
 	/// @return the current world rotation angle in radians.

@@ -14,6 +14,11 @@ public:
 
 	bool Punch();
 
+	bool m_bPunching;
+	bool m_bApex;
+
+	sf::Sprite *m_xpGlove;
+
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
@@ -26,11 +31,9 @@ private:
 
 	float GetPt( int n1 , int n2 , float perc );
 
-	bool m_bPunching;
-
 	sf::VertexArray m_xControlVertices,
 		m_xArms;
 
 	sf::Texture *m_xpGloveTex;
-	sf::Sprite *m_xpGlove;
+	
 };

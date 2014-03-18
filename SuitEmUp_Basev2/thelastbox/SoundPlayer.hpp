@@ -3,7 +3,7 @@
 #include <vector>
 
 struct SPair {
-	sf::Sound *Param0;
+	sf::SoundBuffer *Param0;
 	std::string Param1;
 };
 
@@ -13,7 +13,7 @@ public:
 
 	std::vector<SPair*> GetVector();
 
-	sf::Sound *Load(std::string p_sFname, std::string p_sCname = "");
+	void *Load(std::string p_sFname, std::string p_sCname = "");
 
 	void Play(std::string p_sCname);
 	void Play(std::string p_sCname, sf::Vector2f p_xPos);
@@ -27,7 +27,7 @@ public:
 private:
 	std::vector<SPair*> m_xpaSfx;
 
-	sf::SoundBuffer *m_xpSoundBuffers;
+	std::vector<sf::Sound*> m_xpaSounds;
 
 	std::string m_sDir;
 

@@ -86,8 +86,8 @@ bool Menu_Button::isWithinLocalBounds(){
 	return false;
 }
 
-void Menu_Button::Update(sf::Time p_xDtime){
-
+bool Menu_Button::Update(sf::Time p_xDtime){
+	return false;
 }
 
 void Menu_Button::draw(sf::RenderTarget& target, sf::RenderStates states) const {

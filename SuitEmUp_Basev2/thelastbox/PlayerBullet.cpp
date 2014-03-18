@@ -16,6 +16,8 @@ PlayerBullet::PlayerBullet(TextureMan *p_xpTextureMan, sf::Vector2f p_xPos, floa
 	
 	//m_xpEnemyMan = p_xpEnemyMan;
 
+	m_fRadius = 5.f;
+
 	m_xpTex = m_xpTextureMan->Get("Player_Bullet");
 	m_xpTex->setSmooth(true);
 
@@ -26,7 +28,7 @@ PlayerBullet::PlayerBullet(TextureMan *p_xpTextureMan, sf::Vector2f p_xPos, floa
 
 	setPosition(p_xPos);
 
-	m_fSpd = 10.0f;
+	m_fSpd = 15.0f;
 
 	//m_xpSprite->setOrigin( 2.f, 2.f );
 	m_xpSprite->setScale(1.1,1.1);
@@ -39,10 +41,10 @@ PlayerBullet::PlayerBullet(TextureMan *p_xpTextureMan, sf::Vector2f p_xPos, floa
 }
 
 PlayerBullet::~PlayerBullet(){
-
+	std::cout << "deleted!";
 }
 
-void PlayerBullet::Update(sf::Time p_xDtime){
+bool PlayerBullet::Update(sf::Time p_xDtime){
 	m_xpSprite->setRotation(getRotation() + 90 );
 
 	move(m_xVel);
@@ -50,11 +52,8 @@ void PlayerBullet::Update(sf::Time p_xDtime){
 	//setPosition(getPosition());
 	
 	m_xpSprite->setPosition(getPosition());
-	
-	/*for (int i = 0; i < m_xpEnemyMan->GetVector().size(); i++) {
 
-	}*/
-
+	return false;
 }
 
 void PlayerBullet::draw(sf::RenderTarget& target, sf::RenderStates states) const {

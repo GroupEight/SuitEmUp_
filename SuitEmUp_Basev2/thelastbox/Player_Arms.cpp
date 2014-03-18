@@ -13,7 +13,12 @@ Player_Arms::Player_Arms(TextureMan *p_xpTextMan, int p_iArmDir)
 	m_xpGlove = new sf::Sprite(*m_xpGloveTex);
 	m_xpGlove->setOrigin( m_xpGlove->getLocalBounds().width / 2.f, m_xpGlove->getLocalBounds().height / 2.f );
 
+	if(m_iArmDir == 1){
+		m_xpGlove->setScale( 1.f, -1.f );
+	}
+
 	m_bPunching = false;
+	m_bApex = false;
 
 	m_fPunchLength = 0;
 	m_fPunchInterp = 0;
@@ -25,7 +30,14 @@ void Player_Arms::setArmsPosition(sf::Vector2f armLength){
 		m_fPunchLength = sinf( m_fPunchInterp * 3.141592 / 180 );
 		m_fPunchInterp += 15.f; //Degrees
 
+		if(m_fPunchInterp > 85.f && m_fPunchInterp < 100.f){
+			m_bApex=true;
+		}else{
+			m_bApex=false;
+		}
+
 		if(m_fPunchInterp > 180.f){
+			std::cout << m_bPunching << std::endl;
 			m_bPunching = false;
 			m_fPunchLength = 0.f;
 			m_fPunchInterp = 0.f;
@@ -40,7 +52,7 @@ void Player_Arms::setArmsPosition(sf::Vector2f armLength){
 	int q = 0;
 	float lastX = 0;
 	float lastY = 0;
-	float armWidth = 6.f;
+	float armWidth = 8.f;
 
 	for (float t = 0 ; t < 1 ; t += 0.05){
 		// The interpolation Line
@@ -91,6 +103,8 @@ void Player_Arms::UpdateCurrent(sf::Time p_xDtime){
 }
 
 void Player_Arms::draw(sf::RenderTarget& target, sf::RenderStates states) const{
+	states.transform *= getTransform();
+
 	target.draw( m_xArms, states );
 	target.draw( *m_xpGlove, states );
 }

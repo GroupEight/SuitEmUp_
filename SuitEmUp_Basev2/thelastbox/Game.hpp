@@ -12,6 +12,7 @@ class TextureMan;
 class CursorObject;
 class Ground;
 class PlayerObject;
+class Star;
 
 class Gamestate;
 class Menustate;
@@ -25,7 +26,6 @@ public:
 	void Run();
 	void Cleanup();
 
-private:
 	bool UpdateDeltaTime();
 	void UpdEvents();
 
@@ -35,7 +35,6 @@ private:
 	void processEvents();
 	void render();	
 
-private:
 	static const sf::Time TimePerFrame;
 
 		/*sf::RenderWindow mWindow;
@@ -68,6 +67,10 @@ private:
 
 	NodeMan *m_xpPBulletman;
 	NodeMan *m_xpEBulletman;
+	NodeMan *m_xpStarMan;
+	NodeMan *m_xpEnemyMan;
+
+	Star *m_xpStar;
 
 	CursorObject *m_xpCursor;
 	Ground *m_xpGround;

@@ -20,7 +20,7 @@ public:
 public:
 	Menu_Button(TextureMan *p_xpTextMan, FontMan *p_xpFontMan, sf::RenderWindow *p_xpWindow, SoundPlayer *p_xpSPlayer, float p_fWidth, std::string p_sText, float p_fX, float p_fY);
 
-	virtual void Update(sf::Time p_xDtime);
+	virtual bool Update(sf::Time p_xDtime);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	bool isWithinLocalBounds();

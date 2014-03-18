@@ -33,7 +33,7 @@ Ground::Ground(TextureMan *p_xpTextMan, sf::Vector2f size, PlayerObject *p_xpPla
 	m_xVertArray[i+3].texCoords = sf::Vector2f( m_fHeight, m_fWidth );
 }
 
-void Ground::Update(sf::Time dt){
+bool Ground::Update(sf::Time dt){
 	float t = 2.f;
 	sf::Vector2f l_xPos = sf::Vector2f(m_xpWindow->getView().getCenter());
 	sf::Vector2f p_xOffset = sf::Vector2f(m_xpPlayer->getPosition().x / t, m_xpPlayer->getPosition().y / t);
@@ -48,6 +48,8 @@ void Ground::Update(sf::Time dt){
 	m_xVertArray[i+1].texCoords = sf::Vector2f( 0, 0 ) - p_xOffset;
 	m_xVertArray[i+2].texCoords = sf::Vector2f( -m_fWidth, 0 ) - p_xOffset;
 	m_xVertArray[i+3].texCoords = sf::Vector2f( -m_fWidth, m_fHeight ) - p_xOffset;
+
+	return false;
 }
 
 void Ground::draw(sf::RenderTarget& target, sf::RenderStates states) const {

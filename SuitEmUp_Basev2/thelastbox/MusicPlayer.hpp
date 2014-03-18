@@ -11,13 +11,13 @@
 #include <vector>
 
 struct MPair {
-	sf::Music *Param0;
+	std::string Param0;
 	std::string Param1;
 };
 
 class MusicPlayer : private sf::NonCopyable {
 public:
-	MusicPlayer();
+	MusicPlayer(std::string p_sDir);
 
 	void Play(std::string p_sCname);
 	void Stop();
@@ -25,10 +25,9 @@ public:
 	void SetPaused(bool p_bPaused);
 	void SetVolume(float p_fVolume);
 
+	void Load(std::string p_sFname, std::string p_sCname);
 
 private:
-	std::vector<MPair*> m_xpaSfx;
-
 	sf::SoundBuffer *m_xpSoundBuffers;
 
 	std::string m_sDir;
