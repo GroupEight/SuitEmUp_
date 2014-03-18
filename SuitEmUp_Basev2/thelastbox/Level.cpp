@@ -1,6 +1,6 @@
 //Level.cpp//
 
-#include "Level_Wall.hpp"
+#include "Level.hpp"
 
 #include <sstream>
 #include <fstream>
@@ -13,9 +13,13 @@
 #include "TextureMan.h"
 
 #include "EnemyObject.hpp"
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.cpp
 #include "Goal.h"
 #include "Hidden_Wall.hpp"
 #include "Morker.h"
+=======
+#include "Hidden_Wall.hpp"
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.cpp
 #include "PlayerObject.h"
 
 Wall::Wall(sf::Vector2f p_xPos, float p_fAng, float p_fHe){
@@ -26,6 +30,7 @@ Wall::Wall(sf::Vector2f p_xPos, float p_fAng, float p_fHe){
 }
 
 Darkness::Darkness(sf::Vector2f p_xPos, sf::Vector2f p_xSize, float p_fRot, PlayerObject *p_xpPlayer){
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.cpp
  m_xRect.setPosition(p_xPos);
  m_xRect.setSize(p_xSize);
  m_xRect.setFillColor(sf::Color::Black);
@@ -43,6 +48,25 @@ bool Darkness::Update(){
 }
 
 Level::Level(std::string p_sDir, SoundPlayer *p_xpSPlayer, TextureMan *p_xpTextMan, CollisionMan *p_xpCMan, NodeMan *p_xpEnemyMan, NodeMan *p_xpEBulletMan, NodeMan *p_xpStarman, PlayerObject *p_xpPlayer)
+=======
+	m_xRect.setPosition(p_xPos);
+	m_xRect.setSize(p_xSize);
+	m_xRect.setFillColor(sf::Color::Black);
+
+	m_xpPlayer = p_xpPlayer;
+}
+
+bool Darkness::Update(){
+	if (m_xpPlayer->getPosition().x > m_xRect.getPosition().x && m_xpPlayer->getPosition().x  < m_xRect.getPosition().x + m_xRect.getSize().x){
+		if (m_xpPlayer->getPosition().y > m_xRect.getPosition().y && m_xpPlayer->getPosition().y < m_xRect.getPosition().y + m_xRect.getSize().y){
+			return true;
+		}
+	}
+	return false;
+}
+
+Level::Level(std::string p_sDir, TextureMan *p_xpTextMan, CollisionMan *p_xpCMan, NodeMan *p_xpEnemyMan, PlayerObject *p_xpPlayer)
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.cpp
 : mParallax( 0.2 ){
  m_xpPlayer = p_xpPlayer;
  m_sDir = p_sDir;
@@ -161,6 +185,50 @@ bool Level::LoadLevel(std::string p_sFile){
             continue;
         }
 
+		// Hidden_Walls:
+        if (l_sType.compare("Hidden_Wall") == 0){
+
+            float l_fPosx, l_fPosy, l_fRot, l_fDist;
+
+            ss >> l_fPosx;
+            ss >> l_fPosy;
+
+            if (row.length() != 0){
+                ss >> l_fRot;
+            }
+
+			if (row.length() != 0){
+                ss >> l_fDist;
+            }
+
+			m_xaHWalls.push_back(new Hidden_Wall(sf::Vector2f(l_fPosx, l_fPosy), l_fRot, l_fDist, m_xpPlayer, m_xpTexMan, m_xpCMan));
+			//m_xaHWalls[m_xaHWalls.size() - 1]->setPosition(sf::Vector2f(l_fPosxA, l_fPosyA));
+
+            row = "";
+
+            continue;
+        }
+
+		// Darkness
+		if (l_sType.compare("Darkness") == 0){
+
+            float l_fPosx, l_fPosy, l_fHe, l_fWi, l_fRot;
+
+            ss >> l_fPosx;
+            ss >> l_fPosy;
+
+			ss >> l_fWi;
+			ss >> l_fHe;
+
+			ss >> l_fRot;
+
+			m_xaDarkness.push_back(new Darkness(sf::Vector2f(l_fPosx, l_fPosy), sf::Vector2f(l_fWi, l_fHe), l_fRot, m_xpPlayer));
+
+            row = "";
+
+            continue;
+        }
+
         // Enemy:
         if (l_sType.compare("Enemy_W") == 0){
             float l_fPosx, l_fPosy, l_fAggro, l_fAtk, l_fRot;
@@ -190,9 +258,14 @@ bool Level::LoadLevel(std::string p_sFile){
 			ss >> l_fAggro;
 			ss >> l_fAtk;
 			ss >> l_iType;
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.cpp
 			ss >> l_fRot;
 			
 			m_xpEnemyMan->Add(new Morker(m_xpCMan, m_xpTexMan, l_fAggro, l_fAtk, sf::Vector2f(l_fPosx, l_fPosy), m_xpPlayer, m_xpEBulletMan, m_xpStarman, m_xpSPlayer, l_fRot));
+=======
+
+			m_xpEnemyMan->Add(new EnemyObject(m_xpCMan, m_xpTexMan, 5, l_fAggro, l_fAtk, sf::Vector2f(l_fPosx, l_fPosy), m_xpPlayer));
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.cpp
 
             row = "";
 
@@ -314,6 +387,7 @@ void Level::MakeWalls(){
 }*/
 
 void Level::placeWallVertices(){
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.cpp
  float angleBetweenPoints = 0;
  float distanceBetweenPoints = 0;
  float wallHeight = 50.f;
@@ -370,21 +444,90 @@ void Level::placeWallVertices(){
  m_xWalls[q-1].texCoords = m_xWalls[q-2].texCoords;
  m_xRoof[q-1].position = m_xRoof[q-2].position;
  m_xRoof[q-1].color = sf::Color::Black;*/ 
+=======
+	float angleBetweenPoints = 0;
+	float distanceBetweenPoints = 0;
+	float wallHeight = 50.f;
+	int lastVertex = m_xCVertices.getVertexCount()-1;
+
+	int q = 0;
+
+	for(int i = 0; i < m_xaWalls.size(); i++){
+		float offsetAngle = m_xCVertexSpec[i].position.x * 3.141592 / 180;
+		float offsetHeight = m_xCVertexSpec[i].position.y;
+
+		//float camDistance = sqrt( ( (m_xCVertices[i].position.x - cPos.x) * (m_xCVertices[i].position.x - cPos.x) ) + ( (m_xCVertices[i].position.y - cPos.y) * (m_xCVertices[i].position.y - cPos.y) ) );
+		float camDistanceX = m_xCVertices[i].position.x - cPos.x;
+		float camDistanceY = m_xCVertices[i].position.y - cPos.y;
+		
+		//ANGLE
+		if (i>0 && i<lastVertex){
+			angleBetweenPoints = (90.f * 3.141592 / 180) + atan2f( ( m_xCVertices[i+1].position.y - m_xCVertices[i-1].position.y ), ( m_xCVertices[i+1].position.x - m_xCVertices[i-1].position.x ) );
+		}
+		else {
+			angleBetweenPoints = (90.f * 3.141592 / 180);
+		}
+
+		//POSITION
+		m_xWalls[q].position = sf::Vector2f( m_xCVertices[i].position.x, m_xCVertices[i].position.y );
+		m_xWalls[q+1].position = sf::Vector2f( mParallax * camDistanceX + m_xCVertices[i].position.x + cosf( angleBetweenPoints + offsetAngle ) * (wallHeight + offsetHeight), mParallax * camDistanceY + m_xCVertices[i].position.y + sinf( angleBetweenPoints + offsetAngle ) * (wallHeight + offsetHeight) );
+
+		m_xRoof[q].position = sf::Vector2f( m_xWalls[q+1].position.x + cosf( angleBetweenPoints + offsetAngle ) * -1, m_xWalls[q+1].position.y + sinf( angleBetweenPoints + offsetAngle ) * -1 );
+		m_xRoof[q+1].position = sf::Vector2f( m_xWalls[q+1].position.x + cosf( angleBetweenPoints + offsetAngle ) * ( 800.f ), m_xWalls[q+1].position.y + sinf( angleBetweenPoints + offsetAngle ) * ( 800.f ) );
+
+		//ROOF COLOR
+		m_xRoof[q].color = sf::Color::Black;
+		m_xRoof[q+1].color = sf::Color::Black;
+		
+		//TEX-COORDS
+		if (i>0){
+			float _x = m_xCVertices[i-1].position.x - m_xCVertices[i].position.x;
+			float _y = m_xCVertices[i-1].position.y - m_xCVertices[i].position.y;
+			distanceBetweenPoints = sqrtf( ( _x * _x ) + ( _y * _y ) );
+
+			//Add the length of the new quad to the last texCoords to make sure that the textures isn't stretched/squashed.
+			m_xWalls[q].texCoords = sf::Vector2f( m_xWalls[q-1].texCoords.x + distanceBetweenPoints, m_xpTex->getSize().y );
+			m_xWalls[q+1].texCoords = sf::Vector2f( m_xWalls[q-1].texCoords.x + distanceBetweenPoints, 0 );
+		}
+		else {
+			m_xWalls[q].texCoords = sf::Vector2f( 0, m_xpTex->getSize().y );
+			m_xWalls[q+1].texCoords = sf::Vector2f( 0, 0 );
+		}
+		q+=2;
+	}
+
+	//Fix for weird extra vertex added
+	/*m_xWalls[q-1].position = m_xWalls[q-2].position;
+	m_xWalls[q-1].texCoords = m_xWalls[q-2].texCoords;
+	m_xRoof[q-1].position = m_xRoof[q-2].position;
+	m_xRoof[q-1].color = sf::Color::Black;*/	
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.cpp
 }
 
 sf::Vector2f Level::getControlVertexPos( int index ){
  return m_xCVertices[index].position;
 }
 
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.cpp
 bool Level::Update(sf::Time dt){
 	setCameraPos(m_xpPlayer->getPosition());
 	placeWallVertices();
 	
+=======
+void Level::Update(sf::Time dt){
+	setCameraPos(m_xpPlayer->getPosition());
+	placeWallVertices();
+
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.cpp
 	for (int i = 0; i < m_xaHWalls.size(); i++){
 		m_xaHWalls[i]->SetCameraPos(cPos);
 		m_xaHWalls[i]->Update(dt);
 	}
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.cpp
 	
+=======
+
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.cpp
 	for (int i = m_xaDarkness.size() - 1; i >= 0; i--){
 		if (m_xaDarkness[i] != NULL){
 			if (m_xaDarkness[i]->Update()){
@@ -393,12 +536,15 @@ bool Level::Update(sf::Time dt){
 			}
 		}
 	}
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.cpp
 	
 	if (m_xpGoal != NULL){
 		return m_xpGoal->Update(dt);
 	}
 
 	return false;
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.cpp
 }
 
 void Level::setCameraPos( sf::Vector2f pos ){
@@ -406,6 +552,7 @@ void Level::setCameraPos( sf::Vector2f pos ){
 }
 
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.cpp
 	m_xpGoal->draw(target, states);
 
  glEnable( GL_CULL_FACE );
@@ -414,6 +561,9 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const {
  target.draw( m_xWalls, states );
 
  glDisable( GL_CULL_FACE );
+=======
+	glEnable( GL_CULL_FACE );
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.cpp
 
  states.texture = nullptr;
  target.draw( m_xRoof, states );
@@ -424,7 +574,22 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   }
  }
 
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.cpp
  for (int i = 0; i < m_xaHWalls.size(); i++){
   m_xaHWalls[i]->draw(target, states);
  }
+=======
+	states.texture = nullptr;
+	target.draw( m_xRoof, states );
+
+	for (int i = 0; i < m_xaDarkness.size(); i++){
+		if (m_xaDarkness[i] != NULL){
+			target.draw(m_xaDarkness[i]->m_xRect);
+		}
+	}
+
+	for (int i = 0; i < m_xaHWalls.size(); i++){
+		m_xaHWalls[i]->draw(target, states);
+	}
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.cpp
 }

@@ -23,8 +23,12 @@ public:
 	};
 
 public:
+<<<<<<< HEAD
 	//EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan, float p_fAggroRange, float p_fAttackRange, sf::Vector2f p_xStartpos, PlayerObject *p_xpPlayer, NodeMan *p_xpPBulletMan);
 	EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan, NodeMan *p_xpStarman, int p_iHp, float p_fPow, float p_fAggroRange, sf::Vector2f p_xStartpos, PlayerObject *p_xpPlayer, float p_fRot, SoundPlayer *p_xpSPlayer);
+=======
+	EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan, int p_iHp, float p_fPow, float p_fAggroRange, sf::Vector2f p_xStartpos, PlayerObject *p_xpPlayer);
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 
 	virtual bool Update(sf::Time p_xDtime);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

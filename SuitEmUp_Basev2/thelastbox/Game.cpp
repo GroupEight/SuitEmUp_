@@ -6,6 +6,7 @@
 
 #include "CollisionMan.h"
 #include "FontMan.h"
+#include "InputMan.h"
 #include "NodeMan.h"
 #include "SoundPlayer.hpp"
 #include "Stateman.h"
@@ -129,6 +130,7 @@ bool Game::Init(){
 		return false;
 	}
 
+<<<<<<< HEAD
 	m_xpStarMan = new NodeMan;
 	if (m_xpStarMan == NULL) {
 		return false;
@@ -140,6 +142,14 @@ bool Game::Init(){
 	}
 
 	m_xpPlayer = new PlayerObject(m_xpWindow, m_xpCollisionMan, m_xpPBulletman, m_xpTextMan, m_xpEBulletman, m_xpEnemyMan, m_xpSPlayer);
+=======
+	m_xpInputMan = new InputMan(m_xpWindow);
+	if (m_xpInputMan == NULL){
+		return false;
+	}
+
+	m_xpPlayer = new PlayerObject(m_xpWindow, m_xpCollisionMan, m_xpPBulletman, m_xpTextMan, m_xpInputMan);
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	if (m_xpPlayer == NULL){
 		return false;
 	}
@@ -244,8 +254,6 @@ void Game::Cleanup(){
 bool Game::UpdateDeltaTime(){
 	m_xDtime += m_xpClock->restart();
 
-	//std::cout << (float)m_xDtime.asMilliseconds() << std::endl;
-
 	if (m_xDtime >= m_xFps){
 		//m_xDtime = m_xFps;
 
@@ -326,8 +334,11 @@ void Game::LoadSounds(){
 	m_xpSPlayer->Load("Cymbal_Hit_01.wav", "Cymbal_Hit0");
 	m_xpSPlayer->Load("Cymbal_Hit_02.wav", "Cymbal_Hit1");
 	m_xpSPlayer->Load("Cymbal_Hit_03.wav", "Cymbal_Hit2");
+<<<<<<< HEAD
 	m_xpSPlayer->Load("Star_Collect_1.wav", "Star_Collect0");
 	m_xpSPlayer->Load("Star_Collect_2.wav", "Star_Collect1");
 	m_xpSPlayer->Load("Star_Collect_3.wav", "Star_Collect2");
 	m_xpSPlayer->Load("Whip.wav", "Whip");
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 }

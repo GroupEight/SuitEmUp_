@@ -56,8 +56,12 @@ void *SoundPlayer::Load(std::string p_sFname, std::string p_sCname){
 }
 
 void SoundPlayer::Play(std::string p_sCname){
+<<<<<<< HEAD
 	RemoveStoppedSounds();
 
+=======
+	//RemoveStoppedSounds();
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	Play(p_sCname, GetListenerPosition());
 }
 

@@ -7,7 +7,6 @@
 
 
 EnemyBullet::EnemyBullet(TextureMan *p_xpTextureMan, sf::Vector2f p_xPos, float p_fRot, PlayerObject *p_xpPlayer){
-	//std::cout << "SPAWN!!";
 	m_xpTextureMan = p_xpTextureMan;
 	
 	m_xpPlayer = p_xpPlayer;

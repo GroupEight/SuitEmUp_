@@ -13,8 +13,12 @@
 #include "FontMan.h"
 #include "Morker.h"
 #include "Ground.hpp"
+<<<<<<< HEAD
 #include "HUD.h"
 #include "Level_Wall.hpp"
+=======
+#include "Level.hpp"
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 #include "Menu_Button.hpp"
 #include "Player_Arms.hpp"
 #include "PlayerObject.h"
@@ -118,6 +122,7 @@ bool Gamestate::Update(sf::Time p_xDtime){
 			m_sNext = "Menustate";
 			m_eState = Gamestate::SubStates::End;
 		}
+<<<<<<< HEAD
 
 		if (m_xpPlayer->Update(p_xDtime)){ // Update Player
 			EndText = new sf::Text(sf::String("Too Bad,\nYou Lose..."), *m_xpFman->Get("Standard"), 200);
@@ -128,6 +133,11 @@ bool Gamestate::Update(sf::Time p_xDtime){
 		}
 
 		m_xpGround->Update(p_xDtime);
+=======
+		m_xpLevel->Update(p_xDtime);
+		m_xpGround->Update(p_xDtime);
+		m_xpPlayer->Update(p_xDtime);
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 
 		m_xpEnemyMan->DeleteOnTrue(p_xDtime); // Update all enemies
 
@@ -171,6 +181,8 @@ bool Gamestate::Update(sf::Time p_xDtime){
 	m_xpPBulletMan->DeleteOffScreen(m_xpWindow);
 	m_xpEBulletMan->DeleteOffScreen(m_xpWindow);
 
+	m_xpPBulletMan->DeleteOffScreen(m_xpWindow);
+
 	return true;
 }
 
@@ -178,9 +190,13 @@ void Gamestate::Draw(){
 	m_xpGround->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the ground
 	m_xpPlayer->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the player
 	m_xpPBulletMan->DrawAll(m_xpWindow); // Draw the bullets
+<<<<<<< HEAD
 	m_xpEnemyMan->DrawAll(m_xpWindow); // Draw the enemies
 	m_xpEBulletMan->DrawAll(m_xpWindow); // Draw the enemy bullets
 	m_xpStarMan->DrawAll(m_xpWindow); // Draw the stars
+=======
+	m_xpEnemyMan->DrawOnScreen(m_xpWindow); // Draw the enemies
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	m_xpLevel->draw(*m_xpWindow, sf::RenderStates::Default); // Draw the Level
 
 	m_xpHUD->draw(*m_xpWindow, sf::RenderStates::Default);

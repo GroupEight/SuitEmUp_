@@ -29,8 +29,11 @@ bool CursorObject::Update(sf::Time p_xDtime){
 	setPosition(m_xpWindow->mapPixelToCoords(sf::Mouse::getPosition(*m_xpWindow)));
 
 	m_xpSprite->setPosition(getPosition());
+<<<<<<< HEAD
 
 	return false;
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 }
 
 void CursorObject::draw(sf::RenderTarget& target, sf::RenderStates states) const {

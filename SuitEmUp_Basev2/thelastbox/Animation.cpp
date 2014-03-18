@@ -30,6 +30,10 @@ const sf::Texture* Animation::getTexture() const {
 	return m_xpSprite->getTexture();
 }
 
+sf::Sprite *Animation::GetSprite(){
+	return m_xpSprite;
+}
+
 void Animation::setFrameSize(sf::Vector2i frameSize){
 	mFrameSize = frameSize;
 }
@@ -162,8 +166,7 @@ void Animation::update(sf::Time dt){
 	m_xpSprite->setTextureRect(textureRect);
 }
 
-void Animation::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
+void Animation::draw(sf::RenderTarget& target, sf::RenderStates states) const{
 	states.transform *= getTransform();
 	target.draw(*m_xpSprite, states);
 }

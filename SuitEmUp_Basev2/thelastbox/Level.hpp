@@ -11,13 +11,20 @@ class NodeMan;
 class SoundPlayer;
 class TextureMan;
 
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.hpp
 class Goal;
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.hpp
 class Hidden_Wall;
 class PlayerObject;
 
 class Wall {
 public:
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.hpp
  Wall(sf::Vector2f p_xPos, float p_fAng, float p_fHe);
+=======
+	Wall(sf::Vector2f p_xPos, float p_fAng, float p_fHe);
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.hpp
 
  sf::Vector2f m_xPos;
 
@@ -33,6 +40,17 @@ public:
  PlayerObject *m_xpPlayer;
 
  bool Update();
+};
+
+class Darkness {
+public:
+	Darkness(sf::Vector2f p_xPos, sf::Vector2f p_xSize, float p_fRot, PlayerObject *p_xpPlayer);
+
+	sf::RectangleShape m_xRect;
+
+	PlayerObject *m_xpPlayer;
+
+	bool Update();
 };
 
 class Level : public SceneNode {
@@ -69,9 +87,15 @@ private:
  CollisionMan *m_xpCMan;
  TextureMan *m_xpTexMan;
 
+<<<<<<< HEAD:SuitEmUp_Basev2/thelastbox/Level_Wall.hpp
  NodeMan *m_xpEnemyMan;
  NodeMan *m_xpStarman;
  NodeMan *m_xpEBulletMan;
+=======
+	std::vector<Wall*> m_xaWalls;
+	std::vector<Hidden_Wall*> m_xaHWalls;
+	std::vector<Darkness*> m_xaDarkness;
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b:SuitEmUp_Basev2/thelastbox/Level.hpp
 
  PlayerObject *m_xpPlayer;
 

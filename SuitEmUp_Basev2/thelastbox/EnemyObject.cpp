@@ -13,6 +13,7 @@
 #include "TextureMan.h"
 #include "SoundPlayer.hpp"
 
+<<<<<<< HEAD
 EnemyObject::EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan, NodeMan *p_xpStarman, int p_iHp, float p_fPow, float p_fAggroRange, sf::Vector2f p_xStartpos, PlayerObject *p_xpPlayer, float p_fRot, SoundPlayer *p_xpSPlayer){
 	m_xPos = p_xStartpos;
 
@@ -30,6 +31,16 @@ EnemyObject::EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan,
 
 	m_fAggroRange = p_fAggroRange;
 	m_fAttackRange = 4.f;
+=======
+EnemyObject::EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan, int p_iHp, float p_fPow, float p_fAggroRange, sf::Vector2f p_xStartpos, PlayerObject *p_xpPlayer){
+	m_xPos = p_xStartpos;
+	
+	m_fAggroRange = p_fAggroRange;
+	m_iHp = p_iHp;
+	//m_fPow = p_fPow;
+
+	m_fAttackRange = 5.f;
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 
 	m_fRadius = 100.f;
 
@@ -38,6 +49,7 @@ EnemyObject::EnemyObject(CollisionMan *p_xpCollisionMan, TextureMan *p_xpTexMan,
 	m_iHp = p_iHp;
 
 	m_fSpd = 5.f;
+	//m_fPow = 0.1f;
 
 	m_fhitting = 0.13f;
 	m_bHitting = false;
@@ -134,8 +146,11 @@ bool EnemyObject::Update(sf::Time dt){
 	float l_fEnemyDist = sqrtf( ( (m_xpPlayer->GetPosition().x - m_xpBody->GetPosition().x ) * ( m_xpPlayer->GetPosition().x - m_xpBody->GetPosition().x ) ) + ( ( m_xpPlayer->GetPosition().y - m_xpBody->GetPosition().y ) * (m_xpPlayer->GetPosition().y - m_xpBody->GetPosition().y) ) );
 	float l_fXtrrot = -90.f;
 
+<<<<<<< HEAD
 	//std::cout << l_fEnemyDist << std::endl;
 
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	/*if ( l_fEnemyDist < m_fAggroRange && l_fEnemyDist > m_fAttackRange ){
 			SetState( EnemyObject::Aggro );
 	}
@@ -162,12 +177,16 @@ bool EnemyObject::Update(sf::Time dt){
 	else if (m_eState == EnemyObject::AIState::Aggro){		
 		setRotation(atan2f( (m_xpPlayer->GetPosition().y - GetPosition().y), (m_xpPlayer->GetPosition().x - GetPosition().x) ) * 180.f / 3.141592f - 90.f);
 		m_xVel = m_fSpd * sf::Vector2f(cosf(getRotation() * 3.141592 / 180 + 90.f), sinf(getRotation() * 3.141592 / 180 + 90.f));
+<<<<<<< HEAD
 
 		//std::cout << GetPosition().x << " : " << GetPosition().y << " : " << getRotation() << std::endl;
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	}
 	else if (m_eState == EnemyObject::AIState::Attacking){
 		m_xVel = sf::Vector2f(0, 0);
 		setRotation(atan2f( (m_xpPlayer->GetPosition().y - GetPosition().y), (m_xpPlayer->GetPosition().x - GetPosition().x) ) * 180.f / 3.141592f - 90.f);
+		//m_xpPlayer->Damage(m_fPow);
 		/*float _dirRot = atan2f( m_xpPlayer->getWorldPosition().y - getWorldPosition().y, m_xpPlayer->getWorldPosition().x - getWorldPosition().x );
 		setRotation( _dirRot * 180 / 3.141592 );*/
 

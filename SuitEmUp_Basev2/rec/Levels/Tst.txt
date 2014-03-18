@@ -2,6 +2,7 @@
 
 Player 0 0
 
+<<<<<<< HEAD
 # Hidden_Wall 0 -200 0 50
 
 #Hidden_Wall 500 -8500 90 50
@@ -9,6 +10,11 @@ Player 0 0
 Goal 0 -8700 60
 
 #Room 1
+=======
+# Hidden_Wall 0 550 600 450 90 300
+# Hidden_Wall 0 0 90 300
+
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 Wall 0 550
 Wall 400 500
 Wall 600 350
@@ -139,6 +145,7 @@ Wall -600 350
 Wall -400 500
 Wall 0 550
 
+<<<<<<< HEAD
 Enemy_W 0 -62.5 20 4 40
 Enemy_W 0 -125 20 4 40
 Enemy_M 5 -187.5 30 25 40 20
@@ -153,3 +160,13 @@ Enemy_M -18 -245 30 25 40 90
 # Enemy 15 15 40 10
 # Enemy 15 -15 40 10
 # Enemy -5 15 40 10
+=======
+# Enemy 5 0 40 10
+# Enemy 0 5 40 10
+# Enemy -5 0 40 10
+# Enemy 0 -5 40 10
+# Enemy 5 5 40 10
+# Enemy -5 -5 40 10
+# Enemy 5 -5 40 10
+# Enemy -5 5 40 10
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b

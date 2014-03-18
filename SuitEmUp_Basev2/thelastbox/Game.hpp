@@ -4,6 +4,7 @@
 
 class CollisionMan;
 class FontMan;
+class InputMan;
 class NodeMan;
 class Stateman;
 class SoundPlayer;
@@ -60,10 +61,12 @@ public:
 	sf::Clock *m_xpClock;
 
 	Stateman *m_xpStateman; // Member_ClassPointerStateman
+
 	CollisionMan *m_xpCollisionMan; // Member_ClassPointerCollisionMan
+	FontMan *m_xpFontMan;
+	InputMan *m_xpInputMan;
 	SoundPlayer *m_xpSPlayer;
 	TextureMan *m_xpTextMan;
-	FontMan *m_xpFontMan;
 
 	NodeMan *m_xpPBulletman;
 	NodeMan *m_xpEBulletman;

@@ -69,10 +69,17 @@ void Hidden_Wall::PlaceWallVertices(){
 
 		q+=2;
 	}
+<<<<<<< HEAD
 
 	mWalls[0].position = m_xPosA;
 	mWalls[l_iWall - 1].position = m_xPosB;*/
 
+=======
+
+	mWalls[0].position = m_xPosA;
+	mWalls[l_iWall - 1].position = m_xPosB;*/
+
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	for (int i = 0; i <= resolution; i++){
 		mWalls[q].position = sf::Vector2f( ((mWallWidth/resolution * i) - ( mWallWidth/resolution * i * ( sinf( mWallSlide ) + 1.f )/2.5 ) ), sinf( frequency / resolution * (360.f * 3.141592f / 180.f) * i ) * ( ( sinf( mWallSlide ) + 1.2f )/2.f ) * -(mWallWidth/frequency/3.f) );
 
@@ -135,8 +142,11 @@ Hidden_Wall::State Hidden_Wall::getState(){
 bool Hidden_Wall::Update(sf::Time dt){
 	PlaceWallVertices();
 
+<<<<<<< HEAD
 	std::cout << getPosition().x << " : " << getPosition().y << std::endl;
 
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	//Open/close hidden wall
 	float mHWall_Dist_x = (getPosition().x - m_xpPlayer->getPosition().x);
 	float mHWall_Dist_y = ((getPosition().y + 225) - m_xpPlayer->getPosition().y);

@@ -2,14 +2,11 @@
 
 #include "PlayerBullet.hpp"
 
-
 #include "NodeMan.h"
 #include "TextureMan.h"
 #include "PlayerObject.h"
 
-
 PlayerBullet::PlayerBullet(TextureMan *p_xpTextureMan, sf::Vector2f p_xPos, float p_fRot){
-	//std::cout << "SPAWN!!";
 	m_xpTextureMan = p_xpTextureMan;
 	
 	//m_xpPlayer = p_xpPlayer;

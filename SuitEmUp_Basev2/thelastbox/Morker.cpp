@@ -129,7 +129,10 @@ float Morker::GetAttackRange(){
 bool Morker::Update(sf::Time dt){
 	float l_fEnemyDist = sqrtf( ( (m_xpPlayer->GetPosition().x - m_xpBody->GetPosition().x ) * ( m_xpPlayer->GetPosition().x - m_xpBody->GetPosition().x ) ) + ( ( m_xpPlayer->GetPosition().y - m_xpBody->GetPosition().y ) * (m_xpPlayer->GetPosition().y - m_xpBody->GetPosition().y) ) );
 	float l_fXtrrot = -90.f;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	
 	/*if ( l_fEnemyDist < m_fAggroRange && l_fEnemyDist > m_fAttackRange ){
 			SetState( Morker::Aggro );
@@ -162,7 +165,10 @@ bool Morker::Update(sf::Time dt){
 	else if (m_eState == Morker::AIState::Aggro){		
 		setRotation(atan2f( (m_xpPlayer->GetPosition().y - GetPosition().y), (m_xpPlayer->GetPosition().x - GetPosition().x) ) * 180.f / 3.141592f - 90.f);
 		m_xVel = m_fSpd * sf::Vector2f(cosf(getRotation() * 3.141592 / 180 + 90.f), sinf(getRotation() * 3.141592 / 180 + 90.f));
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	}
 	else if (m_eState == Morker::AIState::Attacking){
 		m_xVel = sf::Vector2f(0, 0);
@@ -172,8 +178,12 @@ bool Morker::Update(sf::Time dt){
 		if( m_fFirerate <= 0) {
 
 			m_fFirerate = 0.45;
+<<<<<<< HEAD
 			m_xpEBulletMan->Add(new EnemyBullet(m_xpTextureMan, getPosition(), getRotation(), m_xpPlayer));
 		
+=======
+		m_xpEBulletMan->Add(new EnemyBullet(m_xpTextureMan, getPosition(), getRotation(), m_xpPlayer));
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 		}
 
 	}

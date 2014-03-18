@@ -2,6 +2,7 @@
 
 #include "HUD.h"
 
+<<<<<<< HEAD
 #include "PlayerObject.h"
 
 #include "FontMan.h"
@@ -30,6 +31,10 @@ HUD::HUD(TextureMan *p_xpTex, FontMan *p_xpFman, sf::RenderWindow *p_xpWindow, P
 	m_xpTxt->setColor(sf::Color::White);
 
 	m_xpWindow = p_xpWindow;
+=======
+HUD::HUD(TextureMan *p_xpTex, sf::RenderWindow p_xpWindow){
+
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 }
 
 HUD::~HUD(){
@@ -37,6 +42,7 @@ HUD::~HUD(){
 }
 
 bool HUD::Update(){
+<<<<<<< HEAD
 	m_xpHealthBar->setPosition( 200.f + m_xpWindow->getView().getCenter().x - m_xpWindow->getSize().x * .85f, 150.f + m_xpWindow->getView().getCenter().y - m_xpWindow->getSize().y * .855f);
 	m_xpHpBarHit->setPosition(m_xpHealthBar->getPosition());
 
@@ -63,10 +69,13 @@ bool HUD::Update(){
 	m_xpTxt->setPosition( m_xpStarSymbol->getPosition().x - m_xpTxt->getLocalBounds().width, m_xpStarSymbol->getPosition().y);
 	//m_xpTxt->setPosition(m_xpStarSymbol->getPosition().x + m_xpStarSymbol->getTexture()->getSize().x, m_xpStarSymbol->getPosition().y);
 
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	return false;
 }
 
 void HUD::draw(sf::RenderTarget& target, sf::RenderStates states){
+<<<<<<< HEAD
 	if (!m_xpPlayer->GetInv()){
 		m_xpWindow->draw(*m_xpHealthBar);
 	}
@@ -77,4 +86,7 @@ void HUD::draw(sf::RenderTarget& target, sf::RenderStates states){
 	m_xpWindow->draw(*m_xpHpOverlay);
 	m_xpWindow->draw(*m_xpStarSymbol);
 	m_xpWindow->draw(*m_xpTxt);
+=======
+
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 }

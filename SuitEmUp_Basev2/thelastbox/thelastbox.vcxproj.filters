@@ -75,9 +75,6 @@
     <ClInclude Include="Hidden_Wall.hpp">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Level_Wall.hpp">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Menu_Button.hpp">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
@@ -171,6 +168,7 @@
     <ClInclude Include="NodeMan.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Star.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
@@ -181,6 +179,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Goal.h">
+=======
+    <ClInclude Include="Level.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
@@ -210,9 +214,6 @@
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Hidden_Wall.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Level_Wall.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Menu_Button.cpp">
@@ -299,6 +300,7 @@
     <ClCompile Include="NodeMan.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Star.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
@@ -309,6 +311,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Goal.cpp">
+=======
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>

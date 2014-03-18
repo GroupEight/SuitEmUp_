@@ -14,6 +14,8 @@ public:
 	void setTexture(sf::Texture *p_xpTex);
 	const sf::Texture* getTexture() const;
 
+	sf::Sprite *GetSprite();
+
 	void setFrameSize(sf::Vector2i mFrameSize);
 	sf::Vector2i getFrameSize() const;
 

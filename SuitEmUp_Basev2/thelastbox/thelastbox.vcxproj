@@ -96,14 +96,17 @@
     <ClInclude Include="FontMan.h" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameObject.h" />
+<<<<<<< HEAD
     <ClInclude Include="Goal.h" />
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
     <ClInclude Include="HUD.h" />
     <ClInclude Include="NodeMan.h" />
     <ClInclude Include="Ground.hpp" />
     <ClInclude Include="Ground_Bump.hpp" />
     <ClInclude Include="Hidden_Wall.hpp" />
     <ClInclude Include="InputMan.h" />
-    <ClInclude Include="Level_Wall.hpp" />
+    <ClInclude Include="Level.hpp" />
     <ClInclude Include="Menustate.h" />
     <ClInclude Include="Menu_Button.hpp" />
     <ClInclude Include="Morker.h" />
@@ -155,7 +158,10 @@
     <ClCompile Include="GameObject.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Goal.cpp" />
+=======
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="NodeMan.cpp" />
     <ClCompile Include="Ground.cpp">
@@ -168,7 +174,7 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="InputMan.cpp" />
-    <ClCompile Include="Level_Wall.cpp">
+    <ClCompile Include="Level.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="Main.cpp" />

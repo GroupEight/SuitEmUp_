@@ -20,10 +20,17 @@ public:
 
 public:
 	Hidden_Wall(sf::Vector2f p_xPos, float p_fRot, float p_fWallDist, PlayerObject *p_xpPlayer, TextureMan *p_xpTextMan, CollisionMan *p_xpCMan);
+<<<<<<< HEAD
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual bool Update(sf::Time dt);
 
+=======
+
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void Update(sf::Time dt);
+
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	void SetCameraPos( sf::Vector2f pos );
 	void SetState( Hidden_Wall::State state );
 	Hidden_Wall::State getState();

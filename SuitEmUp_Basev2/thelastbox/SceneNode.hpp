@@ -14,7 +14,11 @@ public:
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 
+<<<<<<< HEAD
 	virtual bool Overlap(sf::Vector2f position, float p_fRadius);
+=======
+	//virtual void Overlap(PlayerBullet *p_xpPBullet, EnemyObject *p_xpEnemy);
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 
 	bool Show();
 	bool Hide();

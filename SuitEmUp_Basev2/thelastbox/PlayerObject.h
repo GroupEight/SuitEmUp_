@@ -9,6 +9,7 @@ class Player_Arms;
 class Tool_Whip;
 
 class CollisionMan;
+class InputMan;
 class NodeMan;
 class TextureMan;
 class SoundPlayer;
@@ -32,7 +33,11 @@ public:
 	};
 
 public:
+<<<<<<< HEAD
 	PlayerObject(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMan, TextureMan *p_xpTextureMan, NodeMan *p_xpEBulletMan, NodeMan *p_xpEnemyMan, SoundPlayer *p_xpSPlayer);
+=======
+	PlayerObject(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMan, TextureMan *p_xpTextureMan, InputMan *p_xpIMan);
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	~PlayerObject();
 
 	void Damage(float p_fDmg);
@@ -40,6 +45,8 @@ public:
 	virtual bool Update(sf::Time p_xDtime);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+	void Damage(float p_fDmg);
 
 	void setState(PlayerObject::State state);
 	void setTool(PlayerObject::Tool tool);
@@ -68,8 +75,10 @@ public:
 	Player_Arms *m_xpPlayerArms[2];
 
 private:
+	sf::RenderWindow *m_xpWindow;
 
 	CollisionMan *m_xpCollisionMan;
+	InputMan *m_xpIMan;
 	NodeMan *m_xpBulletMan;
 	NodeMan *m_xpEBulletMan;
 	NodeMan *m_xpEnemyMan;
@@ -94,7 +103,12 @@ private:
 	
 	Tool_Whip *m_xpWhip;
 
+<<<<<<< HEAD
 	long long m_iStarCount;
+=======
+	bool m_bPunchArm,
+		m_bOverheat;
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 	
 	float m_fBulletspd,
 		m_fPlayerspd,
@@ -106,6 +120,7 @@ private:
 		m_fCooldown,
 		m_fMaxheat,
 		m_fMinheat,
+<<<<<<< HEAD
 		m_fSuit,
 		m_fInv,
 		m_fInvMax;
@@ -114,6 +129,9 @@ private:
 		punchArm;
 
 	sf::Vector2f m_xWhipPos;
+=======
+		m_fSuit;
+>>>>>>> 5301b7ce945568afbd97112a1b45c6472c1ec48b
 
 	sf::Texture *m_xpIdleTex, 
 		*m_xpRunTex, 
