@@ -20,7 +20,7 @@ public:
 public:
 	Prompt(sf::RenderWindow *p_xpWindow, TextureMan *p_xpTextMan, FontMan *p_xpFontMan, sf::Text text);
 
-	virtual void Update(sf::Time p_xDtime);
+	virtual bool Update(sf::Time p_xDtime);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

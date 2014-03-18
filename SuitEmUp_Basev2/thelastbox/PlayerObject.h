@@ -6,11 +6,13 @@
 
 class Animation;
 class Player_Arms;
+class Tool_Whip;
 
 class CollisionMan;
-class InputMan;
 class NodeMan;
 class TextureMan;
+class SoundPlayer;
+class EnemyObject;
 
 class PlayerObject : public GameObject {
 public:
@@ -19,41 +21,62 @@ public:
 		Run_F, 
 		Run_B,
 		Run_L,
-		Run_R
+		Run_R,
+		Whipping
 	};
 
 	enum Tool {
 		Melee,
 		Crossbow,
+		Whip
 	};
 
 public:
-	PlayerObject(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMan, TextureMan *p_xpTextureMan, InputMan *p_xpIMan);
+	PlayerObject(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, NodeMan *p_xpBulletMan, TextureMan *p_xpTextureMan, NodeMan *p_xpEBulletMan, NodeMan *p_xpEnemyMan, SoundPlayer *p_xpSPlayer);
 	~PlayerObject();
 
-	virtual void Update(sf::Time p_xDtime);
+	void Damage(float p_fDmg);
+
+	virtual bool Update(sf::Time p_xDtime);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
-	void Damage(float p_fDmg);
 
 	void setState(PlayerObject::State state);
 	void setTool(PlayerObject::Tool tool);
 
+	void doWhip(sf::Vector2f _pos);
+
 	PlayerObject::State GetState();
 	PlayerObject::Tool GetTool();
+
+	NodeMan *GetPBulletMan();
+
+	float GetHp();
+	float GetMaxHp();
+
+	int GetStars();
+	void SetStars(int p);
+
+	void StarsPlus();
+
+	bool GetInv();
 
 	bool m_bColliding;
 
 	bool m_bPunching;
 
+	Player_Arms *m_xpPlayerArms[2];
+
 private:
-	sf::RenderWindow *m_xpWindow;
 
 	CollisionMan *m_xpCollisionMan;
-	InputMan *m_xpIMan;
 	NodeMan *m_xpBulletMan;
+	NodeMan *m_xpEBulletMan;
+	NodeMan *m_xpEnemyMan;
 	TextureMan *m_xpTextureMan;
+	SoundPlayer *m_xpSPlayer;
+
+	sf::RenderWindow *m_xpWindow;
 
 	PlayerObject::State m_eState;
 	PlayerObject::Tool m_eTool;
@@ -68,10 +91,11 @@ private:
 		*m_xpCurrentAnim,
 		*m_xpCrossbow;
 
-	Player_Arms *m_xpPlayerArms[2];
+	
+	Tool_Whip *m_xpWhip;
 
-	bool m_bPunchArm,
-		m_bOverheat;
+	int m_iStarCount,
+		m_iStarSfx;
 	
 	float m_fBulletspd,
 		m_fPlayerspd,
@@ -83,7 +107,14 @@ private:
 		m_fCooldown,
 		m_fMaxheat,
 		m_fMinheat,
-		m_fSuit;
+		m_fSuit,
+		m_fInv,
+		m_fInvMax;
+
+	bool m_bOverheat,
+		punchArm;
+
+	sf::Vector2f m_xWhipPos;
 
 	sf::Texture *m_xpIdleTex, 
 		*m_xpRunTex, 

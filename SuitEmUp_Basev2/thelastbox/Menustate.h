@@ -11,10 +11,11 @@ class Menu_Button;
 class FontMan;
 class SoundPlayer;
 class TextureMan;
+class CursorObject;
 
 class Menustate : public State {
 public:
-	Menustate(sf::RenderWindow *p_xpWindow, TextureMan *p_xpTextMan, FontMan *p_xpFontMan, SoundPlayer *p_xpSPlayer);
+	Menustate(sf::RenderWindow *p_xpWindow, CursorObject *p_xpCursor, TextureMan *p_xpTextMan, FontMan *p_xpFontMan, SoundPlayer *p_xpSPlayer);
 	~Menustate();
 
 	bool Enter();
@@ -29,5 +30,10 @@ private:
 
 	sf::View *m_xpView;
 
-	Menu_Button *m_xpaButtons[5];
+	sf::Sprite *m_xpBG;
+	sf::Texture *m_xpBGTex;
+
+	CursorObject *m_xpCursor;
+
+	Menu_Button *m_xpaButtons[4];
 };

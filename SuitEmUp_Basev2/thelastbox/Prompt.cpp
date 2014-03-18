@@ -64,8 +64,8 @@ void Prompt::handleInput(sf::Event event){
 	}
 }
 
-void Prompt::Update(sf::Time p_xDtime){
-
+bool Prompt::Update(sf::Time p_xDtime){
+	return false;
 }
 
 void Prompt::draw(sf::RenderTarget& target, sf::RenderStates states) const {

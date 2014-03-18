@@ -6,19 +6,24 @@
 
 class TextureMan;
 
-class PlayerObject;
-
 class Player_Arms : public SceneNode {
 public:
-	Player_Arms(TextureMan *p_xpTextMan, int p_iArmDir, PlayerObject *p_xpPlayer);
+	Player_Arms(TextureMan *p_xpTextMan, int p_iArmDir);
 
-	void setArmsPosition(sf::Vector2i armLength, float p_fRot);
+	void setArmsPosition(sf::Vector2f armLength);
 
 	bool Punch();
+
+	bool m_bPunching;
+	bool m_bApex;
+
+	sf::Sprite *m_xpGlove;
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
+	void UpdateCurrent(sf::Time p_xDtime);
+
 	int m_iArmDir;
 
 	float m_fPunchLength,
@@ -26,13 +31,9 @@ private:
 
 	float GetPt( int n1 , int n2 , float perc );
 
-	bool m_bPunching;
-
-	PlayerObject *m_xpPlayer;
-
 	sf::VertexArray m_xControlVertices,
 		m_xArms;
 
 	sf::Texture *m_xpGloveTex;
-	sf::Sprite *m_xpGlove;
+	
 };

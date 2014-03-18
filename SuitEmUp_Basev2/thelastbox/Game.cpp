@@ -6,7 +6,6 @@
 
 #include "CollisionMan.h"
 #include "FontMan.h"
-#include "InputMan.h"
 #include "NodeMan.h"
 #include "SoundPlayer.hpp"
 #include "Stateman.h"
@@ -26,12 +25,16 @@ Game::Game(){
 
 	m_xpPBulletman = NULL;
 	m_xpEBulletman = NULL;
+	m_xpStarMan = NULL;
+	m_xpEnemyMan = NULL;
 
 	m_xpGround = NULL;
 	m_xpPlayer = NULL;
 
 	m_xpGamestate = NULL;
 	m_xpMenustate = NULL;
+
+	//m_xpStar = NULL;
 
 	//m_xpWorld = NULL;
 }
@@ -74,7 +77,7 @@ bool Game::Init(){
 	int q = MessageBox(NULL, L"Play game in Fullscreen?", L"Suit Em Up (Name not final)", MB_YESNO | MB_ICONQUESTION);
 
 	if (q == 6){
-		m_xpWindow = new sf::RenderWindow(sf::VideoMode(m_iWi, m_iHe, 32), "Suit Em Up (Name not final)", sf::Style::Fullscreen);
+		m_xpWindow = new sf::RenderWindow(sf::VideoMode(1920, 1080, 32), "Suit Em Up (Name not final)", sf::Style::Fullscreen);
 		m_xpWindow->setPosition(sf::Vector2i(0, 0));
 	}
 	else if (q == 7){
@@ -126,12 +129,17 @@ bool Game::Init(){
 		return false;
 	}
 
-	m_xpInputMan = new InputMan(m_xpWindow);
-	if (m_xpInputMan == NULL){
+	m_xpStarMan = new NodeMan;
+	if (m_xpStarMan == NULL) {
 		return false;
 	}
 
-	m_xpPlayer = new PlayerObject(m_xpWindow, m_xpCollisionMan, m_xpPBulletman, m_xpTextMan, m_xpInputMan);
+	m_xpEnemyMan = new NodeMan;
+	if (m_xpEnemyMan == NULL) {
+		return false;
+	}
+
+	m_xpPlayer = new PlayerObject(m_xpWindow, m_xpCollisionMan, m_xpPBulletman, m_xpTextMan, m_xpEBulletman, m_xpEnemyMan, m_xpSPlayer);
 	if (m_xpPlayer == NULL){
 		return false;
 	}
@@ -146,12 +154,12 @@ bool Game::Init(){
 		return false;
 	}
 
-	m_xpGamestate = new Gamestate(m_xpWindow, m_xpCollisionMan, m_xpTextMan, m_xpPBulletman, m_xpEBulletman, m_xpPlayer, m_xpCursor, m_xpGround);
+	m_xpGamestate = new Gamestate(m_xpWindow, m_xpSPlayer, m_xpCollisionMan, m_xpTextMan, m_xpFontMan, m_xpPBulletman, m_xpEBulletman, m_xpStarMan, m_xpEnemyMan, m_xpPlayer, m_xpCursor, m_xpGround);
 	if (m_xpGamestate == NULL){
 		return false;
 	}
 
-	m_xpMenustate = new Menustate(m_xpWindow, m_xpTextMan, m_xpFontMan, m_xpSPlayer);
+	m_xpMenustate = new Menustate(m_xpWindow, m_xpCursor, m_xpTextMan, m_xpFontMan, m_xpSPlayer);
 	if (m_xpMenustate == NULL){
 		return false;
 	}
@@ -192,7 +200,7 @@ void Game::Run(){
 	m_xpClock = new sf::Clock;
 	m_xpClock->restart();
 
-	//m_xpWindow->setMouseCursorVisible(false);
+	m_xpWindow->setMouseCursorVisible(false);
 
 	while (m_xpStateman->IsRunning()){
 		UpdEvents();
@@ -236,6 +244,8 @@ void Game::Cleanup(){
 bool Game::UpdateDeltaTime(){
 	m_xDtime += m_xpClock->restart();
 
+	//std::cout << (float)m_xDtime.asMilliseconds() << std::endl;
+
 	if (m_xDtime >= m_xFps){
 		//m_xDtime = m_xFps;
 
@@ -268,6 +278,12 @@ void Game::LoadTexts(TextureMan *p_xpTextMan){
 	p_xpTextMan->Load("Graphics/Enemy/Warrior/Run_Animation.png", "Warrior_Run");
 	p_xpTextMan->Load("Graphics/Enemy/Warrior/Attack_Animation.png", "Warrior_Atk");
 
+
+	//Morker
+	p_xpTextMan->Load("Graphics/Enemy/Billy/Idle_Animation.png", "Morker_Idle");
+	p_xpTextMan->Load("Graphics/Enemy/Billy/Fly_Animation.png", "Morker_Fly");
+	p_xpTextMan->Load("Graphics/Enemy/Billy/Attack_Animation.png", "Morker_Atk");
+
 	//Tools
 	p_xpTextMan->Load("Graphics/Bullet_Player.png", "Player_Bullet");
 	p_xpTextMan->Load("Graphics/Ranged_Crossbow_Fire.png", "Crossbow");
@@ -284,6 +300,8 @@ void Game::LoadTexts(TextureMan *p_xpTextMan){
 	p_xpTextMan->Load("Graphics/Shadow.png", "Shadow");
 	p_xpTextMan->Load("Graphics/Shadow_Bump.png", "Shadow_Bump");
 	p_xpTextMan->Load("Graphics/Rope_Tex.png", "Rope");
+	p_xpTextMan->Load("Graphics/Rope_End.png", "Rope_End");
+	p_xpTextMan->Load("Graphics/Menu_BG.png", "Menu_BG");
 
 	//
 	p_xpTextMan->Load("Graphics/GUI/Prompt_Frame.png", "Prompt_Frame");
@@ -292,6 +310,14 @@ void Game::LoadTexts(TextureMan *p_xpTextMan){
 	p_xpTextMan->Load("Graphics/GUI/Button_1_End.png", "Button1_End");
 	p_xpTextMan->Load("Graphics/Mouse_Cursor.png", "Mouse_Cursor");
 	p_xpTextMan->Load("Graphics/Health_Bar.png", "Health_Bar");
+
+	//Health Bar
+	p_xpTextMan->Load("Graphics/Health_Bar_Base.png", "Base_Hp");
+	p_xpTextMan->Load("Graphics/Health_Bar_Base_Hit.png", "Hit_Hp");
+	p_xpTextMan->Load("Graphics/Suits.png", "Suit_Life");
+	p_xpTextMan->Load("Graphics/Health_Bar_Overlay.png", "Bar_Hp");
+
+	p_xpTextMan->Load("Graphics/HUD_Star.png", "HUD_Star");
 }
 
 void Game::LoadSounds(){
@@ -300,4 +326,8 @@ void Game::LoadSounds(){
 	m_xpSPlayer->Load("Cymbal_Hit_01.wav", "Cymbal_Hit0");
 	m_xpSPlayer->Load("Cymbal_Hit_02.wav", "Cymbal_Hit1");
 	m_xpSPlayer->Load("Cymbal_Hit_03.wav", "Cymbal_Hit2");
+	m_xpSPlayer->Load("Star_Collect_1.wav", "Star_Collect0");
+	m_xpSPlayer->Load("Star_Collect_2.wav", "Star_Collect1");
+	m_xpSPlayer->Load("Star_Collect_3.wav", "Star_Collect2");
+	m_xpSPlayer->Load("Whip.wav", "Whip");
 }

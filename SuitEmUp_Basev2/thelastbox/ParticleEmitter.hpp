@@ -15,7 +15,7 @@ public:
 public:
 	ParticleEmitter(TextureMan *p_xpTextMan, ParticleEmitter::ParticleType type, int spawnRate);
 
-	virtual void Update(sf::Time dt);
+	virtual bool Update(sf::Time dt);
 
 private:
 

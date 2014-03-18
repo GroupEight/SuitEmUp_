@@ -1,8 +1,6 @@
+//Animation.cpp//
+
 #include "Animation.hpp"
-
-#include <SFML/Graphics/RenderTarget.hpp>
-#include <SFML/Graphics/Texture.hpp>
-
 
 Animation::Animation()
 : mFrameSize()
@@ -30,10 +28,6 @@ void Animation::setTexture(sf::Texture *p_xpTex){
 
 const sf::Texture* Animation::getTexture() const {
 	return m_xpSprite->getTexture();
-}
-
-sf::Sprite *Animation::GetSprite(){
-	return m_xpSprite;
 }
 
 void Animation::setFrameSize(sf::Vector2i frameSize){
@@ -168,7 +162,8 @@ void Animation::update(sf::Time dt){
 	m_xpSprite->setTextureRect(textureRect);
 }
 
-void Animation::draw(sf::RenderTarget& target, sf::RenderStates states) const{
+void Animation::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
 	states.transform *= getTransform();
 	target.draw(*m_xpSprite, states);
 }

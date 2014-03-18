@@ -2,72 +2,154 @@
 
 Player 0 0
 
-# Hidden_Wall 0 550 600 450 90 300
-# Hidden_Wall 0 0 90 300
+Hidden_Wall 0 -200 0 50
 
-Wall 0 550
-Wall 500 550
-Wall 600 450
+#Hidden_Wall 500 -8500 90 50
+
+Goal 0 -8700 60
+
+# Room 1
+Wall 0 750
+Wall 800 500
+Wall 600 350
 Wall 700 225
 Wall 750 0
 Wall 700 -225
 Wall 600 -450
 Wall 500 -550 10
-Wall 300 -550 20
-Wall 200 -600 -5 10
-Wall 125 -750 -20
-Wall 125 -1300 20
-Wall 200 -1450 -40 -20
+Wall 300 -600 20
+Wall 200 -700 -5 10
+Wall 150 -850 -20
 
-Wall 1500 -1450
+#Room 2
+Wall 125 -1450
+Wall 400 -1500
+Wall 600 -1650
+Wall 700 -1775
+Wall 750 -2000
+Wall 700 -2225
+Wall 600 -2450
+Wall 500 -2550 10
+Wall 300 -2600 20
+Wall 200 -2700 -5 10
+Wall 125 -2850 -20
 
-Wall 1600 -1250
-Wall 1800 -1150
-Wall 1900 -1150
-Wall 2300 -1200
-Wall 2500 -1450
-Wall 2500 -1700
-Wall 2300 -1950
-Wall 1900 -2000
-Wall 1800 -2000
-Wall 1600 -1900
+#Room 3
+Wall 125 -3450
+Wall 400 -3500
+Wall 600 -3650
+Wall 700 -3775
+Wall 750 -4000
+Wall 700 -4225
+Wall 600 -4450
+Wall 500 -4550 10
+Wall 300 -4600 20
+Wall 200 -4700 -5 10
+Wall 125 -4850 -20
 
-Wall 1500 -1800
+#Room 4
+Wall 125 -5450
+Wall 400 -5500
+Wall 600 -5650
+Wall 700 -5775
+Wall 750 -6000
+Wall 700 -6225
+Wall 600 -6450
+Wall 500 -6550 10
+Wall 300 -6600 20
+Wall 200 -6700 -5 10
+Wall 125 -6850 -20
 
-Wall 300 -1800
-Wall 200 -1850
-Wall 125 -1900
+#Room 5
+Wall 125 -7450
+Wall 400 -7500
+Wall 600 -7650
+Wall 700 -7775
+Wall 750 -8000
+Wall 700 -8225
+Wall 600 -8450
+Wall 500 -8550 10
+Wall 300 -8600 20
+Wall 200 -8700 -5 10
+Wall 125 -8850 -20
 
-Wall 0 -1925
+#Room 5
+Wall -125 -8850 -20
+Wall -200 -8700 -5 10
+Wall -300 -8600 20
+Wall -500 -8550 10
+Wall -600 -8450
+Wall -700 -8225
+Wall -750 -8000
+Wall -700 -7775
+Wall -600 -7650
+Wall -400 -7500
+Wall -150 -7450
 
-Wall -125 -1900
-Wall -200 -1750
-Wall -225 -1600
-Wall -200 -1450 20
-Wall -150 -1300 -20
-Wall -150 -750 20
-Wall -200 -600 5 10
-Wall -300 -550 -20
+#Room 4
+Wall -125 -6850 -20
+Wall -200 -6700 -5 10
+Wall -300 -6600 20
+Wall -500 -6550 10
+Wall -600 -6450
+Wall -700 -6225
+Wall -750 -6000
+Wall -700 -5775
+Wall -600 -5650
+Wall -400 -5500
+Wall -150 -5450
+
+#Room 3
+Wall -125 -4850 -20
+Wall -200 -4700 -5 10
+Wall -300 -4600 20
+Wall -500 -4550 10
+Wall -600 -4450
+Wall -700 -4225
+Wall -750 -4000
+Wall -700 -3775
+Wall -600 -3650 
+Wall -400 -3500 
+Wall -150 -3450 
+
+#Room 2
+Wall -125 -2850 -20
+Wall -200 -2700 -5 10
+Wall -300 -2600 20
+Wall -500 -2550 10
+Wall -600 -2450
+Wall -700 -2225
+Wall -750 -2000
+Wall -700 -1775
+Wall -600 -1650
+Wall -400 -1500
+Wall -150 -1450
+
+
+#Room 1
+Wall -150 -850 20
+Wall -200 -700 5 10
+Wall -300 -600 -20
 Wall -500 -550 -10
 Wall -600 -450
-Wall -700 -225 0 -50
-
-Wall -1350 -225
-
-Wall -1450 0
-
-Wall -1350 225
-
-Wall -700 225 0 -50
-Wall -600 450
-Wall -500 550
+Wall -700 -225 0 0
+Wall -750 0 0 0
+Wall -700 225 0 0
+Wall -600 350
+Wall -400 500
 Wall 0 550
 
-# Enemy 5 0 40 10
-# Enemy 0 5 40 10
-# Enemy -5 0 40 10
-# Enemy 0 -5 40 10
-# Enemy 5 5 40 10
-# Enemy -5 -5 40 10
-# Enemy 5 -5 40 10
-# Enemy -5 5 40 10
+Enemy_W 0 0 20 4 40
+Enemy_W 0 -125 20 4 40
+Enemy_M 5 -187.5 30 25 40 20
+
+Enemy_W -5 -248 20 4 40
+Enemy_W 0 -248 20 4 40
+Enemy_W 5 -248 20 4 40
+Enemy_M 18 -245 30 25 40 -90
+Enemy_M -18 -245 30 25 40 90
+
+# Enemy 0 -15 40 10
+# Enemy 15 15 40 10
+# Enemy 15 -15 40 10
+# Enemy -5 15 40 10

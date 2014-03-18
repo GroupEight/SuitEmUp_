@@ -9,7 +9,7 @@ public:
 	CursorObject(TextureMan *p_xpTexMan, sf::RenderWindow *p_xpWindow);
 	~CursorObject();
 
-	void Update(sf::Time p_xDtime);
+	bool Update(sf::Time p_xDtime);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

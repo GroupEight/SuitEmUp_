@@ -1,0 +1,56 @@
+﻿Build started 2014-03-11 17:33:50.
+     1>Project "C:\Users\Hampus\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\thelastbox\thelastbox.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../deps/SFML-2.1x86/include" /I../deps/Box2D12/include /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\thelastbox.pch" /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /FIstdafx.h /analyze- /errorReport:prompt EnemyObject.cpp Gamestate.cpp
+         EnemyObject.cpp
+     1>EnemyObject.cpp(39): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>EnemyObject.cpp(49): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>EnemyObject.cpp(59): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>EnemyObject.cpp(148): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         Gamestate.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Hampus\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\Release\thelastbox.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"../deps/SFML-2.1x86/lib" /LIBPATH:..deps/Box2D12/lib Box2D12 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Hampus\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\Release\thelastbox.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Hampus\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\Release\thelastbox.lib" /MACHINE:X86 /SAFESEH Release\Animation.obj
+         Release\CollisionMan.obj
+         Release\Crossbow.obj
+         Release\CursorObject.obj
+         Release\EnemyBullet.obj
+         Release\EnemyObject.obj
+         Release\Enemy_Larva.obj
+         Release\Film_Grain.obj
+         Release\FontMan.obj
+         Release\Game.obj
+         Release\GameObject.obj
+         Release\NodeMan.obj
+         Release\Ground.obj
+         Release\Ground_Bump.obj
+         Release\Hidden_Wall.obj
+         Release\InputMan.obj
+         Release\Level_Wall.obj
+         Release\Main.obj
+         Release\Menustate.obj
+         Release\Menu_Button.obj
+         Release\Morker.obj
+         Release\MusicPlayer.obj
+         Release\Particle.obj
+         Release\ParticleEmitter.obj
+         Release\PauseMenu.obj
+         Release\PlayerObject.obj
+         Release\PlayerBullet.obj
+         Release\Player_Arms.obj
+         Release\Prompt.obj
+         Release\Scene.obj
+         Release\SceneNode.obj
+         Release\SoundPlayer.obj
+         Release\Star.obj
+         Release\Stateman.obj
+         Release\StateManager.obj
+         Release\stdafx.obj
+         Release\TextureMan.obj
+         Release\thelastbox.obj
+         Release\Gamestate.obj
+     1>LINK : fatal error LNK1181: cannot open input file 'Box2D12.obj'
+     1>Done Building Project "C:\Users\Hampus\Documents\GitHub\SuitEmUp_\SuitEmUp_Basev2\thelastbox\thelastbox.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.38

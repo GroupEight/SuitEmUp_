@@ -8,7 +8,7 @@
 #include <sstream>
 
 GameObject::GameObject(){
-
+	
 }
 
 void GameObject::SetVelocity(sf::Vector2f velocity){
@@ -17,6 +17,25 @@ void GameObject::SetVelocity(sf::Vector2f velocity){
 
 sf::Vector2f GameObject::GetVelocity() const {
 	return m_xVel;
+}
+
+float GameObject::getRadius() {
+
+	return m_fRadius;
+}
+
+b2Body* GameObject::getBody(){
+	return m_xpBody;
+}
+
+bool GameObject::Overlap(sf::Vector2f position, float p_fRadius) {
+	if (sqrt(pow(position.x - getPosition().x, 2) + pow(position.y - getPosition().y, 2)) <= m_fRadius + p_fRadius){
+	//if (sqrt(pow(position.x - m_xPos.x, 2) + pow(position.y - m_xPos.y, 2)) <= m_fRadius + p_fRadius){
+
+		return true;
+	}
+
+	return false;
 }
 
 void GameObject::SetPosition(sf::Vector2f p_xPos){

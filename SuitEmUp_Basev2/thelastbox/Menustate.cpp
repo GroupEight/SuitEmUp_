@@ -9,8 +9,9 @@
 #include "FontMan.h"
 #include "SoundPlayer.hpp"
 #include "TextureMan.h"
+#include "CursorObject.h"
 
-Menustate::Menustate(sf::RenderWindow *p_xpWindow, TextureMan *p_xpTextMan, FontMan *p_xpFontMan, SoundPlayer *p_xpSPlayer){
+Menustate::Menustate(sf::RenderWindow *p_xpWindow, CursorObject *p_xpCursor, TextureMan *p_xpTextMan, FontMan *p_xpFontMan, SoundPlayer *p_xpSPlayer){
 	m_xpWindow = p_xpWindow;
 
 	m_xpView = new sf::View(m_xpWindow->getDefaultView());
@@ -18,21 +19,22 @@ Menustate::Menustate(sf::RenderWindow *p_xpWindow, TextureMan *p_xpTextMan, Font
 
 	m_xpWindow->setView(*m_xpView);
 
+	m_xpBGTex = p_xpTextMan->Get( "Menu_BG" );
+
+	m_xpBG = new sf::Sprite();
+	m_xpBG->setTexture( *m_xpBGTex );
+
+	m_xpCursor = p_xpCursor;
+
 	// Create all of the buttons:
 
-	m_xpaButtons[0] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "Start Game", 640, 120);
+	m_xpaButtons[0] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "Start Game", 500 * 1.5f, 100 * 1.5f);
 
-	m_xpaButtons[1] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "How To Play", 640, 240);
-
-	m_xpaButtons[2] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "Settings", 640, 360);
-
-	m_xpaButtons[3] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "High Score", 640, 480);
-
-	m_xpaButtons[4] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "Quit", 640, 600);
+	m_xpaButtons[1] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "Quit", 730 * 1.5f, 300 * 1.5f);
 }
 
 Menustate::~Menustate(){
-	for (int i = 0; i < 5; i++){
+	for (int i = 0; i < 2; i++){
 		delete m_xpaButtons[i];
 		m_xpaButtons[i] = NULL;
 	}
@@ -63,27 +65,9 @@ bool Menustate::Update(sf::Time p_xDtime){
 				return false;
 			}
 		}
-		if (m_xpaButtons[2]->isWithinLocalBounds()){
-			if (m_xpaButtons[2]->Click()){
-				m_sNext = "";
-				return false;
-			}
-		}
-		if (m_xpaButtons[3]->isWithinLocalBounds()){
-			if (m_xpaButtons[3]->Click()){
-				m_sNext = "";
-				return false;
-			}
-		}
-		if (m_xpaButtons[4]->isWithinLocalBounds()){
-			if (m_xpaButtons[4]->Click()){
-				m_sNext = "";
-				return false;
-			}
-		}
 	}
 	else {
-		for (int i = 0; i < 5; i++){
+		for (int i = 0; i < 2; i++){
 			if (m_xpaButtons[i]->isWithinLocalBounds()){
 				m_xpaButtons[i]->Hover();
 			}
@@ -93,12 +77,22 @@ bool Menustate::Update(sf::Time p_xDtime){
 		}
 	}
 
+	//m_xpCursor->setPosition( sf::Vector2f( sf::Mouse::getPosition().x, sf::Mouse::getPosition().y ) );
+
+	m_xpCursor->Update(p_xDtime);
+
 	return true;
 }
 
 void Menustate::Draw(){
-	for (int i = 0; i < 5; i++){
-		m_xpaButtons[i]->draw(*m_xpWindow, sf::RenderStates::Default);
+	m_xpWindow->draw( *m_xpBG, sf::RenderStates::Default );
+
+	m_xpCursor->draw( *m_xpWindow, sf::RenderStates::Default);
+
+	//m_xpWindow->draw( *m_xpCursor, sf::RenderStates::Default );
+
+	for (int i = 0; i < 2; i++){
+		//m_xpaButtons[i]->draw(*m_xpWindow, sf::RenderStates::Default);
 	}
 }
 

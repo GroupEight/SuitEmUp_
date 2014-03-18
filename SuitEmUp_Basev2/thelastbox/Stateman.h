@@ -21,7 +21,7 @@ public:
 	void Quit();
 	bool IsRunning();
 
-private:
+//private:
 	std::vector<State*> m_States; // Member_ClassVectorStates
 	State *m_Current; // Member_ClassPointerCurrent
 };

@@ -10,11 +10,11 @@ public:
 	SceneNode();
 	~SceneNode();
 		
-	virtual void Update(sf::Time dt);
+	virtual bool Update(sf::Time dt);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 
-	//virtual void Overlap(PlayerBullet *p_xpPBullet, EnemyObject *p_xpEnemy);
+	virtual bool Overlap(sf::Vector2f position, float p_fRadius);
 
 	bool Show();
 	bool Hide();
@@ -25,12 +25,16 @@ public:
 
 	bool OnScreen(sf::RenderWindow *p_xpWindow);
 
+	virtual float getRadius();
+
 protected:
 	sf::Vector2f m_xPos;
 
 	sf::Vector2f m_xVel;
 
 	bool m_bShowing;
+
+	float m_fRadius;
 
 	PlayerBullet *m_xpPBullet;
 

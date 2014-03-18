@@ -72,6 +72,16 @@ void NodeMan::DrawOnScreen(sf::RenderWindow *p_xpWindow){
 	}
 }
 
+void NodeMan::Delete( SceneNode* s ){
+
+	for (int i = m_xpaNodes.size() - 1; i >= 0; i--){
+		if(s == m_xpaNodes[i]){
+			delete m_xpaNodes[i];
+			m_xpaNodes[i] = NULL;
+		}
+	}
+}
+
 void NodeMan::DeleteAll(){
 	for (int i = m_xpaNodes.size() - 1; i >= 0; i--){
 		if (m_xpaNodes[i] != NULL){
@@ -82,10 +92,22 @@ void NodeMan::DeleteAll(){
 	m_xpaNodes.clear();
 }
 
+void NodeMan::DeleteOnTrue(sf::Time p_xDtime){
+	for (int i = m_xpaNodes.size() - 1; i >= 0; i--){
+		if (m_xpaNodes[i] != NULL){
+			if (m_xpaNodes[i]->Update(p_xDtime)){
+				delete m_xpaNodes[i];
+				m_xpaNodes[i] = NULL;
+			}
+		}
+	}
+}
+
 void NodeMan::DeleteOffScreen(sf::RenderWindow *p_xpWindow){
 	for (int i = m_xpaNodes.size() - 1; i >= 0; i--){
 		if (m_xpaNodes[i] != NULL){
 			if (!m_xpaNodes[i]->OnScreen(p_xpWindow)){
+				std::cout << i;
 				delete m_xpaNodes[i];
 				m_xpaNodes[i] = NULL;
 			}

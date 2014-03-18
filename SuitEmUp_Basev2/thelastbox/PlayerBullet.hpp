@@ -24,14 +24,14 @@ private:
 
 #pragma once
 
-#include "SceneNode.hpp"
+#include "GameObject.h"
 
  //class PlayerObject;
 class TextureMan;
 
 class NodeMan;
 
-class PlayerBullet : public SceneNode {
+class PlayerBullet : public GameObject {
 public:
 	//PlayerBullet(sf::Texture texture);
 
@@ -44,7 +44,7 @@ public:
 
 	//NodeMan *m_xpEnemyMan;
 
-	void Update(sf::Time p_xDtime);
+	bool Update(sf::Time p_xDtime);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states ) const;
 

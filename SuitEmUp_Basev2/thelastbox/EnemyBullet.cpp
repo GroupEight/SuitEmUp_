@@ -7,11 +7,12 @@
 
 
 EnemyBullet::EnemyBullet(TextureMan *p_xpTextureMan, sf::Vector2f p_xPos, float p_fRot, PlayerObject *p_xpPlayer){
+	//std::cout << "SPAWN!!";
 	m_xpTextureMan = p_xpTextureMan;
 	
 	m_xpPlayer = p_xpPlayer;
 	
-	
+	m_fRadius = 5.f;
 
 	m_xpTex = m_xpTextureMan->Get("Player_Bullet");
 	m_xpTex->setSmooth(true);
@@ -39,16 +40,18 @@ EnemyBullet::~EnemyBullet(){
 
 }
 
-void EnemyBullet::Update(sf::Time p_xDtime){
+bool EnemyBullet::Update(sf::Time p_xDtime){
 	m_xpSprite->setRotation(getRotation() + 90);
 
 	move(m_xVel);
-
-	//setPosition(getPosition());
 	
 	m_xpSprite->setPosition(getPosition());
 
-	
+	/*if (m_xpPlayer->Overlap(getPosition(), getRadius())){
+		return true;
+	}*/
+
+	return false;
 }
 
 void EnemyBullet::draw(sf::RenderTarget& target, sf::RenderStates states) const {

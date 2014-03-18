@@ -19,7 +19,9 @@ public:
 	void DrawAll(sf::RenderTarget *p_xpTarget);
 	void DrawOnScreen(sf::RenderWindow *p_xpWindow);
 
+	void Delete(SceneNode* s);
 	void DeleteAll();
+	void DeleteOnTrue(sf::Time p_xDtime);
 	void DeleteOffScreen(sf::RenderWindow *p_xpWindow);
 
 	void CopyFrom(NodeMan *p_xpNodeMan);

@@ -22,7 +22,7 @@ public:
 	Hidden_Wall(sf::Vector2f p_xPos, float p_fRot, float p_fWallDist, PlayerObject *p_xpPlayer, TextureMan *p_xpTextMan, CollisionMan *p_xpCMan);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void Update(sf::Time dt);
+	virtual bool Update(sf::Time dt);
 
 	void SetCameraPos( sf::Vector2f pos );
 	void SetState( Hidden_Wall::State state );

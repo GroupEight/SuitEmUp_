@@ -16,7 +16,7 @@ public:
 
 	sf::VertexArray m_xVertArray;
 
-	virtual void Update(sf::Time dt);
+	virtual bool Update(sf::Time dt);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

@@ -132,8 +132,10 @@ Hidden_Wall::State Hidden_Wall::getState(){
 	return mState;
 }
 
-void Hidden_Wall::Update(sf::Time dt){
+bool Hidden_Wall::Update(sf::Time dt){
 	PlaceWallVertices();
+
+	std::cout << getPosition().x << " : " << getPosition().y << std::endl;
 
 	//Open/close hidden wall
 	float mHWall_Dist_x = (getPosition().x - m_xpPlayer->getPosition().x);
@@ -169,6 +171,8 @@ void Hidden_Wall::Update(sf::Time dt){
 		}
 		break;
 	}
+
+	return false;
 }
 
 void Hidden_Wall::SetCameraPos( sf::Vector2f pos ){

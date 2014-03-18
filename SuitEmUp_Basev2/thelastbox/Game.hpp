@@ -4,7 +4,6 @@
 
 class CollisionMan;
 class FontMan;
-class InputMan;
 class NodeMan;
 class Stateman;
 class SoundPlayer;
@@ -13,6 +12,7 @@ class TextureMan;
 class CursorObject;
 class Ground;
 class PlayerObject;
+class Star;
 
 class Gamestate;
 class Menustate;
@@ -26,7 +26,6 @@ public:
 	void Run();
 	void Cleanup();
 
-private:
 	bool UpdateDeltaTime();
 	void UpdEvents();
 
@@ -36,7 +35,6 @@ private:
 	void processEvents();
 	void render();	
 
-private:
 	static const sf::Time TimePerFrame;
 
 		/*sf::RenderWindow mWindow;
@@ -62,15 +60,17 @@ private:
 	sf::Clock *m_xpClock;
 
 	Stateman *m_xpStateman; // Member_ClassPointerStateman
-
 	CollisionMan *m_xpCollisionMan; // Member_ClassPointerCollisionMan
-	FontMan *m_xpFontMan;
-	InputMan *m_xpInputMan;
 	SoundPlayer *m_xpSPlayer;
 	TextureMan *m_xpTextMan;
+	FontMan *m_xpFontMan;
 
 	NodeMan *m_xpPBulletman;
 	NodeMan *m_xpEBulletman;
+	NodeMan *m_xpStarMan;
+	NodeMan *m_xpEnemyMan;
+
+	Star *m_xpStar;
 
 	CursorObject *m_xpCursor;
 	Ground *m_xpGround;

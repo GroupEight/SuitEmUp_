@@ -26,7 +26,7 @@ ParticleEmitter::ParticleEmitter(TextureMan *p_xpTextMan, ParticleEmitter::Parti
 	}
 }
 
-void ParticleEmitter::Update(sf::Time dt){
+bool ParticleEmitter::Update(sf::Time dt){
 	mSpawnTimer++;
 
 	if( mSpawnTimer >= mSpawnRate ){
@@ -43,4 +43,5 @@ void ParticleEmitter::Update(sf::Time dt){
 			this->detachChild( _p );
 		}
 	}*/
+	return true;
 }

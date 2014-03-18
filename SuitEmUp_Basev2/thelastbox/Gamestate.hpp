@@ -9,10 +9,11 @@
 class FontHolder;
 class TextureHolder;
 
-class SoundPlayer;
-
 class CollisionMan;
+class FontMan;
+class MusicPlayer;
 class NodeMan;
+class SoundPlayer;
 class TextureMan;
 
 class Ground;
@@ -20,25 +21,27 @@ class Ground;
 class BGObject;
 class CursorObject;
 class EnemyObject;
+class HUD;
 class HWallObject;
 class Level;
 class Menu_Button;
 class PlayerObject;
 class Prompt;
+class Star;
 
 class Gamestate : public State {
 	private:
 	enum Layer {
 		Background,
 		Main,
-		HUD,
 		LayerCount
 	};
 
 	enum SubStates {
 		Play,
 		Pause,
-		Quit
+		Quit,
+		End
 	};
 
 	enum PauseStates {
@@ -47,7 +50,7 @@ class Gamestate : public State {
 	};
 
 public:
-	Gamestate(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpCollisionMan, TextureMan *p_xpTextMan, NodeMan *p_xpPBulletMan, NodeMan *p_xpEBulletMan, PlayerObject *p_xpPlayer, CursorObject *p_xpCursor, Ground *p_xpGround);
+	Gamestate(sf::RenderWindow *p_xpWindow, SoundPlayer *p_xpSPlayer, CollisionMan *p_xpCollisionMan, TextureMan *p_xpTextMan, FontMan *p_xpFMan, NodeMan *p_xpPBulletMan, NodeMan *p_xpEBulletMan, NodeMan *p_xpStarMan, NodeMan *p_xpEnemyMan, PlayerObject *p_xpPlayer, CursorObject *p_xpCursor, Ground *p_xpGround);
 
 	bool Enter();
 	void Exit();
@@ -62,12 +65,7 @@ public:
 
 	void Gamestate::LoadResources();
 
-	/*void handleInput(sf::Event event);
-	void handleMouseInput(sf::Vector2f _pos);
-	void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
-
-private:
-	void buildScene();*/
+	void ShowText(std::string p_sText);
 
 private:
 	// Used everywhere:
@@ -75,7 +73,8 @@ private:
 	sf::View *m_xpWorldView;
 
 	TextureMan *m_xpTextureMan;
-	FontHolder *m_xpFonts;
+	FontMan *m_xpFman;
+	MusicPlayer *m_xpMPlayer;
 	SoundPlayer *m_xpSPlayer;
 
 	CursorObject *m_xpCursor;
@@ -86,21 +85,26 @@ private:
 	float m_fMinZoom,
 		m_fStrtZoom,
 		m_fMaxZoom,
-		m_fCurrZoom;
+		m_fCurrZoom,
+		m_fEndTime;
+
+	sf::Text *EndText;
 
 	// Used in Playstate:
 	CollisionMan *m_xpCollisionMan;
 
 	PlayerObject *m_xpPlayer;
 
+	HUD *m_xpHUD;
+
 	sf::Texture *m_xpTex;
 
-	NodeMan *m_xpEnemyMan;
-	NodeMan *m_xpEBulletMan;
-	NodeMan *m_xpPBulletMan;
+	NodeMan *m_xpEnemyMan,
+		*m_xpEBulletMan,
+		*m_xpPBulletMan,
+		*m_xpStarMan;
 
 	Level* m_xpLevel;
-	HWallObject* mHWall;
 
 	sf::FloatRect m_xWorldBounds;
 	sf::Vector2f m_xSpawnPosition;
@@ -114,7 +118,4 @@ private:
 	Menu_Button *m_xpQuitBtn;
 
 	sf::Sprite *m_xpBG;
-
-	/*Ground_Bump *mGroundBump_Player;
-	Ground_Bump *mGroundBump_Test;*/
 };
