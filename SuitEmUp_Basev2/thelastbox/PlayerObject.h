@@ -90,11 +90,10 @@ private:
 		*m_xpStepAnim,
 		*m_xpCurrentAnim,
 		*m_xpCrossbow;
-
 	
 	Tool_Whip *m_xpWhip;
 
-	int m_iStarCount,
+	unsigned int m_iStarCount,
 		m_iStarSfx;
 	
 	float m_fBulletspd,
@@ -109,7 +108,8 @@ private:
 		m_fMinheat,
 		m_fSuit,
 		m_fInv,
-		m_fInvMax;
+		m_fInvMax,
+		m_fArmCdwn;
 
 	bool m_bOverheat,
 		punchArm;

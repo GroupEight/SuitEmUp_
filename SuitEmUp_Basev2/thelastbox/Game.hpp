@@ -12,10 +12,11 @@ class TextureMan;
 class CursorObject;
 class Ground;
 class PlayerObject;
-class Star;
 
 class Gamestate;
+class HiScorestate;
 class Menustate;
+class NewScoreState;
 
 class Game {
 public:
@@ -35,26 +36,8 @@ public:
 	void processEvents();
 	void render();	
 
+private:
 	static const sf::Time TimePerFrame;
-
-		/*sf::RenderWindow mWindow;
-		StateManager mStateMan;
-		StateManager::States mState;
-		World mWorld;
-		PauseMenu mPMenu;
-		MusicPlayer mMPlayer;
-
-		Film_Grain mGrain;
-		sf::Sprite mCursor;
-		sf::Texture mCursorTex;
-
-		sf::Sprite mHealthBar;
-		sf::Texture mHealthBarTex;
-
-	  	sf::Font mFont;
-		sf::Text mStatisticsText;
-		sf::Time mStatisticsUpdateTime;
-		std::size_t mStatisticsNumFrames;*/
 
 	sf::RenderWindow *m_xpWindow;
 	sf::Clock *m_xpClock;
@@ -70,14 +53,14 @@ public:
 	NodeMan *m_xpStarMan;
 	NodeMan *m_xpEnemyMan;
 
-	Star *m_xpStar;
-
 	CursorObject *m_xpCursor;
 	Ground *m_xpGround;
 	PlayerObject *m_xpPlayer;
 
 	Gamestate *m_xpGamestate; // Member_Gamestate
+	HiScorestate *m_xpHiScorestate;
 	Menustate *m_xpMenustate; // Member_Menustate
+	NewScoreState *m_xpNewScoreState;
 
 	//b2World *m_xpWorld;
 

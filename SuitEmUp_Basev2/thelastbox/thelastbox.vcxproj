@@ -97,7 +97,9 @@
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goal.h" />
+    <ClInclude Include="HiScorestate.h" />
     <ClInclude Include="HUD.h" />
+    <ClInclude Include="NewScoreState.h" />
     <ClInclude Include="NodeMan.h" />
     <ClInclude Include="Ground.hpp" />
     <ClInclude Include="Ground_Bump.hpp" />
@@ -119,6 +121,7 @@
     <ClInclude Include="ResourceIdentifiers.hpp" />
     <ClInclude Include="Scene.hpp" />
     <ClInclude Include="SceneNode.hpp" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="Sfx.h" />
     <ClInclude Include="SoundPlayer.hpp" />
     <ClInclude Include="Star.h" />
@@ -156,7 +159,9 @@
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>
     <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="HiScorestate.cpp" />
     <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="NewScoreState.cpp" />
     <ClCompile Include="NodeMan.cpp" />
     <ClCompile Include="Ground.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
@@ -205,6 +210,7 @@
     <ClCompile Include="SceneNode.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="SoundPlayer.cpp">
       <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</ForcedIncludeFiles>
     </ClCompile>

@@ -27,6 +27,8 @@ public:
 
 	virtual float getRadius();
 
+	static float FScreenMode;
+
 protected:
 	sf::Vector2f m_xPos;
 

@@ -23,14 +23,22 @@ Menustate::Menustate(sf::RenderWindow *p_xpWindow, CursorObject *p_xpCursor, Tex
 
 	m_xpBG = new sf::Sprite();
 	m_xpBG->setTexture( *m_xpBGTex );
+	if (SceneNode::FScreenMode == 1.0f){
+		m_xpBG->setScale(1 / 1.5f, 1 / 1.5f);
+	}
+	else {
+		m_xpBG->setScale(1 , 1);
+	}
 
 	m_xpCursor = p_xpCursor;
 
 	// Create all of the buttons:
 
-	m_xpaButtons[0] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "Start Game", 500 * 1.5f, 100 * 1.5f);
+	m_xpaButtons[0] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "Start Game", 500 * SceneNode::FScreenMode, 100 * SceneNode::FScreenMode);
 
-	m_xpaButtons[1] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "Quit", 730 * 1.5f, 300 * 1.5f);
+	m_xpaButtons[1] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "Quit", 730 * SceneNode::FScreenMode, 300 * SceneNode::FScreenMode);
+
+	m_xpaButtons[2] = new Menu_Button(p_xpTextMan, p_xpFontMan, m_xpWindow, p_xpSPlayer, 3.0f, "Hi-Score", 1050 * SceneNode::FScreenMode, 255 * SceneNode::FScreenMode);
 }
 
 Menustate::~Menustate(){
@@ -65,9 +73,15 @@ bool Menustate::Update(sf::Time p_xDtime){
 				return false;
 			}
 		}
+		if (m_xpaButtons[2]->isWithinLocalBounds()){
+			if (m_xpaButtons[2]->Click()){
+				m_sNext = "HiScorestate";
+				return false;
+			}
+		}
 	}
 	else {
-		for (int i = 0; i < 2; i++){
+		for (int i = 0; i < 3; i++){
 			if (m_xpaButtons[i]->isWithinLocalBounds()){
 				m_xpaButtons[i]->Hover();
 			}
@@ -91,9 +105,9 @@ void Menustate::Draw(){
 
 	//m_xpWindow->draw( *m_xpCursor, sf::RenderStates::Default );
 
-	for (int i = 0; i < 2; i++){
-		//m_xpaButtons[i]->draw(*m_xpWindow, sf::RenderStates::Default);
-	}
+	/*for (int i = 0; i < 3; i++){
+		m_xpaButtons[i]->draw(*m_xpWindow, sf::RenderStates::Default);
+	}*/
 }
 
 std::string Menustate::Next(){

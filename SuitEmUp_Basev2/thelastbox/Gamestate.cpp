@@ -104,26 +104,19 @@ bool Gamestate::Update(sf::Time p_xDtime){
 			m_sNext = "Gamestate";
 			return false;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)){
-			//m_sNext = "Gamestate";
-			//return false;
-			//m_xpLevel->ClearLevel();
-			//m_xpStarMan->Add( new Star( m_xpTextureMan, sf::Vector2f(0.f, 0.f), 0.f, m_xpPlayer ) );
-		}
 
-		//m_xpLevel->placeWallVertices();
 		if (m_xpLevel->Update(p_xDtime)){
 			EndText = new sf::Text(sf::String("You Win!"), *m_xpFman->Get("Standard"), 200);
 			EndText->setColor(sf::Color::White);
-			EndText->setPosition(m_xpWindow->getView().getCenter());
-			m_sNext = "Menustate";
+			EndText->setPosition(m_xpWindow->getView().getCenter().x - EndText->getLocalBounds().width / 2, m_xpWindow->getView().getCenter().y - EndText->getLocalBounds().height / 2);
+			m_sNext = "NewScoreState";
 			m_eState = Gamestate::SubStates::End;
 		}
 
 		if (m_xpPlayer->Update(p_xDtime)){ // Update Player
-			EndText = new sf::Text(sf::String("Too Bad,\nYou Lose..."), *m_xpFman->Get("Standard"), 200);
+			EndText = new sf::Text(sf::String("Game\nOver"), *m_xpFman->Get("Standard"), 200);
 			EndText->setColor(sf::Color::White);
-			EndText->setPosition(m_xpWindow->getView().getCenter());
+			EndText->setPosition(m_xpWindow->getView().getCenter().x - EndText->getLocalBounds().width / 2, m_xpWindow->getView().getCenter().y - EndText->getLocalBounds().height / 2);
 			m_sNext = "Menustate";
 			m_eState = Gamestate::SubStates::End;
 		}

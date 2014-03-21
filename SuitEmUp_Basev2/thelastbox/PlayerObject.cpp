@@ -101,6 +101,8 @@ PlayerObject::PlayerObject(sf::RenderWindow *p_xpWindow, CollisionMan *p_xpColli
 	m_fInvMax = 0.2f;
 	m_fInv = m_fInvMax;
 
+	m_fArmCdwn = 0;
+
 	//Whip
 	m_xpWhip = new Tool_Whip( m_xpTextureMan );
 	m_xpWhip->setOrigin( 50.f, 0.f );
@@ -491,42 +493,40 @@ bool PlayerObject::Update(sf::Time p_xDtime){
 		}
 	}
 
-	 m_xpPlayerArms[0]->setArmsPosition(sf::Vector2f(0, 0));
-	 m_xpPlayerArms[1]->setArmsPosition(sf::Vector2f(0, 0));
+	m_xpPlayerArms[0]->setArmsPosition(sf::Vector2f(0, 0));
+	m_xpPlayerArms[1]->setArmsPosition(sf::Vector2f(0, 0));
 
-	 if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right) ){
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right) && m_fArmCdwn <= 0){
 
-	  switch (punchArm){ // false = Left Arm, true = Right Arm
-	  case false:
-	   if( !m_xpPlayerArms[0]->m_bPunching){
+		m_fArmCdwn = m_fFrate / m_fMaxrate;
+
+		int s = rand() % 3;
+
+		//m_xpSPlayer->Play();
+
 		if( m_eTool == Tool::Melee ){
-		 int s = rand() % 3;
 
-		 m_xpPlayerArms[0]->Punch();
+			if (!m_xpPlayerArms[punchArm]->m_bPunching){
+				m_xpPlayerArms[punchArm]->Punch();
+			}
 
-		 punchArm = true;
+			switch (punchArm){ // false = Left Arm, true = Right Arm
+			case false:
+				punchArm = true;
+
+				break;
+
+			case true:
+				punchArm = false;
+
+				break;
+			}
 		}
 		else {
-		 setTool( Tool::Melee );
+			setTool( Tool::Melee );
 		}
-	   }
-	   break;
-	  case true:
-	   if ( !m_xpPlayerArms[1]->m_bPunching){
-		if( m_eTool == Tool::Melee ){
-		 int s = rand() % 3;
-
-		 //m_xpPlayerArms[1]->Punch();
-
-		 punchArm = false;
-		}
-		else {
-		 setTool( Tool::Melee );
-		}
-	   }
-	   break;
-	  }
-	 }
+	}
+	
 	if (m_fSuit <= 0.f){
 		return true;
 	}
@@ -535,6 +535,7 @@ bool PlayerObject::Update(sf::Time p_xDtime){
 
 	m_fSuit-= (float)p_xDtime.asSeconds();
 	m_fFiretime-= (float)p_xDtime.asSeconds();
+	m_fArmCdwn-= (float)p_xDtime.asSeconds();
 	m_fInv-= (float)p_xDtime.asSeconds();
 
 	return false;

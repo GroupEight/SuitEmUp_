@@ -1,0 +1,12 @@
+.
+
+Alice 100
+Bob 90
+Cecil 80
+David 70
+Emil 60
+Frederick 50
+Gilbert 40
+Hieda 30
+Isabel 20
+Jag 10

@@ -14,9 +14,16 @@
 #include "CursorObject.h"
 #include "Ground.hpp"
 #include "PlayerObject.h"
+#include "SceneNode.hpp"
 
 #include "Gamestate.hpp"
+#include "HiScorestate.h"
 #include "Menustate.h"
+#include "NewScoreState.h"
+
+#include <sstream>
+
+float SceneNode::FScreenMode;
 
 Game::Game(){
 	m_xpStateman = NULL;
@@ -79,9 +86,11 @@ bool Game::Init(){
 	if (q == 6){
 		m_xpWindow = new sf::RenderWindow(sf::VideoMode(1920, 1080, 32), "Suit Em Up (Name not final)", sf::Style::Fullscreen);
 		m_xpWindow->setPosition(sf::Vector2i(0, 0));
+		SceneNode::FScreenMode = 1.5f;
 	}
 	else if (q == 7){
-		m_xpWindow = new sf::RenderWindow(sf::VideoMode(m_iWi, m_iHe, 32), "Suit Em Up (Name not final)", sf::Style::Resize | sf::Style::Close);
+		m_xpWindow = new sf::RenderWindow(sf::VideoMode(m_iWi, m_iHe, 32), "Suit Em Up (Name not final)", /*sf::Style::Resize |*/ sf::Style::Close);
+		SceneNode::FScreenMode = 1.0f;
 	}
 	else {
 		return false;
@@ -159,13 +168,25 @@ bool Game::Init(){
 		return false;
 	}
 
+	m_xpHiScorestate = new HiScorestate(m_xpWindow, m_xpPlayer, m_xpCursor, m_xpTextMan, m_xpFontMan, m_xpSPlayer);
+	if (m_xpHiScorestate == NULL){
+		return false;
+	}
+
 	m_xpMenustate = new Menustate(m_xpWindow, m_xpCursor, m_xpTextMan, m_xpFontMan, m_xpSPlayer);
 	if (m_xpMenustate == NULL){
 		return false;
 	}
 
+	m_xpNewScoreState = new NewScoreState(m_xpWindow, m_xpPlayer, m_xpCursor, m_xpTextMan, m_xpFontMan, m_xpSPlayer);
+	if (m_xpNewScoreState == NULL){
+		return false;
+	}
+
 	m_xpStateman->Add(m_xpGamestate);
+	m_xpStateman->Add(m_xpHiScorestate);
 	m_xpStateman->Add(m_xpMenustate);
+	m_xpStateman->Add(m_xpNewScoreState);
 
 	m_xpStateman->Setstate("Menustate");
 
@@ -173,40 +194,26 @@ bool Game::Init(){
 }
 
 void Game::Run(){
-	//Start inital music
-	//mMPlayer.play( Music::InGameTheme );
-
-	//totalTime = 0;
-
-	//Hide default mouse cursor
-	/*
-
-	sf::Clock clock;
-	sf::Time timeSinceLastUpdate = sf::Time::Zero;
-	while (m_xpWindow->isOpen()){
-		sf::Time elapsedTime = clock.restart();
-		timeSinceLastUpdate += elapsedTime;
-		while (timeSinceLastUpdate > TimePerFrame){
-			timeSinceLastUpdate -= TimePerFrame;
-
-			processEvents();
-			update(TimePerFrame);
-
-		}
-
-		updateStatistics(elapsedTime);
-		render();
-	}*/
 	m_xpClock = new sf::Clock;
 	m_xpClock->restart();
 
 	m_xpWindow->setMouseCursorVisible(false);
 
 	while (m_xpStateman->IsRunning()){
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::F12)){
+			sf::Image l_xImg = m_xpWindow->capture();
+			int l_iSNum = (rand() % 10 + 10 * (rand() % 10) + 100 * (rand() % 10) + 1000 * (rand() % 10) + 10000 * (rand() % 10) + 100000 * (rand() % 10));
+			std::stringstream convert;
+
+			convert << l_iSNum;
+
+			l_xImg.saveToFile("../rec/Screenshot" + convert.str() + ".png");
+		}
+
 		UpdEvents();
 
 		if (UpdateDeltaTime()){
-			m_xpWindow->clear(sf::Color::White);
+			m_xpWindow->clear(sf::Color::Black);
 			
 			m_xpStateman->Update(m_xDtime);
 			m_xpStateman->Draw();
